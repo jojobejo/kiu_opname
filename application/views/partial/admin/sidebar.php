@@ -23,7 +23,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('admin/StkOpname') ?>" class="nav-link">
+            <a href="<?php echo base_url('opname') ?>" class="nav-link">
               <i class="nav-icon fas fa-chart-area"></i>
               <p>
                Opname
@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('admin/User') ?>" class="nav-link">
+            <a href="<?php echo base_url('user') ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                User
@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('admin/user') ?>" class="nav-link">
+            <a href="<?php echo base_url('log_out') ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                Log Out

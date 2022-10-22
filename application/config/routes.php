@@ -52,5 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['list_barang'] = 'C_Admin/ListBarang';
 $route['admin'] = 'C_Admin/admin';
+$route['opname'] = 'C_Admin/StkOpname';
+$route['user'] = 'C_Admin/user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
