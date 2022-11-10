@@ -31,36 +31,52 @@
                                 <div class="card-header">
                                     <h3 class="card-title">List Barang</h3>
                                 </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Nama Barang</th>
-                                                <th>Lokasi</th>
-                                                <th>Stok</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                <div>
+                                    <?php $this->load->view('content/admin/modal/modaBarang') ?>
 
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Nama Barang</th>
-                                                <th>Lokasi</th>
-                                                <th>Stok</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                    <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-plus"></i>
+                                        Tambah Data Barang
+                                    </button>
+
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Barang</th>
+                                                    <th>Lokasi</th>
+                                                    <th>Stok</th>
+                                                    <th>Gudang</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($barang as $b) : ?>
+                                                    <tr>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->sektor ?></td>
+                                                        <td><?= $b->stok_barang ?> </td>
+                                                        <td><?= $b->nama_gudang ?></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editModal<?php echo $b->id_barang ?>">
+                                                                <i class="fa fa-solid fa-pencil-alt"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapus<?php echo $b->id_barang ?>">
+                                                                <i class="fa fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card-body -->
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>

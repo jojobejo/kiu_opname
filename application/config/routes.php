@@ -54,5 +54,6 @@ $route['list_barang'] = 'C_Admin/ListBarang';
 $route['admin'] = 'C_Admin/admin';
 $route['opname'] = 'C_Admin/StkOpname';
 $route['user'] = 'C_Admin/user';
+$route['addBarang'] = 'C_Admin/ListBarang/addBarang';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
