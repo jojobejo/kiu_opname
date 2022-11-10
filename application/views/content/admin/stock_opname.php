@@ -36,7 +36,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-3">
-                                                <label for="" class="control-label align-left">Nama Barang</label>
+                                                <label for="" class="control-label align-left">Nama Barang id</label>
                                             </div>
                                             <div class="col-8">
                                                 <div class="form-group">
