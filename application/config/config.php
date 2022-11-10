@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-  $config['base_url']    = 'https://kiu.co.id/kiu_opname/';
+  $config['base_url']    = 'https://kiu.co.id/opname/';
 
  //$config['base_url'] = 'https://10.10.10.12/kiu_opname/';
 
