@@ -1,4 +1,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
+    <style>
+        .chartCus{
+            height: 20px;
+            width: 50px;
+        }
+    </style>
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -21,7 +27,6 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            <?php $this->load->view('content/admin/modal/modalStock') ?>
 
             <!-- Main content -->
             <section class="content">
@@ -29,32 +34,38 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
-                                <div class="d-flex justify-content-center">
-                                    <!-- CARD BODY -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama Barang</th>
-                                                    <th>Stok</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalStock">
-                                                            <i class="fa fa-solid fa-pencil-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <!-- CARD BODY -->
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-center">
+                                        <canvas id="myChart" class="chartCus"></canvas>
+                                        <script>
+                                            var xValues = ["Cocok", "Tidak Cocok"];
+                                            var yValues = [60, 40];
+                                            var barColors = [
+                                                "#00aba9",
+                                                "#b91d47"
+                                            ];
+
+                                            new Chart("myChart", {
+                                                type: "doughnut",
+                                                data: {
+                                                    labels: xValues,
+                                                    datasets: [{
+                                                        backgroundColor: barColors,
+                                                        data: yValues
+                                                    }]
+                                                },
+                                                options: {
+                                                    title: {
+                                                        display: true,
+                                                        text: "Grafik Kecocokan"
+                                                    }
+                                                }
+                                            });
+                                        </script>
                                     </div>
-                                    <!-- ./CARD BODY -->
                                 </div>
+                                <!-- ./CARD BODY -->
                             </div>
                         </div>
                     </div>
@@ -63,7 +74,6 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
 
 
         <footer class="main-footer">

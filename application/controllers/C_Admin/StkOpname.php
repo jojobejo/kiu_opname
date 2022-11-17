@@ -26,6 +26,7 @@ class StkOpname extends CI_Controller
         $this->load->view('partial/admin/header');
         $this->load->view('content/admin/stock_opname',$data);
         $this->load->view('partial/admin/footer');
+        $this->load->view('content/admin/ajax/selectbarang');
     }
 
 
