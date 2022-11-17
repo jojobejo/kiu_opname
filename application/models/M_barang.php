@@ -18,6 +18,7 @@ class M_barang extends CI_Model
         $this->db->select('tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
         $this->db->FROM('tb_barang');
         $this->db->join('tb_gudang','tb_gudang.kode_gudang = tb_barang.kode_gudang');
+        $this->db->where('tb_barang.sektor = 1');
         $query = $this->db->get();
         return $query;
 
