@@ -20,7 +20,7 @@ class ListBarang extends CI_Controller
             redirect("login");
         }
 
-        $data['barang'] = $this->M_barang->getBarang()->result();
+        $data['barang'] = $this->M_barang->getBarangAdmin()->result();
         $data['gudang'] = $this->M_barang->getGudang();
 
         $this->load->view('partial/admin/header');
@@ -38,12 +38,13 @@ class ListBarang extends CI_Controller
         $sktor          = $this->input->post('sektor_isi');
         $gudang         = $this->input->post('gudang_isi');
         $stok           = $this->input->post('stok_isi');
-
+        $exdate         = $this->input->post('date_isi');
         $data = array(
             'nama_barang'   => $nmabarang,
             'sektor'        => $sktor,
             'kode_gudang'   => $gudang,
-            'stok_barang'   => $stok
+            'stok_barang'   => $stok,
+            'exdate'        => $exdate
         );
 
         $this->M_barang->addBarang($data);
@@ -61,13 +62,15 @@ class ListBarang extends CI_Controller
         $sektor    = $this->input->post('sektor_isi');
         $stok      = $this->input->post('stok_isi');
         $gudang    = $this->input->post('gudang_isi');
+        $exdate         = $this->input->post('date_isi');
 
         $data = array(
             'id_barang'     => $idbarang,
             'nama_barang'   => $nmabarang,
             'sektor'        => $sektor,
             'kode_gudang'   => $gudang,
-            'stok_barang'   => $stok
+            'stok_barang'   => $stok,
+            'exdate'        => $exdate
         );
 
         $this->M_barang->editBarang($data, $idbarang);

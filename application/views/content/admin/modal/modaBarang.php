@@ -25,6 +25,7 @@
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                     </div>
@@ -46,6 +47,12 @@
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Stok Tersedia <span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="number" id="stok_isi" name="stok_isi" value="" /></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
+                        <div class="col-sm-8"><input class="form-control" type="date" id="date_isi" name="date_isi" value="" /></div>
                     </div>
                 </div>
             </div>
@@ -94,6 +101,7 @@
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
@@ -115,6 +123,12 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Stok Tersedia <span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="number" id="stok_isi" name="stok_isi" value="<?= $b->stok_barang ?>" /></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
+                            <div class="col-sm-8"><input class="form-control" type="date" id="date_isi" name="date_isi" value="<?= $b->exdate ?>" /></div>
                         </div>
                     </div>
                 </div>

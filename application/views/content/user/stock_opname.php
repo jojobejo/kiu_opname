@@ -1,10 +1,4 @@
 <body class="hold-transition sidebar-mini layout-fixed">
-    <style>
-        .chartCus {
-            height: 20px;
-            width: 50px;
-        }
-    </style>
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -12,8 +6,8 @@
             <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
-        <?php $this->load->view('partial/admin/navbar') ?>
-        <?php $this->load->view('partial/admin/sidebar') ?>
+        <?php $this->load->view('partial/user/navbar') ?>
+        <?php $this->load->view('partial/user/sidebar') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -27,6 +21,8 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+            
+            <?php $this->load->view('content/user/modal/modalOpname'); ?>
 
             <!-- Main content -->
             <section class="content">
@@ -34,83 +30,45 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
-                                <!-- CARD BODY -->
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-center">
-                                        <canvas id="myChart" class="chartCus"></canvas>
-                                        <script>
-                                            var xValues = ["Cocok", "Tidak Cocok"];
-                                            var yValues = [60, 40];
-                                            var barColors = [
-                                                "#00aba9",
-                                                "#b91d47"
-                                            ];
-
-                                            new Chart("myChart", {
-                                                type: "doughnut",
-                                                data: {
-                                                    labels: xValues,
-                                                    datasets: [{
-                                                        backgroundColor: barColors,
-                                                        data: yValues
-                                                    }]
-                                                },
-                                                options: {
-                                                    title: {
-                                                        display: true,
-                                                        text: "Grafik Kecocokan"
-                                                    }
-                                                }
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                                <!-- ./CARD BODY -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <section class="content">
-                    <div class="container-fluids">
-                        <div class="row">
-                            <div class="col-md">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>List Barang Tidak Cocok</h3>
-                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <!-- CARD BODY -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Nama Barang</th>
                                                     <th>Stok</th>
+                                                    <th>Expire Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach ($barang as $b) : ?>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?= $b->nama_barang ?></td>
+                                                    <td><?= $b->stok_opname ?></td>
+                                                    <td><?= $b->exdate ?></td>
                                                     <td>
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalStock">
+                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang?>">
                                                             <i class="fa fa-solid fa-pencil-alt"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- ./CARD BODY -->
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
 
 
         <footer class="main-footer">

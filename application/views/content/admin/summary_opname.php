@@ -39,7 +39,7 @@
                                     <div class="d-flex justify-content-center">
                                         <canvas id="myChart" class="chartCus"></canvas>
                                         <script>
-                                            var xValues = ["Cocok", "Tidak Cocok"];
+                                            var xValues = ["Data Klop", "Data Tidak Klop"];
                                             var yValues = [60, 40];
                                             var barColors = [
                                                 "#00aba9",
@@ -58,7 +58,7 @@
                                                 options: {
                                                     title: {
                                                         display: true,
-                                                        text: "Grafik Kecocokan"
+                                                        text: "QUICK COUNT"
                                                     }
                                                 }
                                             });
@@ -71,42 +71,7 @@
                     </div>
                 </div>
 
-                <section class="content">
-                    <div class="container-fluids">
-                        <div class="row">
-                            <div class="col-md">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>List Barang Tidak Cocok</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama Barang</th>
-                                                    <th>Stok</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalStock">
-                                                            <i class="fa fa-solid fa-pencil-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
+                
             </section>
             <!-- /.content -->
         </div>

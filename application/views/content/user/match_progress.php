@@ -12,8 +12,8 @@
             <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
-        <?php $this->load->view('partial/admin/navbar') ?>
-        <?php $this->load->view('partial/admin/sidebar') ?>
+        <?php $this->load->view('partial/user/navbar') ?>
+        <?php $this->load->view('partial/user/sidebar') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

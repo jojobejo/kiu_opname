@@ -15,15 +15,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url('list_barang') ?>" class="nav-link">
-              <i class="nav-icon fas fa-archive"></i>
-              <p>
-                List Barang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('opname') ?>" class="nav-link">
+            <a href="<?php echo base_url('u_opname') ?>" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
                 Opname
@@ -31,26 +23,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('match_progress') ?>" class="nav-link">
+            <a href="<?php echo base_url('u_match_progress') ?>" class="nav-link">
               <i class="nav-icon fas fa-spinner"></i>
               <p>
                 Match Progress
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('quick_count') ?>" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Quick Count
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('user') ?>" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                User
               </p>
             </a>
           </li>

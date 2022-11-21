@@ -15,7 +15,51 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>List User</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <?php $this->load->view('content/admin/modal/modalUser') ?>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUser">
+                                            <i class="fas fa-plus"></i>
+                                            Tambah User Baru
+                                        </button>
+                                    </div>
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama User</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Sektor</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($user as $s) : ?>
+                                                <tr>
+                                                    <td><?= $s->nama_user ?></td>
+                                                    <td><?= $s->username?></td>
+                                                    <td><?= $s->role?></td>
+                                                    <td><?= $s->sektor?></td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalEditUser<?= $s->id_user?>">
+                                                            <i class="fa fa-solid fa-pencil-alt"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#modalHapus<?= $s->id_user?>">
+                                                            <i class="fa fa-solid fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                <?php endforeach; ?>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->

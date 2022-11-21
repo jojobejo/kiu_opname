@@ -48,16 +48,20 @@
                                                     <th>Lokasi</th>
                                                     <th>Stok</th>
                                                     <th>Gudang</th>
+                                                    <th>Expired Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($barang as $b) : ?>
+                                                <?php
+                                                 foreach ($barang as $b) : 
+                                                    ?>
                                                     <tr>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->sektor ?></td>
                                                         <td><?= $b->stok_barang ?> </td>
                                                         <td><?= $b->nama_gudang ?></td>
+                                                        <td><?= $b->exdate ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editModal<?php echo $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>

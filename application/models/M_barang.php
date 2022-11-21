@@ -12,41 +12,48 @@ class M_barang extends CI_Model
         return $this->db->get('tb_barang')->result();
     }
 
-    public function getBarang()
+    public function getBarang($sektor)
     {
-        
-        $this->db->select('tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
+        // return $this->db->query('SELECT tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang
+        //  FROM tb_barang,JOIN tb_gudang.kode_gudang = tb_barang.kode_gudang, WHERE tb_barang.sektor=' . $sektor . ' ');
+        $this->db->select('tb_barang.stok_opname,tb_barang.exdate,tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
         $this->db->FROM('tb_barang');
         $this->db->join('tb_gudang','tb_gudang.kode_gudang = tb_barang.kode_gudang');
-        $this->db->where('tb_barang.sektor = 1');
+        $this->db->where('tb_barang.sektor',$sektor);
         $query = $this->db->get();
         return $query;
 
     }
 
+    public function getBarangAdmin()
+    {
+       
+        $this->db->select('tb_barang.exdate,tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
+        $this->db->FROM('tb_barang');
+        $this->db->join('tb_gudang','tb_gudang.kode_gudang = tb_barang.kode_gudang');
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getGudang()
     {
-        return $this->db->get
-        ('tb_gudang')->result();    
+        return $this->db->get('tb_gudang')->result();
     }
 
     public function addBarang($data)
     {
-        return $this->db->insert('tb_barang',$data);
+        return $this->db->insert('tb_barang', $data);
     }
 
-    public function editBarang($data,$idbarang)
+    public function editBarang($data, $idbarang)
     {
-        $this->db->where('id_barang',$idbarang);
-        return $this->db->update('tb_barang',$data);
+        $this->db->where('id_barang', $idbarang);
+        return $this->db->update('tb_barang', $data);
     }
 
     public function barangdel($idbarang)
     {
-        $this->db->where('id_barang' ,$idbarang);
+        $this->db->where('id_barang', $idbarang);
         return $this->db->delete('tb_barang');
     }
-
-    
-
 }
