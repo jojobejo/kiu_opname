@@ -21,8 +21,8 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            
-            <?php $this->load->view('content/user/modal/modalOpname'); ?>
+
+            <?php $this->load->view('content/user/modal/modalOpname1'); ?>
 
             <!-- Main content -->
             <section class="content">
@@ -44,16 +44,16 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($barang as $b) : ?>
-                                                <tr>
-                                                    <td><?= $b->nama_barang ?></td>
-                                                    <td><?= $b->stok_opname ?></td>
-                                                    <td><?= $b->exdate ?></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang?>">
-                                                            <i class="fa fa-solid fa-pencil-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->stok_opname1 ?></td>
+                                                        <td><?= $b->exdate ?></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?>">
+                                                                <i class="fa fa-solid fa-pencil-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>

@@ -1,10 +1,4 @@
 <body class="hold-transition sidebar-mini layout-fixed">
-    <style>
-        .chartCus {
-            height: 20px;
-            width: 50px;
-        }
-    </style>
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -28,72 +22,23 @@
             </div>
             <!-- /.content-header -->
 
+            <?php $this->load->view('content/user/modal/modalOpname2'); ?>
+
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluids">
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
-                                <!-- CARD BODY -->
-                                <div class="card-body">
-
-                                    <!--  MATCH DATA   -->
-                                    <?php foreach ($selesih as $s) {
-                                        $match =  $s->match;
-                                        $not =  $s->not;
-                                    } ?>
-                                    <!--  END MATCH DATA   -->
-
-                                    <div class="d-flex justify-content-center">
-                                        <canvas id="myChart" class="chartCus"></canvas>
-                                        <script>
-                                            var xValues = ["Cocok", "Tidak Cocok"];
-                                            var yValues = [<?php echo json_encode($match); ?>, <?php echo json_encode($not); ?>];
-                                            var barColors = [
-                                                "#00aba9",
-                                                "#b91d47"
-                                            ];
-
-                                            new Chart("myChart", {
-                                                type: "doughnut",
-                                                data: {
-                                                    labels: xValues,
-                                                    datasets: [{
-                                                        backgroundColor: barColors,
-                                                        data: yValues
-                                                    }]
-                                                },
-                                                options: {
-                                                    title: {
-                                                        display: true,
-                                                        text: "Grafik Kecocokan"
-                                                    }
-                                                }
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                                <!-- ./CARD BODY -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <section class="content">
-                    <div class="container-fluids">
-                        <div class="row">
-                            <div class="col-md">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>List Barang Tidak Cocok</h3>
-                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <!-- CARD BODY -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Nama Barang</th>
-                                                    <th>Expired Date</th>
-                                                    <th>Hasil</th>
+                                                    <th>Stok</th>
+                                                    <th>Expire Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -101,8 +46,8 @@
                                                 <?php foreach ($barang as $b) : ?>
                                                     <tr>
                                                         <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->stok_opname2 ?></td>
                                                         <td><?= $b->exdate ?></td>
-                                                        <td><?= $b->sama ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
@@ -113,16 +58,17 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- ./CARD BODY -->
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
 
 
         <footer class="main-footer">

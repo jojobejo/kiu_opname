@@ -16,7 +16,7 @@ class M_barang extends CI_Model
     {
         // return $this->db->query('SELECT tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang
         //  FROM tb_barang,JOIN tb_gudang.kode_gudang = tb_barang.kode_gudang, WHERE tb_barang.sektor=' . $sektor . ' ');
-        $this->db->select('tb_barang.stok_opname,tb_barang.exdate,tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
+        $this->db->select('tb_barang.*,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
         $this->db->FROM('tb_barang');
         $this->db->join('tb_gudang','tb_gudang.kode_gudang = tb_barang.kode_gudang');
         $this->db->where('tb_barang.sektor',$sektor);
@@ -27,7 +27,6 @@ class M_barang extends CI_Model
 
     public function getBarangAdmin()
     {
-       
         $this->db->select('tb_barang.exdate,tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang');
         $this->db->FROM('tb_barang');
         $this->db->join('tb_gudang','tb_gudang.kode_gudang = tb_barang.kode_gudang');
