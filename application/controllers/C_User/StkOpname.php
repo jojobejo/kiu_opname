@@ -46,9 +46,6 @@ class StkOpname extends CI_Controller
 
     public function addOpnameData()
     {
-        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" || $this->session->userdata("team_opname") == "1") {
-            redirect("login");
-        }
 
         $idbarang       = $this->input->post('id_isi');
         $nmabarang      = $this->input->post('barang_isi');
@@ -71,7 +68,7 @@ class StkOpname extends CI_Controller
 
             $this->M_Opname->addOpname($data, $idbarang);
             redirect('u_opname');
-        } else {
+        } elseif ($this->session->userdata('team_opname') == '2') {
             $data = array(
                 'id_barang'     => $idbarang,
                 'nama_barang'   => $nmabarang,
