@@ -37,7 +37,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Barang</th>
-                                                    <th>Stok</th>
+                                                    <th>Box</th>
+                                                    <th>Pcs</th>
                                                     <th>Expire Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -46,10 +47,11 @@
                                                 <?php foreach ($barang as $b) : ?>
                                                     <tr>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->stok_opname2 ?></td>
-                                                        <td><?= $b->exdate ?></td>
+                                                        <td><?= $b->stok_box2 ?></td>
+                                                        <td><?= $b->stok_pcs2 ?></td>
+                                                        <td><?= $b->exp_date ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
                                                         </td>

@@ -47,6 +47,7 @@
                                     <div class="d-flex justify-content-center">
                                         <canvas id="myChart" class="chartCus"></canvas>
                                         <script>
+
                                             var xValues = ["Cocok", "Tidak Cocok"];
                                             var yValues = [<?php echo json_encode($match); ?>, <?php echo json_encode($not); ?>];
                                             var barColors = [
@@ -98,18 +99,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($barang as $b) : ?>
+                                              
                                                     <tr>
-                                                        <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->exdate ?></td>
-                                                        <td><?= $b->sama ?></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                <?php endforeach; ?>
+                                                
                                             </tbody>
                                         </table>
                                     </div>

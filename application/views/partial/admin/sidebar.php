@@ -18,23 +18,15 @@
             <a href="<?php echo base_url('list_barang') ?>" class="nav-link">
               <i class="nav-icon fas fa-archive"></i>
               <p>
-                List Barang
+                Barang Gudang
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('opname') ?>" class="nav-link">
-              <i class="nav-icon fas fa-clipboard-list"></i>
+            <a href="<?php echo base_url('data_zahir') ?>" class="nav-link">
+              <i class="nav-icon fas fa-desktop"></i>
               <p>
-                Opname
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('match_progress') ?>" class="nav-link">
-              <i class="nav-icon fas fa-spinner"></i>
-              <p>
-                Match Progress
+                Data Zahir
               </p>
             </a>
           </li>

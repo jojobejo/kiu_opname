@@ -35,6 +35,7 @@
                                                 <th>Username</th>
                                                 <th>Role</th>
                                                 <th>Sektor</th>
+                                                <th>Team Opname</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -45,6 +46,7 @@
                                                     <td><?= $s->username?></td>
                                                     <td><?= $s->role?></td>
                                                     <td><?= $s->sektor?></td>
+                                                    <td><?= $s->team_opname?></td>
                                                     <td>
                                                         <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalEditUser<?= $s->id_user?>">
                                                             <i class="fa fa-solid fa-pencil-alt"></i>

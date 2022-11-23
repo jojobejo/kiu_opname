@@ -29,15 +29,15 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">List Barang</h3>
+                                    <h3 class="card-title">Data barang Zahir</h3>
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-plus"></i>
-                                        Tambah Data Barang
+                                        Tambah Data Zahir
                                     </button>
 
-                                    <?php $this->load->view('content/admin/modal/modaBarang') ?>
+                                    <?php $this->load->view('content/admin/modal/modalZahir') ?>
 
                                     <!-- /.card-header -->
                                     <div class="card-body">
@@ -46,8 +46,7 @@
                                                 <tr>
                                                     <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Dimensi Barang</th>
-                                                    <th>Sektor</th>
+                                                    <th>Qty</th>
                                                     <th>Expired Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -58,15 +57,14 @@
                                                 ?>
                                                     <tr>
                                                         <td><?= $b->kode_barang ?></td>
-                                                        <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->hasil_dimensi ?> </td>
-                                                        <td><?= $b->sektor ?></td>
+                                                        <td><?= $b->nama_barang ?> </td>
+                                                        <td><?= $b->qty ?></td>
                                                         <td><?= $b->exp_date ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editBarang<?php echo $b->id_barang ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapus<?php echo $b->id_barang ?>">
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir<?= $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-trash"></i>
                                                             </a>
                                                         </td>

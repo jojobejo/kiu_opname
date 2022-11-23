@@ -32,7 +32,7 @@
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Role<span class="required">*</span></label>
                         <div class="col-sm-8"><select class="form-control" name="role_isi" id="role_isi" readonly>
-                                <option value="user">user</option>
+                                <option value="user" selected>user</option>
                             </Select></div>
                     </div>
                 </div>
@@ -44,6 +44,16 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
+                            </Select></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-sm-3 control-label text-right" for="id_bar">Team Opname<span class="required">*</span></label>
+                        <div class="col-sm-8"><select class="form-control" name="team_isi" id="team_isi">
+                                <option value="">PILIH TEAM OPNAME</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
                             </Select></div>
                     </div>
                 </div>
@@ -93,10 +103,10 @@
                     <div class="form-group">
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Password<span class="required">*</span></label>
-                            <div class="col-sm-8"><input class="form-control" type="password" id="password_isi" name="password_isi" value="<?= $u->password ?>" placeholder="Input Password" /></div>
+                            <div class="col-sm-8"><input class="form-control" type="password" id="password_isi" name="password_isi" value="" placeholder="Input Password kembali" /></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Roles<span class="required">*</span></label>
                             <div class="col-sm-8">
@@ -116,6 +126,16 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+                                </Select></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">Team Opname<span class="required">*</span></label>
+                            <div class="col-sm-8"><select class="form-control" name="team_isi" id="team_isi">
+                                    <option value="<?= $u->team_opname ?>"><?= $u->team_opname ?></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
                                 </Select></div>
                         </div>
                     </div>

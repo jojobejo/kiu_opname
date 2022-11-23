@@ -54,6 +54,7 @@ $route['list_barang'] = 'C_Admin/ListBarang';
 $route['admin'] = 'C_Admin/admin';
 $route['opname'] = 'C_Admin/StkOpname';
 $route['user'] = 'C_Admin/user';
+$route['data_zahir'] = 'C_Admin/Data_zahir';
 $route['logout'] = 'login/logout';
 $route['match_progress'] = 'C_Admin/C_matchProgress';
 $route['quick_count'] = 'C_Admin/C_summaryOpaname';

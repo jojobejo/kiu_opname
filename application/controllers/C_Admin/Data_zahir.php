@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class ListBarang extends CI_Controller
+class Data_zahir extends CI_Controller
 
 {
     function __construct()
@@ -20,10 +20,10 @@ class ListBarang extends CI_Controller
             redirect("login");
         }
 
-        $data['barang'] = $this->M_barang->getAll();
+        $data['barang'] = $this->M_barang->getBarangZahir();
 
         $this->load->view('partial/admin/header');
-        $this->load->view('content/admin/list_barang', $data);
+        $this->load->view('content/admin/data_zahir', $data);
         $this->load->view('partial/admin/footer');
     }
 
@@ -35,25 +35,18 @@ class ListBarang extends CI_Controller
 
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('barang_isi');
-        $sktor          = $this->input->post('sektor_isi');
-        $panjang        = $this->input->post('panjang_isi');
-        $lebar          = $this->input->post('lebar_isi');
-        $tinggi         = $this->input->post('tinggi_isi');
-        $dimensi        = $panjang * $lebar * $tinggi;
+        $qty            = $this->input->post('qty_isi');
         $exdate         = $this->input->post('date_isi');
+
         $data = array(
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmabarang,
-            'sektor'        => $sktor,
-            'panjang'       => $panjang,
-            'lebar'         => $lebar,
-            'tinggi'        => $tinggi,
-            'hasil_dimensi' => $dimensi,
+            'qty'            => $qty,
             'exp_date'      => $exdate
         );
 
-        $this->M_barang->addBarang($data);
-        redirect('list_barang');
+        $this->M_barang->insertDataZahir($data);
+        redirect('data_zahir');
     }
 
     public function editBarang()
@@ -65,26 +58,19 @@ class ListBarang extends CI_Controller
         $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('barang_isi');
-        $sktor          = $this->input->post('sektor_isi');
-        $panjang        = $this->input->post('panjang_isi');
-        $lebar          = $this->input->post('lebar_isi');
-        $tinggi         = $this->input->post('tinggi_isi');
-        $dimensi        = $panjang * $lebar * $tinggi;
+        $qty            = $this->input->post('qty_isi');
         $exdate         = $this->input->post('date_isi');
+
         $data = array(
             'id_barang'     => $idbarang,
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmabarang,
-            'sektor'        => $sktor,
-            'panjang'       => $panjang,
-            'lebar'         => $lebar,
-            'tinggi'        => $tinggi,
-            'hasil_dimensi' => $dimensi,
+            'qty'            => $qty,
             'exp_date'      => $exdate
         );
 
-        $this->M_barang->editBarang($data, $idbarang);
-        redirect('list_barang');
+        $this->M_barang->editDataZahir($data,$idbarang);
+        redirect('data_zahir');
     }
 
     public function hapusBarang($hapus)
@@ -92,7 +78,7 @@ class ListBarang extends CI_Controller
     {
         $idbarang = $hapus;
 
-        $this->M_barang->barangdel($idbarang);
+        $this->M_barang->zahirDel($idbarang);
 
         redirect("list_barang");
     }

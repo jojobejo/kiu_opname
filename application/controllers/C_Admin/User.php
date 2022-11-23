@@ -36,14 +36,15 @@ class User extends CI_Controller
         $password = password_hash($pass, PASSWORD_DEFAULT);
         $role  = $this->input->post("role_isi");
         $sektor = $this->input->post("sektor_isi");
-
+        $team = $this->input->post("team_isi");
 
         $data = array(
             'nama_user'   => $nama_user,
             'username'    => $username,
             'password'    => $password,
             'role'        => $role,
-            'sektor'    => $sektor
+            'sektor'    => $sektor,
+            'team_opname'    => $team
         );
 
         $this->Usermodel->addUser($data);
@@ -59,6 +60,7 @@ class User extends CI_Controller
         $password = password_hash($pass, PASSWORD_DEFAULT);
         $role  = $this->input->post("role_isi");
         $sektor = $this->input->post("sektor_isi");
+        $team = $this->input->post("team_isi");
 
         $data = array(
             'id_user'   => $id_user,
@@ -66,7 +68,8 @@ class User extends CI_Controller
             'username'  => $username,
             'password'  => $password,
             'role'      => $role,
-            'sektor'    => $sektor
+            'sektor'    => $sektor,
+            'team_opname'    => $team
         );
         $this->Usermodel->editUser($id_user, $data);
         redirect('user');
