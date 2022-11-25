@@ -21,6 +21,7 @@ class StkOpname extends CI_Controller
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user") {
             redirect("login");
         } else {
+          
             if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "1") {
 
                 $sektor = $this->session->userdata('sektor');
@@ -31,7 +32,9 @@ class StkOpname extends CI_Controller
                 $this->load->view('content/user/stock_opname1', $data);
                 $this->load->view('partial/user/footer');
                 $this->load->view('content/user/ajax/selectbarang');
+
             } elseif ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "2") {
+                
                 $sektor = $this->session->userdata('sektor');
                 $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
                 $this->load->view('partial/user/header');
@@ -47,8 +50,10 @@ class StkOpname extends CI_Controller
 
         $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
-        $box           = $this->input->post('box_isi');
-        $pcs           = $this->input->post('pcs_isi');
+        $box            = $this->input->post('box_isi');
+        $pcs            = $this->input->post('pcs_isi');
+        $dimensi        = $this->input->post('dimensi_isi');
+        $qty            = ($box * $dimensi) + $pcs;
         $exdate         = $this->input->post('date_isi');
 
         if ($this->session->userdata('team_opname') == '1') {
@@ -57,7 +62,8 @@ class StkOpname extends CI_Controller
                 'kode_barang'   => $kdbarang,
                 'stok_box1'     => $box,
                 'stok_pcs1'     => $pcs,
-                'exp_date'      => $exdate
+                'exp_date'      => $exdate,
+                'QTY1'          => $qty
             );
 
             $this->M_Opname->addOpname($data, $idbarang);
@@ -68,7 +74,8 @@ class StkOpname extends CI_Controller
                 'kode_barang'   => $kdbarang,
                 'stok_box2'     => $box,
                 'stok_pcs2'     => $pcs,
-                'exp_date'      => $exdate
+                'exp_date'      => $exdate,
+                'QTY2'          => $qty
             );
 
             $this->M_Opname->addOpname($data, $idbarang);

@@ -23,6 +23,7 @@ class C_matchProgress extends CI_Controller
 
         $sektor = $this->session->userdata('sektor');
 
+        $data['barang'] = $this->M_Opname->getNotMatch($sektor)->result();
         $data['selesih'] = $this->M_Opname->getHasilMatch($sektor)->result();
 
         $this->load->view('partial/user/header');

@@ -25,6 +25,12 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">Dimensi<span class="required">*</span></label>
+                            <div class="col-sm-8"><input class="form-control" type="number" id="dimensi_isi" name="dimensi_isi" value="<?= $b->hasil_dimensi ?>" /></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Box<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="<?= $b->stok_box2 ?>" /></div>
                         </div>

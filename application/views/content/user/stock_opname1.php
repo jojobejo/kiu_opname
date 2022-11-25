@@ -22,7 +22,7 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/user/modal/modalOpname1'); ?>
+             <!-- $this->load->view('content/user/modal/modalOpname1'); ?>  -->
 
             <!-- Main content -->
             <section class="content">

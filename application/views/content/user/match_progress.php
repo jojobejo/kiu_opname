@@ -47,7 +47,6 @@
                                     <div class="d-flex justify-content-center">
                                         <canvas id="myChart" class="chartCus"></canvas>
                                         <script>
-
                                             var xValues = ["Cocok", "Tidak Cocok"];
                                             var yValues = [<?php echo json_encode($match); ?>, <?php echo json_encode($not); ?>];
                                             var barColors = [
@@ -80,6 +79,9 @@
                     </div>
                 </div>
 
+                <?php $this->load->view('content/user/modal/modalOpnameResult1'); ?>
+                <?php $this->load->view('content/user/modal/modalOpnameResult2'); ?>
+
                 <section class="content">
                     <div class="container-fluids">
                         <div class="row">
@@ -99,18 +101,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              
+
+                                                <?php foreach ($barang as $b) : ?>
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->exp_date ?></td>
+                                                        <?php
+                                                        if ($b->hasil == 'match') {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-success btn-sm">
+                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        } else {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
+                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        }
+                                                        ?>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?><?= $b->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
