@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
-                            <div class="col-sm-8"><input class="form-control" type="date" id="date_isi" name="date_isi" value="<?= $b->exp_date ?>" readonly /></div>
+                            <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="<?= $b->exp_date ?>" readonly /></div>
                         </div>
                     </div>
                 </div>
