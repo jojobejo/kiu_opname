@@ -15,7 +15,7 @@ class M_Opname extends CI_Model
     {
         // return $this->db->query('SELECT tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang
         //  FROM tb_barang,JOIN tb_gudang.kode_gudang = tb_barang.kode_gudang, WHERE tb_barang.sektor=' . $sektor . ' ');
-        $this->db->select('tb_opname.*,tb_barang_zahir.nama_barang');
+        $this->db->select('tb_opname.*,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
         $this->db->FROM('tb_opname');
         $this->db->join('tb_barang_zahir', 'tb_barang_zahir.kode_barang = tb_opname.kode_barang');
         $query = $this->db->get();

@@ -52,8 +52,8 @@ class StkOpname extends CI_Controller
         $kdbarang       = $this->input->post('kode_isi');
         $box            = $this->input->post('box_isi');
         $pcs            = $this->input->post('pcs_isi');
-        $dimensi        = $this->input->post('dimensi_isi');
-        $qty            = ($box * $dimensi) + $pcs;
+        // $dimensi        = $this->input->post('dimensi_isi');
+        // $qty            = ($box * $dimensi) + $pcs;
         $exdate         = $this->input->post('date_isi');
 
         if ($this->session->userdata('team_opname') == '1') {
@@ -62,8 +62,8 @@ class StkOpname extends CI_Controller
                 'kode_barang'   => $kdbarang,
                 'stok_box1'     => $box,
                 'stok_pcs1'     => $pcs,
-                'exp_date'      => $exdate,
-                'QTY1'          => $qty
+                'exp_date'      => $exdate
+                // 'QTY1'          => $qty
             );
 
             $this->M_Opname->addOpname($data, $idbarang);
@@ -74,8 +74,8 @@ class StkOpname extends CI_Controller
                 'kode_barang'   => $kdbarang,
                 'stok_box2'     => $box,
                 'stok_pcs2'     => $pcs,
-                'exp_date'      => $exdate,
-                'QTY2'          => $qty
+                'exp_date'      => $exdate
+                // 'QTY2'          => $qty
             );
 
             $this->M_Opname->addOpname($data, $idbarang);
