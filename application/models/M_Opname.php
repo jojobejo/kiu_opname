@@ -36,7 +36,8 @@ class M_Opname extends CI_Model
         COUNT(CASE WHEN  tb_opname.QTY1 = tb_opname.QTY2 then 1 ELSE NULL END) as 'match',
                COUNT(CASE WHEN tb_opname.QTY1 != tb_opname.QTY2 then 1 ELSE NULL END) as 'not'
                FROM tb_opname
-               JOIN tb_barang_zahir ON tb_barang_zahir.kode_barang = tb_opname.kode_barang");
+               JOIN tb_barang_zahir ON tb_barang_zahir.kode_barang = tb_opname.kode_barang
+               where tb_barang_zahir.sektor = '$sektor'");
     }
 
     public function getNotMatch($sektor)
