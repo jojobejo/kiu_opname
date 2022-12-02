@@ -11,6 +11,7 @@ class Data_zahir extends CI_Controller
     {
         parent::__construct();
         $this->load->model("M_barang");
+        $this->load->model("M_Opname");
         $this->load->library('form_validation');
     }
 
@@ -35,16 +36,37 @@ class Data_zahir extends CI_Controller
 
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('barang_isi');
+        $panjang        = $this->input->post('panjang_isi');
+        $lebar          = $this->input->post('lebar_isi');
+        $tinggi         = $this->input->post('tinggi_isi');
+        $dimensi        = $panjang * $lebar * $tinggi;
         $qty            = $this->input->post('qty_isi');
+        $keterangan     = $this->input->post('keterangan_isi');
         $exdate         = $this->input->post('date_isi');
+        $sektor         = $this->input->post('sektor_isi');
 
         $data = array(
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmabarang,
-            'qty'            => $qty,
-            'exp_date'      => $exdate
+            'panjang'       => $panjang,
+            'lebar'         => $lebar,
+            'tinggi'        => $tinggi,
+            'hasil_dimensi' => $dimensi,
+            'qty'           => $qty,
+            'exp_date'      => $exdate,
+            'sektor'        => $sektor,
+            'keterangan'    => $keterangan
         );
 
+        $data1 = array(
+            'kode_barang'   => $kdbarang,
+            'stok_box1'     => "0",
+            'stok_pcs1'     => "0",
+            'exp_date'      => $exdate,
+            'QTY1'          => "0"
+        );
+        
+        $this->M_Opname->addBarang($data1);
         $this->M_barang->insertDataZahir($data);
         redirect('data_zahir');
     }
@@ -69,7 +91,7 @@ class Data_zahir extends CI_Controller
             'exp_date'      => $exdate
         );
 
-        $this->M_barang->editDataZahir($data,$idbarang);
+        $this->M_barang->editDataZahir($data, $idbarang);
         redirect('data_zahir');
     }
 

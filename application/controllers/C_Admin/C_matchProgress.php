@@ -21,11 +21,10 @@ class C_matchProgress extends CI_Controller
             redirect("login");
         }
 
-        $data['total']  = $this->M_Opname->TotalBarangZahir();
+        $data['zahir']  = $this->M_Opname->countZahir();
 
         $this->load->view('partial/admin/header');
         $this->load->view('content/admin/match_progress');
         $this->load->view('partial/admin/footer');
-        $this->load->view('content/admin/ajax/ajaxMatchProgress');
     }
 }

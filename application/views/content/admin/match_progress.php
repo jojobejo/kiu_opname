@@ -12,8 +12,8 @@
             <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
-        <?php $this->load->view('partial/admin/navbar') ?>
-        <?php $this->load->view('partial/admin/sidebar') ?>
+        <?php $this->load->view('partial/user/navbar') ?>
+        <?php $this->load->view('partial/user/sidebar') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -30,17 +30,25 @@
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluids">
+                <!-- <div class="container-fluids">
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
                                 <!-- CARD BODY -->
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-center">
+                                <!-- <div class="card-body">
+
+                                    <!--  MATCH DATA   -->
+                                    <?php foreach ($selesih as $s) {
+                                        $match =  $s->match;
+                                        $not =  $s->not;
+                                    } ?>
+                                    <!--  END MATCH DATA   -->
+
+                                    <!-- <div class="d-flex justify-content-center">
                                         <canvas id="myChart" class="chartCus"></canvas>
                                         <script>
                                             var xValues = ["Cocok", "Tidak Cocok"];
-                                            var yValues = [60, 40];
+                                            var yValues = [<?php echo json_encode($match); ?>, <?php echo json_encode($not); ?>];
                                             var barColors = [
                                                 "#00aba9",
                                                 "#b91d47"
@@ -64,12 +72,15 @@
                                             });
                                         </script>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- ./CARD BODY -->
-                            </div>
+                            <!-- </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+                <?php $this->load->view('content/user/modal/modalOpnameResult1'); ?>
+                <?php $this->load->view('content/user/modal/modalOpnameResult2'); ?>
 
                 <section class="content">
                     <div class="container-fluids">
@@ -84,20 +95,39 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Barang</th>
-                                                    <th>Stok</th>
+                                                    <th>Expired Date</th>
+                                                    <th>Hasil</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalStock">
-                                                            <i class="fa fa-solid fa-pencil-alt"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+
+                                                <?php foreach ($barang as $b) : ?>
+                                                    <tr>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->exp_date ?></td>
+                                                        <?php
+                                                        if ($b->hasil == 'match') {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-success btn-sm">
+                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        } else {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
+                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        }
+                                                        ?>
+                                                        <td>
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?><?= $b->id_opname ?>">
+                                                                <i class="fa fa-solid fa-pencil-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>

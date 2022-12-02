@@ -1,5 +1,5 @@
 <!-- MODAL ADD -->
-<?php foreach ($barang as $b) : ?>
+<?php foreach ($opname as $b) : ?>
     <div class="modal fade" id="modalOpname<?= $b->id_opname ?>">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -21,6 +21,12 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Kode Barang <span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="kode_isi" name="kode_isi" value="<?= $b->kode_barang ?>" readonly /></div>
+                        </div>
+                    </div>
+                    <div class="form-group" hidden>
+                        <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">dimensi <span class="required">*</span></label>
+                            <div class="col-sm-8"><input class="form-control" type="text" id="dimensi_isi" name="dimensi_isi" value="<?= $b->hasil_dimensi ?>" readonly /></div>
                         </div>
                     </div>
                     <div class="form-group">

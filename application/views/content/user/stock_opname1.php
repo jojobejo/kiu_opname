@@ -22,7 +22,7 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/user/modal/modalOpname1'); ?> 
+            <?php $this->load->view('content/user/modal/modalOpname1'); ?>  
 
             <!-- Main content -->
             <section class="content">
@@ -44,14 +44,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($barang as $b) : ?>
+                                                <?php
+                                                foreach ($opname as $o) :
+                                                ?>
                                                     <tr>
-                                                        <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->stok_box1 ?></td>
-                                                        <td><?= $b->stok_pcs1 ?></td>
-                                                        <td><?= $b->exp_date ?></td>
+                                                        <td><?= $o->nama_barang ?></td>
+                                                        <td><?= $o->stok_box1 ?></td>
+                                                        <td><?= $o->stok_pcs1 ?></td>
+                                                        <td><?= $o->exp_date ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $o->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
                                                         </td>
