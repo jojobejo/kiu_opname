@@ -31,7 +31,6 @@ class M_Opname extends CI_Model
         $this->db->from('tb_opname');
         $this->db->join('tb_barang_zahir', 'tb_barang_zahir.id_opname = tb_opname.id_opname');
         $this->db->where('tb_barang_zahir.sektor', $sektor);
-        $this->db->group_by('tb_opname.exp_date');
         $query = $this->db->get();
         return $query;
     }
