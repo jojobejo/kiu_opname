@@ -22,6 +22,7 @@ class Data_zahir extends CI_Controller
         }
 
         $data['barang'] = $this->M_barang->getBarangZahir();
+        $data['idopname'] = $this->M_barang->getidOpname();
 
         $this->load->view('partial/admin/header');
         $this->load->view('content/admin/data_zahir', $data);
@@ -37,6 +38,7 @@ class Data_zahir extends CI_Controller
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $panjang        = $this->input->post('panjang_isi');
+        $idopname       = $this->input->post('id_opname_isi');
         $lebar          = $this->input->post('lebar_isi');
         $tinggi         = $this->input->post('tinggi_isi');
         $dimensi        = $panjang * $lebar * $tinggi;
@@ -47,6 +49,7 @@ class Data_zahir extends CI_Controller
 
         $data = array(
             'kode_barang'   => $kdbarang,
+            'id_opname'     => $idopname,
             'nama_barang'   => $nmabarang,
             'panjang'       => $panjang,
             'lebar'         => $lebar,
@@ -65,7 +68,7 @@ class Data_zahir extends CI_Controller
             'exp_date'      => $exdate,
             'QTY1'          => "0"
         );
-        
+
         $this->M_Opname->addBarang($data1);
         $this->M_barang->insertDataZahir($data);
         redirect('data_zahir');

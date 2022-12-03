@@ -21,6 +21,8 @@ class ListBarang extends CI_Controller
         }
 
         $data['barang'] = $this->M_barang->getAll();
+        $data['idopname'] = $this->M_barang->getidOpname()->result();
+        
 
         $this->load->view('partial/admin/header');
         $this->load->view('content/admin/list_barang', $data);
@@ -32,7 +34,7 @@ class ListBarang extends CI_Controller
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
             redirect("login");
         }
-
+        
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $sktor          = $this->input->post('sektor_isi');

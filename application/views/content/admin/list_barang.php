@@ -31,7 +31,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">List Barang</h3>
                                 </div>
-                                <div>
+                                <div>   
                                     <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
                                         <i class="fas fa-plus"></i>
                                         Tambah Data Barang

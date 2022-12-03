@@ -18,6 +18,14 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <label class="col-sm-3 control-label text-right" for="id_bar">Id Opname<span class="required">*</span></label>
+                        <?php foreach ($idopname as $id) { ?>
+                        <div class="col-sm-8"><input class="form-control" type="text" id="id_opname_isi" name="id_opname_isi" value="<?php $id ?>" /></div>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang <span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="text" id="barang_isi" name="barang_isi" value="" /></div>
                     </div>

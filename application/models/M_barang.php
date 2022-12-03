@@ -12,7 +12,14 @@ class M_barang extends CI_Model
         return $this->db->get('tb_barang')->result();
     }
 
-
+    public function getidOpname()
+    {
+        $query = $this->db->select('id_opname')
+            ->from('tb_barang_zahir')
+            ->get();
+        $row = $query->last_row();
+        return $row;
+    }
 
     public function getBarang($sektor)
     {
@@ -67,7 +74,7 @@ class M_barang extends CI_Model
     }
     public function zahirDel($idbarang)
     {
-        $this->db->where('id_barang',$idbarang);
+        $this->db->where('id_barang', $idbarang);
         return $this->db->delete('tb_barang_zahir');
     }
 }
