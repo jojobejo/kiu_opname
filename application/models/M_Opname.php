@@ -18,7 +18,7 @@ class M_Opname extends CI_Model
 
     public function getOpname($sektor)
     {
-        $this->db->select(' tb_barang_zahir.hasil_dimensi,tb_barang_zahir.kode_barang,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
+        $this->db->select('tb_barang_zahir.hasil_dimensi,tb_barang_zahir.kode_barang,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
         $this->db->FROM('tb_barang_zahir');
         $this->db->where('tb_barang_zahir.sektor', $sektor);
         $query = $this->db->get();

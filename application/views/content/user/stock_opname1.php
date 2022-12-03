@@ -45,7 +45,7 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                foreach ($opname as $o) :
+                                                foreach ($barang as $o) :
                                                 ?>
                                                     <tr>
                                                         <td><?= $o->nama_barang ?></td>
