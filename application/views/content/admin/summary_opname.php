@@ -37,7 +37,7 @@
                                 <div class="card-header p-2">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">By Exp-Date</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#pending" data-toggle="tab">Summary All</a></li>
+                                        <li class="nav-item"><a class="nav-link active" href="#pending" data-toggle="tab">Summary All</a></li>
                                     </ul>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
