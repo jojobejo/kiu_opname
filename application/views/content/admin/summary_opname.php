@@ -82,7 +82,7 @@
                                                 <div class="col-md">
                                                     <div class="card mt-5">
                                                         <div class="card-header">
-                                                            <h3>List Barang Tidak EXP</h3>
+                                                            <h3>Table Match By Exp-Date</h3>
                                                         </div>
                                                         <div class="card-body">
                                                             <table id="example2" class="table table-bordered table-striped">
@@ -141,7 +141,7 @@
                                         </div>
                                         <!-- /.tab-pane -->
                                         <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="pending">
+                                        <div class="tab-pane active" id="pending">
                                             <?php
                                             foreach ($selisihFaktur as $s) {
                                                 $match = $s->match;
@@ -180,7 +180,7 @@
                                                 <div class="col-md">
                                                     <div class="card mt-5">
                                                         <div class="card-header">
-                                                            <h3>List Barang With Faktur Pending</h3>
+                                                            <h3>List Barang Match Faktur Pending</h3>
                                                         </div>
                                                         <div class="card-body">
                                                             <table id="example3" class="table table-bordered table-striped">
