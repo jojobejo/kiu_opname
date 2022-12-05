@@ -15,8 +15,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo $this->session->userdata('nama_user')?></a>
-          <a href="#" class="d-block">Job sektor : <?php echo $this->session->userdata('sektor')?></a>
-          <a href="#" class="d-block">Team Opname: <?php echo $this->session->userdata('team_opname')?></a>
+          <a href="#" class="d-block">Area Sektor : <?php echo $this->session->userdata('sektor')?></a>
         </div>
       </div>
 
@@ -49,8 +48,6 @@
               </p>
             </a>
           </li>
-
-
       </nav>
       <!-- /.sidebar-menu -->
     </div>

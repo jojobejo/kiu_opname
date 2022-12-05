@@ -28,6 +28,9 @@ class C_summaryOpaname extends CI_Controller
         $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
         $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
 
+        $data['selisihFaktur'] = $this->M_Opname->countfakturPending()->result();
+        $data['listPending']   = $this->M_Opname->listCountByPending()->result();
+
         $this->load->view('partial/admin/header');
         $this->load->view('content/admin/summary_opname',$data);
         $this->load->view('partial/admin/footer');

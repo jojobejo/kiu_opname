@@ -61,6 +61,7 @@ $route['quick_count'] = 'C_Admin/C_summaryOpaname';
 $route['addBarang'] = 'C_Admin/ListBarang/addBarang';
 $route['def_user'] = 'C_User/Def_user';
 $route['u_opname'] = 'C_User/StkOpname';
+$route['faktur_pending'] = 'C_Admin/FakturPending';
 $route['u_match_progress'] = 'C_User/C_matchProgress';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

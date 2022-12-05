@@ -1,10 +1,4 @@
 <body class="hold-transition sidebar-mini layout-fixed">
-    <style>
-        .chartCus {
-            height: 20px;
-            width: 50px;
-        }
-    </style>
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -12,8 +6,8 @@
             <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
-        <?php $this->load->view('partial/user/navbar') ?>
-        <?php $this->load->view('partial/user/sidebar') ?>
+        <?php $this->load->view('partial/admin/navbar') ?>
+        <?php $this->load->view('partial/admin/sidebar') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -30,61 +24,60 @@
 
             <!-- Main content -->
             <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">List Fatur Pending</h3>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-plus"></i>
+                                        Tambah Data Faktur Pending
+                                    </button>
 
-                <section class="content">
-                    <div class="container-fluids">
-                        <div class="row">
-                            <div class="col-md">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3>List Barang Tidak Cocok</h3>
-                                    </div>
+                                    <?php $this->load->view("content/admin/modal/modalFakturPending") ?>
+
+                                    <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
-                                                    <th>Hasil</th>
+                                                    <th>Qty</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                                <?php foreach ($barang as $b) : ?>
-                                                    <tr>
+                                                <tr>
+                                                    <?php foreach ($barang as $b) : ?>
+                                                        <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
-                                                        <?php
-                                                        if ($b->hasil == 'match') {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-success btn-sm">
-                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                            </a>
-                                                        </td>';
-                                                        } else {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                            </a>
-                                                        </td>';
-                                                        }
-                                                        ?>
-                                                        <!-- <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?><?= $b->id_opname ?>">
+                                                        <td><?= $b->qty ?></td>
+                                                        <td>
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_pending ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
-                                                        </td> -->
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir<?= $b->id_pending ?>">
+                                                                <i class="fa fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                </tr>
+
+                                            <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- /.card-body -->
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </section>
             </section>
             <!-- /.content -->
         </div>

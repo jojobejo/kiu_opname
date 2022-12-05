@@ -15,18 +15,18 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url('list_barang') ?>" class="nav-link">
-              <i class="nav-icon fas fa-archive"></i>
-              <p>
-                Barang Gudang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="<?php echo base_url('data_zahir') ?>" class="nav-link">
               <i class="nav-icon fas fa-desktop"></i>
               <p>
                 Data Zahir
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url('faktur_pending') ?>" class="nav-link">
+              <i class="nav-icon fa fa-clock"></i>
+              <p>
+                Faktur Pending
               </p>
             </a>
           </li>

@@ -36,102 +36,12 @@
                             <div class="card">
                                 <div class="card-header p-2">
                                     <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">All Barang</a></li>
                                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">By Exp-Date</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#pending" data-toggle="tab">Summary All</a></li>
                                     </ul>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="activity">
-                                            <?php
-                                            foreach ($selisih as $s) {
-                                                $match = $s->match;
-                                                $not   = $s->not;
-                                            }
-                                            ?>
-                                            <div class="d-flex justify-content-center">
-                                                <canvas id="myChart" class="chartCus"></canvas>
-                                                <script>
-                                                    var xValues = ["Data Klop", "Data Tidak Klop"];
-                                                    var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
-                                                    var barColors = [
-                                                        "#00aba9",
-                                                        "#b91d47"
-                                                    ];
-
-                                                    new Chart("myChart", {
-                                                        type: "doughnut",
-                                                        data: {
-                                                            labels: xValues,
-                                                            datasets: [{
-                                                                backgroundColor: barColors,
-                                                                data: yValues
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            title: {
-                                                                display: true,
-                                                                text: "Diagram Count Selisih All Barang"
-                                                            }
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <div class="card mt-5">
-                                                        <div class="card-header">
-                                                            <h3>List Barang Tidak Cocok</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <table id="example1" class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th hidden>id</th>
-                                                                        <th>Nama Barang</th>
-                                                                        <th>Qty on Zahir</th>
-                                                                        <th>Qty Fisik</th>
-                                                                        <th>Hasil</th>
-                                                                        <th>Aksi</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($listBarang as $b) : ?>
-                                                                        <tr>
-                                                                            <td hidden><?= $b->id_barang ?></td>
-                                                                            <td><?= $b->nama_barang ?></td>
-                                                                            <td><?= $b->qty_a ?></td>
-                                                                            <td><?= $b->qty_b ?></td>
-                                                                            <?php
-                                                                            if ($b->hasil == 'match') {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-success btn-sm">
-                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            } else {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            }
-                                                                            ?>
-                                                                            <td>
-                                                                                <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?><?= $b->id_barang ?>">
-                                                                                    <i class="fa fa-solid fa-pencil-alt"></i>
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="timeline">
                                             <?php
@@ -195,10 +105,10 @@
                                                                             <td hidden><?= $b->id_opname ?></td>
                                                                             <td><?= $b->nama_barang ?></td>
                                                                             <td><?= $b->stok_box ?></td>
-                                                                            <td><?= $b->stok_box1?></td>
-                                                                            <td><?= $b->stok_pcs?></td>
-                                                                            <td><?= $b->stok_pcs1?></td>
-                                                                            <td><?= $b->exp_date?></td>
+                                                                            <td><?= $b->stok_box1 ?></td>
+                                                                            <td><?= $b->stok_pcs ?></td>
+                                                                            <td><?= $b->stok_pcs1 ?></td>
+                                                                            <td><?= $b->exp_date ?></td>
                                                                             <?php
                                                                             if ($b->hasil == 'match') {
                                                                                 echo '<td>
@@ -219,6 +129,94 @@
                                                                                     <i class="fa fa-solid fa-pencil-alt"></i>
                                                                                 </a>
                                                                             </td>
+                                                                        </tr>
+                                                                    <?php endforeach; ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="pending">
+                                            <?php
+                                            foreach ($selisihFaktur as $s) {
+                                                $match = $s->match;
+                                                $not   = $s->not;
+                                            }
+                                            ?>
+                                            <div class="d-flex justify-content-center">
+                                                <canvas id="chartfaktur" class="chartCus"></canvas>
+                                                <script>
+                                                    var xValues = ["Data Klop", "Data Tidak Klop"];
+                                                    var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
+                                                    var barColors = [
+                                                        "#00aba9",
+                                                        "#b91d47"
+                                                    ];
+
+                                                    new Chart("chartfaktur", {
+                                                        type: "doughnut",
+                                                        data: {
+                                                            labels: xValues,
+                                                            datasets: [{
+                                                                backgroundColor: barColors,
+                                                                data: yValues
+                                                            }]
+                                                        },
+                                                        options: {
+                                                            title: {
+                                                                display: true,
+                                                                text: "Diagram Count Selisih By Expired Date"
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md">
+                                                    <div class="card mt-5">
+                                                        <div class="card-header">
+                                                            <h3>List Barang With Faktur Pending</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table id="example3" class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th hidden>id</th>
+                                                                        <th>Kode Barang</th>
+                                                                        <th>Nama Barang</th>
+                                                                        <th>Qty</th>
+                                                                        <th>Qty Opname</th>
+                                                                        <th>Hasil</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php foreach ($listPending as $b) : ?>
+                                                                        <tr>
+                                                                            <td hidden><?= $b->id_barang ?></td>
+                                                                            <td><?= $b->kode_barang ?></td>
+                                                                            <td><?= $b->nama_barang ?></td>
+                                                                            <td><?= $b->total ?></td>
+                                                                            <td><?= $b->qty_b ?></td>
+                                                                            <?php
+                                                                            if ($b->hasil == 'match') {
+                                                                                echo '<td>
+                                                                <a href="#" class="btn btn-success btn-sm">
+                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                                </a>
+                                                            </td>';
+                                                                            } else {
+                                                                                echo '<td>
+                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
+                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                                                                </a>
+                                                            </td>';
+                                                                            }
+                                                                            ?>
                                                                         </tr>
                                                                     <?php endforeach; ?>
                                                                 </tbody>
