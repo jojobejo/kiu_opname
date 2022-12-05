@@ -56,8 +56,9 @@
                                                     var xValues = ["Data Klop", "Data Tidak Klop"];
                                                     var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
                                                     var barColors = [
-                                                        "#00aba9",
-                                                        "#b91d47"
+                                                        "#2ecc71",
+                                                        "#cb4335"
+                                                        
                                                     ];
 
                                                     new Chart("chartVivo", {
@@ -154,8 +155,8 @@
                                                     var xValues = ["Data Klop", "Data Tidak Klop"];
                                                     var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
                                                     var barColors = [
-                                                        "#00aba9",
-                                                        "#b91d47"
+                                                        "#2ecc71",
+                                                        "#cb4335"
                                                     ];
 
                                                     new Chart("chartfaktur", {
