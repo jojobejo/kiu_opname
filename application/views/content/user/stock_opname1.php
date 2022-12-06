@@ -46,12 +46,14 @@
                                             <tbody>
                                                 <?php
                                                 foreach ($opname as $o) :
+                                                $originalDate = $o->exp_date;
+                                                $newDate = date("d/m/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
                                                         <td><?= $o->nama_barang ?></td>
                                                         <td><?= $o->stok_box1 ?></td>
                                                         <td><?= $o->stok_pcs1 ?></td>
-                                                        <td><?= $o->exp_date ?></td>
+                                                        <td><?= $newDate ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $o->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>

@@ -50,10 +50,12 @@
                                             </thead>
                                             <tbody>
 
-                                                <?php foreach ($barang as $b) : ?>
+                                                <?php foreach ($barang as $b) : 
+                                                      $originalDate = $b->exp_date;
+                                                      $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                     <tr>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->exp_date ?></td>
+                                                        <td><?= $newDate ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>

@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang <span class="required">*</span></label>
+                        <label class="col-sm-3 control-label text-right" for="id_bar">Keterangan Input <span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="text" id="keterangan_isi" name="keterangan_isi" value="" /></div>
                     </div>
                 </div>

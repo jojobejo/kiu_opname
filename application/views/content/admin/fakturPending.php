@@ -53,10 +53,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <?php foreach ($barang as $b) : ?>
+                                                    <?php foreach ($barang as $b) : 
+                                                        $originalDate = $b->exp_date;
+                                                        $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                         <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->exp_date ?></td>
+                                                        <td><?= $newDate?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edit<?= $b->id_pending ?>">

@@ -46,20 +46,26 @@
                                                 <tr>
                                                     <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Qty</th>
                                                     <th>Expired Date</th>
+                                                    <th>Qty</th>
+                                                    <th>Sektor</th>
+                                                    <th>Keterangan</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 foreach ($barang as $b) :
+                                                    $originalDate = $b->exp_date;
+                                                    $newDate = date("d/m/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
                                                         <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->nama_barang ?> </td>
+                                                        <td><?= $newDate?></td>
                                                         <td><?= $b->qty ?></td>
-                                                        <td><?= $b->exp_date ?></td>
+                                                        <td><?= $b->sektor ?></td>
+                                                        <td><?= $b->keterangan ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_barang ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>

@@ -101,7 +101,9 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php foreach ($listVivo as $b) : ?>
+                                                                    <?php foreach ($listVivo as $b) : 
+                                                                         $originalDate = $b->exp_date;
+                                                                         $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                                         <tr>
                                                                             <td hidden><?= $b->id_opname ?></td>
                                                                             <td><?= $b->nama_barang ?></td>
@@ -109,7 +111,7 @@
                                                                             <td><?= $b->stok_box1 ?></td>
                                                                             <td><?= $b->stok_pcs ?></td>
                                                                             <td><?= $b->stok_pcs1 ?></td>
-                                                                            <td><?= $b->exp_date ?></td>
+                                                                            <td><?= $newDate ?></td>
                                                                             <?php
                                                                             if ($b->hasil == 'match') {
                                                                                 echo '<td>
