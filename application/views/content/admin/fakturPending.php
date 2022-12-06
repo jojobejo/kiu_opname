@@ -59,10 +59,10 @@
                                                         <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_pending ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edit<?= $b->id_pending ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir<?= $b->id_pending ?>">
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapus<?php echo $b->id_pending ?>">
                                                                 <i class="fa fa-solid fa-trash"></i>
                                                             </a>
                                                         </td>

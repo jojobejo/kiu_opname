@@ -58,7 +58,7 @@
                                                     var barColors = [
                                                         "#2ecc71",
                                                         "#cb4335"
-                                                        
+
                                                     ];
 
                                                     new Chart("chartVivo", {

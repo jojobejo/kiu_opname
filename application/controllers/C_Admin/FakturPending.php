@@ -44,4 +44,33 @@ class FakturPending extends CI_Controller
         $this->M_barang->insertFakturPending($data);
         redirect('faktur_pending');
     }
+
+    public function hapusFakturPending($hapus)
+
+    {
+        $idbarang = $hapus;
+
+        $this->M_barang->delfakturPending($idbarang);
+
+        redirect("faktur_pending");
+    }
+
+
+    function editFakturPending()
+    {
+        $kdbarang       = $this->input->post('kode_isi');
+        $nmabarang      = $this->input->post('nama_isi');
+        $expdate        = $this->input->post('exp_isi');
+        $qtyisi         = $this->input->post('qty_isi');
+        $data = array(
+            'kode_barang'   => $kdbarang,
+            'nama_barang'   => $nmabarang,
+            'exp_date'      => $expdate,
+            'qty'           => $qtyisi
+        );
+
+        $this->M_barang->editFakturPending($data);
+        redirect('faktur_pending');
+    }
+
 }
