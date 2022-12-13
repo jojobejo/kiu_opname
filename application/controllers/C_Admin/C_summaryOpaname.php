@@ -22,6 +22,8 @@ class C_summaryOpaname extends CI_Controller
             redirect("login");
         }
 
+        $data['page_title'] = 'Match Progress || Quick Count'; 
+
         $data['selisih']  = $this->M_Opname->countAll()->result();
         $data['listBarang'] = $this->M_Opname->listBarangMatch()->result();
 
@@ -31,7 +33,7 @@ class C_summaryOpaname extends CI_Controller
         $data['selisihFaktur'] = $this->M_Opname->countfakturPending()->result();
         $data['listPending']   = $this->M_Opname->listCountByPending()->result();
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/summary_opname', $data);
         $this->load->view('partial/admin/footersummary');
     }

@@ -21,9 +21,10 @@ class User extends CI_Controller
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
             redirect("login");
         }
+        $data['page_title'] = 'User'; 
         $data["user"] = $this->Usermodel->getAll();
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/user', $data);
         $this->load->view('partial/admin/footer');
     }

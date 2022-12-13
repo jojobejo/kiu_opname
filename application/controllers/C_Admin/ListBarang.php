@@ -20,11 +20,12 @@ class ListBarang extends CI_Controller
             redirect("login");
         }
 
+        $data['page_title'] = 'List Barang'; 
         $data['barang'] = $this->M_barang->getAll();
         $data['idopname'] = $this->M_barang->getidOpname()->result();
         
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/list_barang', $data);
         $this->load->view('partial/admin/footer');
     }

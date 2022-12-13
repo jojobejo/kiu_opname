@@ -22,8 +22,9 @@ class StkOpname extends CI_Controller
             redirect("login");
         }
         $data['barang'] = $this->M_barang->getAll();
+        $data['page_title'] = 'Stok Opname'; 
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/stock_opname',$data);
         $this->load->view('partial/admin/footer');
         $this->load->view('content/admin/ajax/selectbarang');

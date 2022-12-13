@@ -21,9 +21,10 @@ class C_matchProgress extends CI_Controller
             redirect("login");
         }
 
+        $data['page_title'] = 'Match Progress || Stok Opname'; 
         $data['zahir']  = $this->M_Opname->countZahir();
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/match_progress');
         $this->load->view('partial/admin/footer');
     }

@@ -32,7 +32,9 @@ class StkOpname extends CI_Controller
                 $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
                 $data['opname'] = $this->M_Opname->getHitungOpname($sektor)->result();
 
-                $this->load->view('partial/user/header');
+                $data['page_title'] = 'Stok Opname'; 
+
+                $this->load->view('partial/user/header',$data);
                 $this->load->view('content/user/stock_opname1', $data);
                 $this->load->view('partial/user/footer');
                 $this->load->view('content/user/ajax/selectbarang');
@@ -41,7 +43,7 @@ class StkOpname extends CI_Controller
 
                 $sektor = $this->session->userdata('sektor');
                 $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
-                $this->load->view('partial/user/header');
+                $this->load->view('partial/user/header',$data);
                 $this->load->view('content/user/stock_opname2', $data);
                 $this->load->view('partial/user/footer');
                 $this->load->view('content/user/ajax/selectbarang');

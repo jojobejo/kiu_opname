@@ -21,10 +21,11 @@ class Data_zahir extends CI_Controller
             redirect("login");
         }
 
+        $data['page_title'] = 'Data Barang Zahir || Stok Opname'; 
         $data['barang'] = $this->M_barang->getBarangZahir();
         $data['idopname'] = $this->M_barang->getidOpname();
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/data_zahir', $data);
         $this->load->view('partial/admin/footer');
     }

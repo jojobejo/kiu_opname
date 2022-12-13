@@ -21,9 +21,10 @@ class FakturPending extends CI_Controller
             redirect("login");
         }
 
+        $data['page_title'] = 'Faktur Pending'; 
         $data['barang'] = $this->M_barang->getFakturPending();
 
-        $this->load->view('partial/admin/header');
+        $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/fakturPending', $data);
         $this->load->view('partial/admin/footer');
     }
