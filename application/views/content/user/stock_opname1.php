@@ -36,6 +36,7 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Box</th>
                                                     <th>Pcs</th>
@@ -45,11 +46,13 @@
                                             </thead>
                                             <tbody>
                                                 <?php
+                                                $no = 1;
                                                 foreach ($opname as $o) :
                                                 $originalDate = $o->exp_date;
                                                 $newDate = date("d/m/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
+                                                        <td><?= $no++ ?></td>
                                                         <td><?= $o->nama_barang ?></td>
                                                         <td><?= $o->stok_box1 ?></td>
                                                         <td><?= $o->stok_pcs1 ?></td>

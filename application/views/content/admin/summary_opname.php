@@ -4,6 +4,12 @@
             height: 20px;
             width: 50px;
         }
+
+        #chart-wrapper {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+        }
     </style>
     <div class="wrapper">
 
@@ -34,212 +40,184 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">By Exp-Date</a></li>
-                                        <li class="nav-item"><a class="nav-link active" href="#pending" data-toggle="tab">Summary All</a></li>
-                                    </ul>
-                                </div><!-- /.card-header -->
+                                <?php
+                                foreach ($selisihVivo as $s) {
+                                    $match = $s->match;
+                                    $not   = $s->not;
+                                    $total = $s->total;
+
+                                    $vM = ($match / $total) * 100;
+                                    $vN = ($not / $total) * 100;
+
+                                    $dataPointsVivo = array(
+                                        array("label" => "Match", "y" => $vM),
+                                        array("label" => "Not Match", "y" => $vN)
+                                    );
+                                }
+                                ?>
+
+                                <?php
+                                foreach ($selisihFaktur as $a) {
+                                    $match = $a->match;
+                                    $not   = $a->not;
+                                    $total = $a->total;
+
+                                    $pM = ($match / $total) * 100;
+                                    $pN = ($not / $total) * 100;
+
+                                    $dataPoints = array(
+                                        array("label" => "Match", "y" => $pM),
+                                        array("label" => "Not Match", "y" => $pN),
+                                    );
+                                }
+                                ?>
                                 <div class="card-body">
-                                    <div class="tab-content">
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="timeline">
-                                            <?php
-                                            foreach ($selisihVivo as $s) {
-                                                $match = $s->match;
-                                                $not   = $s->not;
-                                            }
-                                            ?>
-                                            <div class="d-flex justify-content-center">
-                                                <canvas id="chartVivo" class="chartCus"></canvas>
-                                                <script>
-                                                    var xValues = ["Data Klop", "Data Tidak Klop"];
-                                                    var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
-                                                    var barColors = [
-                                                        "#2ecc71",
-                                                        "#cb4335"
+                                    <div class="row">
+                                        <div class="col-sm">
 
-                                                    ];
-
-                                                    new Chart("chartVivo", {
-                                                        type: "doughnut",
-                                                        data: {
-                                                            labels: xValues,
-                                                            datasets: [{
-                                                                backgroundColor: barColors,
-                                                                data: yValues
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            title: {
-                                                                display: true,
-                                                                text: "Diagram Count Selisih By Expired Date"
-                                                            }
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <div class="card mt-5">
-                                                        <div class="card-header">
-                                                            <h3>Table Match By Exp-Date</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <table id="example2" class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th hidden>id</th>
-                                                                        <th>Nama Barang</th>
-                                                                        <th>Qty Box Zahir</th>
-                                                                        <th>Qty Box Fisik</th>
-                                                                        <th>Qty Pcs Zahir</th>
-                                                                        <th>Qty Pcs Fisik</th>
-                                                                        <th>Expired Date</th>
-                                                                        <th>Hasil</th>
-                                                                        <th>Aksi</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($listVivo as $b) : 
-                                                                         $originalDate = $b->exp_date;
-                                                                         $newDate = date("d/m/Y", strtotime($originalDate)); ?>
-                                                                        <tr>
-                                                                            <td hidden><?= $b->id_opname ?></td>
-                                                                            <td><?= $b->nama_barang ?></td>
-                                                                            <td><?= $b->stok_box ?></td>
-                                                                            <td><?= $b->stok_box1 ?></td>
-                                                                            <td><?= $b->stok_pcs ?></td>
-                                                                            <td><?= $b->stok_pcs1 ?></td>
-                                                                            <td><?= $newDate ?></td>
-                                                                            <?php
-                                                                            if ($b->hasil == 'match') {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-success btn-sm">
-                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            } else {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            }
-                                                                            ?>
-                                                                            <td>
-                                                                                <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_barang ?><?= $b->id_barang ?>">
-                                                                                    <i class="fa fa-solid fa-pencil-alt"></i>
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                                            <div id="chartContainer" style="height: 450px; width: 100%;"></div>
                                         </div>
-                                        <!-- /.tab-pane -->
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane active" id="pending">
-                                            <?php
-                                            foreach ($selisihFaktur as $s) {
-                                                $match = $s->match;
-                                                $not   = $s->not;
-                                            }
-                                            ?>
-                                            <div class="d-flex justify-content-center">
-                                                <canvas id="chartfaktur" class="chartCus"></canvas>
-                                                <script>
-                                                    var xValues = ["Data Klop", "Data Tidak Klop"];
-                                                    var yValues = [<?php echo json_encode($match) ?>, <?php echo json_encode($not) ?>];
-                                                    var barColors = [
-                                                        "#2ecc71",
-                                                        "#cb4335"
-                                                    ];
-
-                                                    new Chart("chartfaktur", {
-                                                        type: "doughnut",
-                                                        data: {
-                                                            labels: xValues,
-                                                            datasets: [{
-                                                                backgroundColor: barColors,
-                                                                data: yValues
-                                                            }]
-                                                        },
-                                                        options: {
-                                                            title: {
-                                                                display: true,
-                                                                text: "Diagram Count Selisih By Expired Date"
-                                                            }
-                                                        }
-                                                    });
-                                                </script>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <div class="card mt-5">
-                                                        <div class="card-header">
-                                                            <h3>List Barang Match Faktur Pending</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <table id="example3" class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th hidden>id</th>
-                                                                        <th>Kode Barang</th>
-                                                                        <th>Nama Barang</th>
-                                                                        <th>Qty</th>
-                                                                        <th>Qty Opname</th>
-                                                                        <th>Hasil</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php foreach ($listPending as $b) : ?>
-                                                                        <tr>
-                                                                            <td hidden><?= $b->id_barang ?></td>
-                                                                            <td><?= $b->kode_barang ?></td>
-                                                                            <td><?= $b->nama_barang ?></td>
-                                                                            <td><?= $b->total ?></td>
-                                                                            <td><?= $b->qty_b ?></td>
-                                                                            <?php
-                                                                            if ($b->hasil == 'match') {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-success btn-sm">
-                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            } else {
-                                                                                echo '<td>
-                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                                            }
-                                                                            ?>
-                                                                        </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                                        <div class="col-sm">
+                                            <div id="chartContainer1" style="height: 450px; width:100%"></div>
                                         </div>
-                                        <!-- /.tab-pane -->
                                     </div>
-                                    <!-- /.tab-content -->
-                                </div><!-- /.card-body -->
+                                </div>
                             </div>
-                            <!-- /.card -->
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card mt-2">
+                            <div class="card-header ui-sortable-handle" style="cursor: move;">
+                                <h3 class="card-title">
+                                    <i class="fas fa-table mr-1"></i>
+                                    List Match - Not Match Barang
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#revenue-chart" data-toggle="tab">List Vivo</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#sales-chart" data-toggle="tab">List All Barang</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane" id="revenue-chart">
+                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('C_Admin/C_summaryOpaname/excelFifo') ?>">
+                                            <i class="fas fa-file-excel"></i>&nbsp;
+                                            Export Data To Excel
+                                        </a>
+
+                                        <table id="example2" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th hidden>id</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Qty Box Zahir</th>
+                                                    <th>Qty Box Fisik</th>
+                                                    <th>Qty Pcs Zahir</th>
+                                                    <th>Qty Pcs Fisik</th>
+                                                    <th>Expired Date</th>
+                                                    <th>Hasil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($listVivo as $b) :
+                                                    $originalDate = $b->exp_date;
+                                                    $newDate = date("d/m/Y", strtotime($originalDate)); ?>
+                                                    <tr>
+                                                        <td hidden><?= $b->id_opname ?></td>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->stok_box ?></td>
+                                                        <td><?= $b->stok_box1 ?></td>
+                                                        <td><?= $b->stok_pcs ?></td>
+                                                        <td><?= $b->stok_pcs1 ?></td>
+                                                        <td><?= $newDate ?></td>
+                                                        <?php
+                                                        if ($b->hasil == 'match') {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-success btn-sm">
+                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        } else {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
+                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                                                            </a>
+                                                        </td>';
+                                                        }
+                                                        ?>
+
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="chart tab-pane active" id="sales-chart">
+                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('C_Admin/C_summaryOpaname/excelAllBarang') ?>">
+                                            <i class="fas fa-file-excel"></i>&nbsp;
+                                            Export Data To Excel
+                                        </a>
+                                        <table id="example3" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th hidden>id</th>
+                                                    <th>Kode Barang</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Saldo Buku</th>
+                                                    <th>Faktur Pending</th>
+                                                    <th>Saldo Fisik</th>
+                                                    <th>Selisih</th>
+                                                    <th>Hasil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($listPending as $b) : ?>
+                                                    <tr>
+                                                        <td hidden><?= $b->id_barang ?></td>
+                                                        <td><?= $b->kode_barang ?></td>
+                                                        <td><?= $b->nama_barang ?></td>
+                                                        <td><?= $b->saldo_buku ?></td>
+                                                        <td><?= $b->faktur_pending ?></td>
+                                                        <td><?= $b->qty_b ?></td>
+                                                        <td><?= $b->selisih ?></td>
+                                                        <?php
+                                                        if ($b->hasil == 'match') {
+                                                            echo '<td>
+                                                                <a href="#" class="btn btn-success btn-sm">
+                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                                </a>
+                                                            </td>';
+                                                        } else {
+                                                            echo '<td>
+                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
+                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                                                                </a>
+                                                            </td>';
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+
             </section>
+
+
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -260,3 +238,95 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+    <?php
+    foreach ($selisihVivo as $s) {
+        $match = $s->match;
+        $not   = $s->not;
+        $total = $s->total;
+
+        $vM = ($match / $total) * 100;
+        $vN = ($not / $total) * 100;
+
+        $dataPointsVivo = array(
+            array("label" => "Match", "y" => $vM),
+            array("label" => "Not Match", "y" => $vN)
+        );
+    }
+    ?>
+
+    <?php
+    foreach ($selisihFaktur as $a) {
+        $match = $a->match;
+        $not   = $a->not;
+        $total = $a->total;
+
+        $pM = ($match / $total) * 100;
+        $pN = ($not / $total) * 100;
+
+        $dataPoints = array(
+            array("label" => "Match", "y" => $pM),
+            array("label" => "Not Match", "y" => $pN),
+        );
+    }
+    ?>
+
+    <script>
+        window.onload = function() {
+
+            var chart1 = new CanvasJS.Chart("chartContainer", {
+
+                title: {
+                    text: "Count By All Barang"
+                },
+                legend: {
+                    maxWidth: 500,
+                    itemWidth: 170
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.00\"%\"",
+                    legendText: "{indexLabel}: {y}",
+                    dataPoints: [{
+                            y: <?= $pM ?>,
+                            indexLabel: "Match"
+                        },
+                        {
+                            y: <?= $pN ?>,
+                            indexLabel: "Not Match"
+                        },
+
+                    ]
+                }]
+            });
+
+            var chart2 = new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: "Count By Exp Date"
+                },
+                legend: {
+                    maxWidth: 500,
+                    itemWidth: 200
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.00\"%\"",
+                    legendText: "{indexLabel}: {y}",
+                    dataPoints: [{
+                            y: <?= $vM ?>,
+                            indexLabel: "Match"
+                        },
+                        {
+                            y: <?= $vN ?>,
+                            indexLabel: "Not Match"
+                        },
+                    ]
+                }]
+            });
+
+            chart1.render();
+            chart2.render();
+        }
+    </script>

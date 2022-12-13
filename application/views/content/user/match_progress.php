@@ -43,6 +43,7 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Hasil</th>
@@ -50,10 +51,13 @@
                                             </thead>
                                             <tbody>
 
-                                                <?php foreach ($barang as $b) : 
+                                                <?php 
+                                                $no = 1;
+                                                foreach ($jmlBarang as $b) : 
                                                       $originalDate = $b->exp_date;
                                                       $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                     <tr>
+                                                        <td><?= $no++?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $newDate ?></td>
                                                         <?php

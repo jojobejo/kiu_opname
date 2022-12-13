@@ -30,9 +30,14 @@
                         <div class="col-lg-6 col-6">
                             <!-- small box -->
                             <div class="small-box bg-info">
+                                <?php
+                                foreach ($barang as $b) {
+                                    $tB = $b->total_barang;
+                                    $hB =  round((float)$tB, 2);
+                                }
+                                ?>
                                 <div class="inner">
-                                    <h3>3,515</h3>
-
+                                    <h3><?= $hB ?></h3>
                                     <p>Jumlah Barang</p>
                                 </div>
                                 <div class="icon">
@@ -45,8 +50,19 @@
                         <div class="col-lg-6 col-6">
                             <!-- small box -->
                             <div class="small-box bg-success">
+                                <?php
+                                foreach ($jmlBarang as $s) {
+                                    $match = $s->match;
+                                    $not   = $s->not;
+                                    $total = $s->total;
+
+                                    $vM = ($match / $total) * 100;
+                                    $vN = ($not / $total) * 100;
+                                    $hM =  round((float)$vM, 2);
+
+                                } ?>
                                 <div class="inner">
-                                    <h3>90<sup style="font-size: 20px">%</sup></h3>
+                                    <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
 
                                     <p>Persentase Kecocokan</p>
                                 </div>
