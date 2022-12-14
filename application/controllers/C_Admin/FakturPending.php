@@ -21,10 +21,10 @@ class FakturPending extends CI_Controller
             redirect("login");
         }
 
-        $data['page_title'] = 'Faktur Pending'; 
+        $data['page_title'] = 'Faktur Pending';
         $data['barang'] = $this->M_barang->getFakturPending();
 
-        $this->load->view('partial/admin/header',$data);
+        $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/fakturPending', $data);
         $this->load->view('partial/admin/footer');
     }
@@ -59,19 +59,20 @@ class FakturPending extends CI_Controller
 
     function editFakturPending()
     {
+        $idbarang      = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
         $nmabarang      = $this->input->post('nama_isi');
         $expdate        = $this->input->post('exp_isi');
         $qtyisi         = $this->input->post('qty_isi');
         $data = array(
+            'id_pending'     => $idbarang,
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmabarang,
             'exp_date'      => $expdate,
             'qty'           => $qtyisi
         );
 
-        $this->M_barang->editFakturPending($data);
-        redirect('faktur_pending');
+        $this->M_barang->editFakturPending($data, $idbarang);
+        redirect("faktur_pending");
     }
-
 }

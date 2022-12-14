@@ -148,11 +148,16 @@
                                                 <tr>
                                                     <th hidden>id</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Qty Box Zahir</th>
-                                                    <th>Qty Box Fisik</th>
-                                                    <th>Qty Pcs Zahir</th>
-                                                    <th>Qty Pcs Fisik</th>
                                                     <th>Expired Date</th>
+                                                    <th>Sektor</th>
+                                                    <th>Faktur Pending</th>
+                                                    <th>Saldo Buku Zahir</th>
+                                                    <th>Box Saldo Buku</th>
+                                                    <th>Box Saldo Pcs</th>
+                                                    <th>Saldo Fisik</th>
+                                                    <th>Box Fisik</th>
+                                                    <th>Pcs Fisik</th>
+                                                    <th>Selisih</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
@@ -163,11 +168,16 @@
                                                     <tr>
                                                         <td hidden><?= $b->id_opname ?></td>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->stok_box ?></td>
-                                                        <td><?= $b->stok_box1 ?></td>
-                                                        <td><?= $b->stok_pcs ?></td>
-                                                        <td><?= $b->stok_pcs1 ?></td>
                                                         <td><?= $newDate ?></td>
+                                                        <td><?= $b->sektor ?></td>
+                                                        <td><?= $b->faktur_pending ?></td>
+                                                        <td><?= $b->saldo_buku ?></td>
+                                                        <td><?= $b->box_buku ?></td>
+                                                        <td><?= $b->pcs_buku ?></td>
+                                                        <td><?= $b->saldo_fisik ?></td>
+                                                        <td><?= $b->box_fisik ?></td>
+                                                        <td><?= $b->pcs_fisik ?></td>
+                                                        <td><?= $b->selisih ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
@@ -229,6 +239,7 @@
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Fisik</th>
                                                     <th>Selisih</th>
+                                                    <th>Sektor</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
@@ -242,6 +253,7 @@
                                                         <td><?= $b->faktur_pending ?></td>
                                                         <td><?= $b->qty_b ?></td>
                                                         <td><?= $b->selisih ?></td>
+                                                        <td><?= $b->sektor ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
