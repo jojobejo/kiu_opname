@@ -72,6 +72,11 @@ class M_barang extends CI_Model
         $this->db->where('id_barang', $idbarang);
         return $this->db->update('tb_barang_zahir', $data);
     }
+    public function editDataOpname($data, $idopname)
+    {
+        $this->db->where('id_opname', $idopname);
+        return $this->db->update('tb_opname', $data);
+    }
     public function zahirDel($idbarang)
     {
         $this->db->where('id_barang', $idbarang);

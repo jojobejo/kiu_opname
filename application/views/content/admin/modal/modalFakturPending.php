@@ -18,6 +18,12 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <label class="col-sm-3 control-label text-right" for="id_bar">Kode Pending<span class="required">*</span></label>
+                        <div class="col-sm-8"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="" /></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang<span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="text" id="nama_isi" name="nama_isi" value="" /></div>
                     </div>
@@ -63,6 +69,12 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Id Pending<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="id_isi" name="id_isi" value="<?= $b->id_pending ?>" /></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">Kode Pending<span class="required">*</span></label>
+                            <div class="col-sm-8"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="<?= $b->kode_pending ?>" /></div>
                         </div>
                     </div>
                     <div class="form-group">

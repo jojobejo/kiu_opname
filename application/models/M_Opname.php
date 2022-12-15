@@ -45,14 +45,15 @@ class M_Opname extends CI_Model
 
     public function getMatchUser($sektor)
     {
-        return $this->db->query("SELECT
+        return $this->db->query("SELECT 
         a.kode_barang,
         b.nama_barang, 
         b.exp_date,
+        b.sektor,
         CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
         FROM tb_opname a 
         JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_barang = a.kode_barang
+        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending
         WHERE b.sektor = '$sektor'
         ");
     }
@@ -77,7 +78,7 @@ class M_Opname extends CI_Model
         COUNT(CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty != 0 then 1 ELSE NULL END) as 'not'
         FROM tb_opname a
         JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_barang = a.kode_barang");
+        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending");
     }
 
     public function listMatchVivo()
@@ -99,7 +100,7 @@ class M_Opname extends CI_Model
         CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
         FROM tb_opname a 
         JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_barang = a.kode_barang");
+        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending ");
     }
 
     public function getResult()
@@ -150,7 +151,7 @@ class M_Opname extends CI_Model
         a.id_barang,
         a.kode_barang,
         a.nama_barang,
-       	sum(a.qty) as qty_a, (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang group by c.kode_barang) as qty_c,
+       	sum(a.qty) as qty_a, (SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending group by c.kode_pending) as qty_c,
         (select sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b
         from tb_barang_zahir a group by a.kode_barang 
         ) as x  
@@ -167,7 +168,7 @@ class M_Opname extends CI_Model
         x.sektor,
         x.qty_a AS saldo_buku,
         COALESCE(x.qty_c,0) as faktur_pending,
-       x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
+        x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
         x.qty_b,
         (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) = x.qty_a THEN 'match' ELSE 'not match' END) AS hasil
         FROM

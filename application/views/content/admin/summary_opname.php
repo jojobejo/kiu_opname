@@ -164,7 +164,7 @@
                                             <tbody>
                                                 <?php foreach ($listVivo as $b) :
                                                     $originalDate = $b->exp_date;
-                                                    $newDate = date("d/m/Y", strtotime($originalDate)); ?>
+                                                    $newDate = date("m/d/Y", strtotime($originalDate)); ?>
                                                     <tr>
                                                         <td hidden><?= $b->id_opname ?></td>
                                                         <td><?= $b->nama_barang ?></td>

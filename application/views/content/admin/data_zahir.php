@@ -45,6 +45,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Kode Barang</th>
+                                                    <th>Kode Pending</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Qty</th>
@@ -57,17 +58,18 @@
                                                 <?php
                                                 foreach ($barang as $b) :
                                                     $originalDate = $b->exp_date;
-                                                    $newDate = date("d/m/Y", strtotime($originalDate));
+                                                    $newDate = date("m/d/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
                                                         <td><?= $b->kode_barang ?></td>
+                                                        <td><?= $b->kode_pending ?></td>
                                                         <td><?= $b->nama_barang ?> </td>
-                                                        <td><?= $newDate?></td>
+                                                        <td><?= $newDate ?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td><?= $b->sektor ?></td>
                                                         <td><?= $b->keterangan ?></td>
                                                         <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_barang ?>">
+                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>
                                                             </a>
                                                             <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir<?= $b->id_barang ?>">

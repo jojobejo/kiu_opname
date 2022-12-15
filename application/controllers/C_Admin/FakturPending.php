@@ -32,11 +32,13 @@ class FakturPending extends CI_Controller
     function insertDataPending()
     {
         $kdbarang       = $this->input->post('kode_isi');
+        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('nama_isi');
         $expdate        = $this->input->post('exp_isi');
         $qtyisi         = $this->input->post('qty_isi');
         $data = array(
             'kode_barang'   => $kdbarang,
+            'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'exp_date'      => $expdate,
             'qty'           => $qtyisi

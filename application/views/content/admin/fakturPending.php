@@ -44,6 +44,7 @@
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Kode Pending</th>
                                                     <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
@@ -56,6 +57,7 @@
                                                     <?php foreach ($barang as $b) : 
                                                         $originalDate = $b->exp_date;
                                                         $newDate = date("d/m/Y", strtotime($originalDate)); ?>
+                                                        <td><?= $b->kode_pending ?></td>
                                                         <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $newDate?></td>

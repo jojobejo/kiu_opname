@@ -21,11 +21,11 @@ class Data_zahir extends CI_Controller
             redirect("login");
         }
 
-        $data['page_title'] = 'Data Barang Zahir || Stok Opname'; 
+        $data['page_title'] = 'Data Barang Zahir || Stok Opname';
         $data['barang'] = $this->M_barang->getBarangZahir();
         $data['idopname'] = $this->M_barang->getidOpname();
 
-        $this->load->view('partial/admin/header',$data);
+        $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/data_zahir', $data);
         $this->load->view('partial/admin/footer');
     }
@@ -37,6 +37,7 @@ class Data_zahir extends CI_Controller
         }
 
         $kdbarang       = $this->input->post('kode_isi');
+        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $panjang        = $this->input->post('panjang_isi');
         $idopname       = $this->input->post('id_opname_isi');
@@ -51,6 +52,7 @@ class Data_zahir extends CI_Controller
         $data = array(
             'kode_barang'   => $kdbarang,
             'id_opname'     => $idopname,
+            'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'panjang'       => $panjang,
             'lebar'         => $lebar,
@@ -64,6 +66,7 @@ class Data_zahir extends CI_Controller
 
         $data1 = array(
             'kode_barang'   => $kdbarang,
+            'kode_pending'  => $kdpending,
             'stok_box1'     => "0",
             'stok_pcs1'     => "0",
             'exp_date'      => $exdate,
@@ -81,21 +84,33 @@ class Data_zahir extends CI_Controller
             redirect('login');
         }
 
+        $idopname       = $this->input->post('opname_isi');
         $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
+        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $qty            = $this->input->post('qty_isi');
         $exdate         = $this->input->post('date_isi');
 
         $data = array(
+
             'id_barang'     => $idbarang,
+            'id_opname'     => $idopname,
             'kode_barang'   => $kdbarang,
+            'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
-            'qty'            => $qty,
+            'qty'           => $qty,
             'exp_date'      => $exdate
         );
 
+        $data1 = array(
+            'id_opname'     => $idopname,
+            'kode_barang'   => $kdbarang,
+            'kode_pending'  => $kdpending,
+        );
+
         $this->M_barang->editDataZahir($data, $idbarang);
+        $this->M_barang->editDataOpname($data1, $idopname);
         redirect('data_zahir');
     }
 
