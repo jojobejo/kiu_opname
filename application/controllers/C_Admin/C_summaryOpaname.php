@@ -49,7 +49,7 @@ class C_summaryOpaname extends CI_Controller
 
         // Settingan awal fil excel
         $excel->getProperties()->setCreator('it_karisma')
-            ->setLastModifiedBy('My Notes Code')
+            ->setLastModifiedBy('all_barang_')
             ->setTitle("Data Laporan Opname All Barang")
             ->setSubject("All Barang")
             ->setDescription("Rekap Opname All Barang")
@@ -93,8 +93,8 @@ class C_summaryOpaname extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO"); // Set kolom A3 dengan tulisan "NO"
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE BARANG"); // Set kolom B3 dengan tulisan "NIS"
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "NAMA BARANG"); // Set kolom C3 dengan tulisan "NAMA"
-        $excel->setActiveSheetIndex(0)->setCellValue('D3', "SALDO BUKU"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "FAKTUR PENDING"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "FAKTUR PENDING"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "SALDO BUKU"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
         $excel->setActiveSheetIndex(0)->setCellValue('F3', "SALDO FISIK"); // Set kolom E3 dengan tulisan "ALAMAT"
         $excel->setActiveSheetIndex(0)->setCellValue('G3', "SELISIH"); // Set kolom E3 dengan tulisan "ALAMAT"
         $excel->setActiveSheetIndex(0)->setCellValue('H3', "HASIL"); // Set kolom E3 dengan tulisan "ALAMAT"
@@ -118,8 +118,8 @@ class C_summaryOpaname extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kode_barang);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->nama_barang);
-            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->saldo_buku);
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->faktur_pending);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->faktur_pending);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->saldo_buku);
             $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->qty_b);
             $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->selisih);
             $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->hasil);
@@ -212,8 +212,8 @@ class C_summaryOpaname extends CI_Controller
             )
         );
 
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan All-Barang"); // Set kolom A1 dengan tulisan "DATA SISWA"
-        $excel->getActiveSheet()->mergeCells('A1:I1'); // Set Merge Cell pada kolom A1 sampai E1
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan Fivo-By Expired Date"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->getActiveSheet()->mergeCells('A1:N1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
@@ -223,11 +223,16 @@ class C_summaryOpaname extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE BARANG"); // Set kolom B3 dengan tulisan "NIS"
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "NAMA BARANG"); // Set kolom B3 dengan tulisan "NIS"
         $excel->setActiveSheetIndex(0)->setCellValue('D3', "EXPIRED DATE"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "STOK BOX BUKU"); // Set kolom C3 dengan tulisan "NAMA"
-        $excel->setActiveSheetIndex(0)->setCellValue('F3', "STOK BOX FISIK"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
-        $excel->setActiveSheetIndex(0)->setCellValue('G3', "STOK QTY BUKU"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('H3', "STOK QTY FISIK"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('I3', "HASIL"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "SEKTOR"); // Set kolom C3 dengan tulisan "NAMA"
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "FAKTUR PENDING"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
+        $excel->setActiveSheetIndex(0)->setCellValue('G3', "SALDO BUKU ZAHIR"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('H3', "SALDO BOX BUKU"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('I3', "SALDO PCS BUKU"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('J3', "SALDO FISIK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('K3', "SALDO BOX FISIK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('L3', "SALDO BOX FISIK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('M3', "SELISIH"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('N3', "HASIL"); // Set kolom E3 dengan tulisan "ALAMAT"
 
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -239,6 +244,11 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
         $siswa = $this->M_Opname->listMatchVivo()->result();
@@ -250,11 +260,16 @@ class C_summaryOpaname extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kode_barang);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->nama_barang);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->exp_date);
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->stok_box);
-            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->stok_box1);
-            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->stok_pcs);
-            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->stok_pcs1);
-            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->hasil);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->sektor);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->faktur_pending);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->saldo_buku);
+            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->box_buku);
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->pcs_buku);
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->saldo_fisik);
+            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->box_fisik);
+            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->pcs_fisik);
+            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->selisih);
+            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, $data->hasil);
 
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -266,6 +281,11 @@ class C_summaryOpaname extends CI_Controller
             $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row);
 
             $no++; // Tambah 1 setiap kali looping
             $numrow++; // Tambah 1 setiap kali looping
@@ -275,12 +295,17 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); // Set width kolom A
         $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10); // Set width kolom B
         $excel->getActiveSheet()->getColumnDimension('C')->setWidth(45); // Set width kolom C
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20); // Set width kolom D
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20); // Set width kolom E
-        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20); // Set width kolom E
-        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(20); // Set width kolom E
-        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(20); // Set width kolom E
-        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(25); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(10); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('L')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('N')->setWidth(15); // Set width kolom E
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
