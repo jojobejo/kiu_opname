@@ -49,7 +49,7 @@
                                                 $no = 1;
                                                 foreach ($opname as $o) :
                                                     $originalDate = $o->exp_date;
-                                                    $newDate = date("d/m/Y", strtotime($originalDate));
+                                                    $newDate = date("m/d/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
                                                         <td class="text-center"><?= $no++ ?></td>

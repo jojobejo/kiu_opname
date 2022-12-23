@@ -55,7 +55,7 @@
                                                 $no = 1;
                                                 foreach ($jmlBarang as $b) : 
                                                       $originalDate = $b->exp_date;
-                                                      $newDate = date("d/m/Y", strtotime($originalDate)); ?>
+                                                      $newDate = date("m/d/Y", strtotime($originalDate)); ?>
                                                     <tr>
                                                         <td hidden><?= $no++?></td>
                                                         <td><?= $b->nama_barang ?></td>
