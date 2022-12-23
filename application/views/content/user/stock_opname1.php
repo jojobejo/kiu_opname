@@ -22,7 +22,7 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/user/modal/modalOpname1'); ?>  
+            <?php $this->load->view('content/user/modal/modalOpname1'); ?>
 
             <!-- Main content -->
             <section class="content">
@@ -32,8 +32,8 @@
                             <div class="card">
                                 <div class="d-flex justify-content-center">
                                     <!-- CARD BODY -->
-                                    <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
+                                    <div class="card-body table-responsive">
+                                        <table id="dataTBUserSO" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -48,11 +48,11 @@
                                                 <?php
                                                 $no = 1;
                                                 foreach ($opname as $o) :
-                                                $originalDate = $o->exp_date;
-                                                $newDate = date("d/m/Y", strtotime($originalDate));
+                                                    $originalDate = $o->exp_date;
+                                                    $newDate = date("d/m/Y", strtotime($originalDate));
                                                 ?>
                                                     <tr>
-                                                        <td><?= $no++ ?></td>
+                                                        <td class="text-center"><?= $no++ ?></td>
                                                         <td><?= $o->nama_barang ?></td>
                                                         <td><?= $o->stok_box1 ?></td>
                                                         <td><?= $o->stok_pcs1 ?></td>

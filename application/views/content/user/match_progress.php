@@ -40,10 +40,10 @@
                                         <h3>List Barang Tidak Cocok</h3>
                                     </div>
                                     <div class="card-body">
-                                        <table id="example1" class="table table-bordered table-striped">
+                                        <table id="tbMatchProgressUser" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
+                                                    <th hidden>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Hasil</th>
@@ -57,7 +57,7 @@
                                                       $originalDate = $b->exp_date;
                                                       $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                     <tr>
-                                                        <td><?= $no++?></td>
+                                                        <td hidden><?= $no++?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $newDate ?></td>
                                                         <?php
