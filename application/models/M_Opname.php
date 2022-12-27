@@ -50,6 +50,7 @@ class M_Opname extends CI_Model
         b.nama_barang, 
         b.exp_date,
         b.sektor,
+        b.sktor_tambahan,
         CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
         FROM tb_opname a 
         JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 

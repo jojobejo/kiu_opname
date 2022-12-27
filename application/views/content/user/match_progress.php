@@ -46,6 +46,7 @@
                                                     <th hidden>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
+                                                    <th>Sektor Tambahan</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
@@ -60,6 +61,7 @@
                                                         <td hidden><?= $no++?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $newDate ?></td>
+                                                        <td><?= $b->sktor_tambahan ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
