@@ -41,6 +41,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('u_list_barang') ?>" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                  List Barang 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url('logout') ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -63,5 +63,7 @@ $route['def_user'] = 'C_User/Def_user';
 $route['u_opname'] = 'C_User/StkOpname';
 $route['faktur_pending'] = 'C_Admin/FakturPending';
 $route['u_match_progress'] = 'C_User/C_matchProgress';
+$route['u_list_barang'] = 'C_User/C_listBarang';
+$route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -15,6 +15,14 @@ class M_Opname extends CI_Model
         return $this->db->insert('tb_opname', $data1);
     }
 
+    public function list_barang()
+    {
+        $this->db->select('tb_barang_zahir.kode_barang,tb_barang_zahir.sektor,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
+        $this->db->FROM('tb_barang_zahir');
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getOpname($sektor)
     {
         $this->db->select('tb_barang_zahir.hasil_dimensi,tb_barang_zahir.kode_barang,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');

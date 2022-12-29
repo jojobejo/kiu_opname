@@ -4,7 +4,7 @@
 <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
@@ -39,53 +39,30 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/adminlte.js') ?>"></script>
 
+<script type="text/javascript">
+    var table;
+    $(document).ready(function() {
 
-<script>
-  $(function() {
-    $("#dataTBUserSO").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper');
+        //datatables
+        table = $('#table').DataTable({
 
-    $("#tbMatchProgressUser").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            "processing": true,
+            "serverSide": true,
+            "order": [],
 
-    $("#dataListBarang").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            "ajax": {
+                "url": "<?php echo site_url('C_User/C_listBarang/get_data_user') ?>",
+                "type": "POST"
+            },
 
-  });
+            "columnDefs": [{
+                "targets": [0],
+                "orderable": false,
+            }, ],
 
-  var table;
-  $(document).ready(function() {
-
-    //datatables
-    table = $('#table').DataTable({
-
-      "processing": true,
-      "serverSide": true,
-      "order": [],
-
-      "ajax": {
-        "url": "<?php echo site_url('u_list_barang1') ?>",
-        "type": "POST"
-      },
-
-
-      "columnDefs": [{
-        "targets": [0],
-        "orderable": false,
-      }, ],
+        });
 
     });
-
-  });
 </script>
 
 </body>
