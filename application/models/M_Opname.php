@@ -20,6 +20,7 @@ class M_Opname extends CI_Model
         $this->db->select('tb_barang_zahir.hasil_dimensi,tb_barang_zahir.kode_barang,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
         $this->db->FROM('tb_barang_zahir');
         $this->db->where('tb_barang_zahir.sektor', $sektor);
+
         $query = $this->db->get();
         return $query;
     }
@@ -30,6 +31,7 @@ class M_Opname extends CI_Model
         $this->db->from('tb_opname');
         $this->db->join('tb_barang_zahir', 'tb_barang_zahir.id_opname = tb_opname.id_opname');
         $this->db->where('tb_barang_zahir.sektor', $sektor);
+        $this->db->order_by('kode_barang', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -46,40 +48,100 @@ class M_Opname extends CI_Model
     public function getMatchUser($sektor)
     {
         return $this->db->query("SELECT 
-        a.kode_barang,
-        b.nama_barang, 
-        b.exp_date,
-        b.sektor,
-        b.sktor_tambahan,
-        CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
-        FROM tb_opname a 
-        JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending
-        WHERE b.sektor = '$sektor'
+        x.nama_barang,
+         x.exp_date,
+         x.sektor,
+         x.qty_a AS saldo_buku,
+         x.stok_box as saldo_buku_box,
+         x.stok_pcs as saldo_buku_pcs,
+         x.salqty as saldo_fisik,
+         x.stkbox as fisik_box,
+         x.stkpcs as fisik_pcs,
+         x.sktor_tambahan,
+         COALESCE(x.qty_c,0) as faktur_pending,
+         x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
+         (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) - x.qty_a = 0  THEN 'match' ELSE 'not match' END) AS hasil
+         FROM
+         (Select 
+         a.id_barang,
+         a.kode_barang,
+         a.nama_barang,
+         a.exp_date,
+         a.sektor,
+         a.stok_box,
+         a.stok_pcs,
+         a.sktor_tambahan,
+         
+ (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+ (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
+ (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
+ (SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
+ (SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
+ (SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+          
+         from tb_barang_zahir a WHERE a.sektor='$sektor' group by a.nama_barang,a.exp_date) as x  
+         ORDER BY x.nama_barang  ASC 
+              
         ");
     }
 
     public function prsenUser($sektor)
     {
-        return $this->db->query("SELECT  
-        COUNT(tb_barang_zahir.kode_barang) AS total,
-        COUNT(CASE WHEN  tb_opname.QTY1 = tb_barang_zahir.qty then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN tb_opname.QTY1 != tb_barang_zahir.qty then 1 ELSE NULL END) as 'not'
-        FROM tb_opname
-        JOIN tb_barang_zahir ON tb_barang_zahir.id_opname = tb_opname.id_opname
-        WHERE tb_barang_zahir.sektor = '$sektor'
+        return $this->db->query("SELECT 
+        COUNT(x.kode_barang) as total,
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
+        
+        FROM
+        (Select 
+        a.id_barang,
+        a.kode_barang,
+        a.nama_barang,
+        a.exp_date,
+        a.sektor,
+        a.stok_box,
+        a.stok_pcs,
+        a.sktor_tambahan,
+        
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
+(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
+(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
+(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+         
+        from tb_barang_zahir a WHERE a.sektor = '$sektor'  group by a.nama_barang,a.exp_date) as x  
+        ORDER BY x.id_barang
         ");
     }
 
     public function countVivo()
     {
-        return $this->db->query("SELECT  
-        COUNT(b.kode_barang) AS total,
-        COUNT(CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty != 0 then 1 ELSE NULL END) as 'not'
-        FROM tb_opname a
-        JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending");
+        return $this->db->query("SELECT 
+        COUNT(x.kode_barang) as total,
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
+        
+        FROM
+        (Select 
+        a.id_barang,
+        a.kode_barang,
+        a.nama_barang,
+        a.exp_date,
+        a.sektor,
+        a.stok_box,
+        a.stok_pcs,
+        a.sktor_tambahan,
+        
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
+(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
+(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
+(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+         
+        from tb_barang_zahir a  group by a.nama_barang,a.exp_date) as x  
+        ORDER BY x.id_barang");
     }
 
     public function listMatchVivo()
@@ -90,19 +152,76 @@ class M_Opname extends CI_Model
         b.exp_date,
         b.sektor,
         COALESCE(c.qty,0) AS faktur_pending,
-        b.qty as saldo_buku,
-        b.stok_box as box_buku,
-        b.stok_pcs as pcs_buku,
-        a.QTY1 as saldo_fisik,
-        a.stok_box1 as box_fisik,
-        a.stok_pcs1 as pcs_fisik,
-        COALESCE(c.qty,0) AS faktur_pending,
-        (a.QTY1-COALESCE(c.qty,0))-b.qty as selisih,
-        CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
+        sum(b.qty) as saldo_buku,
+        sum(b.stok_box) as box_buku,
+        sum(b.stok_pcs) as pcs_buku,
+        sum(a.QTY1) as saldo_fisik,
+        sum(a.stok_box1) as box_fisik,
+        sum(a.stok_pcs1) as pcs_fisik,
+        (sum(a.QTY1)-COALESCE(c.qty,0))-sum(b.qty) as selisih,
+        CASE WHEN (sum(a.QTY1)-COALESCE(c.qty,0))-sum(b.qty) = 0 THEN 'match' ELSE 'not' END AS hasil 
         FROM tb_opname a 
         JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending ");
+        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending 
+        GROUP BY a.kode_barang,a.exp_date");
     }
+
+    // SELECT 
+    //     x.nama_barang,
+    //     x.exp_date,
+    //     x.sektor,
+    //     x.qty_a AS saldo_buku,
+    //     x.stok_box as saldo_buku_box,
+    //     x.stok_pcs as saldo_buku_pcs,
+    //     x.salqty as saldo_fisik,
+    //     x.stkbox as fisik_box,
+    //     x.stkpcs as fisik_pcs,
+    //     COALESCE(x.qty_c,0) as faktur_pending,
+    //     x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
+    //     x.qty_b,
+    //     (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) = x.qty_a THEN 'match' ELSE 'not match' END) AS hasil
+    //     FROM
+    //     (Select 
+    //     a.id_barang,
+    //     a.kode_barang,
+    //     a.nama_barang,
+    //     a.exp_date,
+    //     a.sektor,
+    //     a.stok_box,
+    //     a.stok_pcs,
+    //     sum(a.qty) as qty_a,
+    //     (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang group by c.kode_barang) as qty_c,
+    //     (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b,
+    //     (SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang group by d.kode_barang ) as stkbox,
+    //     (SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang group by e.kode_barang ) as stkpcs,
+    //     (SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.kode_barang ) as salqty
+    //     from tb_barang_zahir a group by a.nama_barang,a.exp_date) as x  
+    //     WHERE x.sektor = '1'
+    //     ORDER BY x.id_barang  ASC 
+
+
+    // CODE BENAR , KONSEP SALAH ->
+    // public function listMatchVivo()
+    // {
+    //     return $this->db->query("SELECT 
+    //     a.kode_barang,
+    //     b.nama_barang, 
+    //     b.exp_date,
+    //     b.sektor,
+    //     COALESCE(c.qty,0) AS faktur_pending,
+    //     b.qty as saldo_buku,
+    //     b.stok_box as box_buku,
+    //     b.stok_pcs as pcs_buku,
+    //     a.QTY1 as saldo_fisik,
+    //     a.stok_box1 as box_fisik,
+    //     a.stok_pcs1 as pcs_fisik,
+    //     COALESCE(c.qty,0) AS faktur_pending,
+    //     (a.QTY1-COALESCE(c.qty,0))-b.qty as selisih,
+    //     CASE WHEN (a.QTY1-COALESCE(c.qty,0))-b.qty = 0 THEN 'match' ELSE 'not' END AS hasil 
+    //     FROM tb_opname a 
+    //     JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
+    //     LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending ");
+    // }
 
     public function getResult()
     {

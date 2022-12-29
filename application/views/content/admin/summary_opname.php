@@ -149,7 +149,6 @@
                                                     <th hidden>id</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
-                                                    <th>Sektor</th>
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Buku Zahir</th>
                                                     <th>Box Saldo Buku</th>
@@ -169,7 +168,6 @@
                                                         <td hidden><?= $b->id_opname ?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $newDate ?></td>
-                                                        <td><?= $b->sektor ?></td>
                                                         <td><?= $b->faktur_pending ?></td>
                                                         <td><?= $b->saldo_buku ?></td>
                                                         <td><?= $b->box_buku ?></td>

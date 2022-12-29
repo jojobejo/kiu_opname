@@ -50,6 +50,7 @@
                                                     <th>Expired Date</th>
                                                     <th>Qty</th>
                                                     <th>Sektor</th>
+                                                    <th>Sektor Berkaitan</th>
                                                     <th>Keterangan</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -67,6 +68,7 @@
                                                         <td><?= $newDate ?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td><?= $b->sektor ?></td>
+                                                        <td><?= $b->sktor_tambahan ?></td>
                                                         <td><?= $b->keterangan ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir<?= $b->id_opname ?>">

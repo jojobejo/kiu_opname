@@ -48,6 +48,7 @@ class Data_zahir extends CI_Controller
         $keterangan     = $this->input->post('keterangan_isi');
         $exdate         = $this->input->post('date_isi');
         $sektor         = $this->input->post('sektor_isi');
+        $sektor1         = $this->input->post('sktor_kait_isi');
 
         $data = array(
             'kode_barang'   => $kdbarang,
@@ -61,6 +62,7 @@ class Data_zahir extends CI_Controller
             'qty'           => $qty,
             'exp_date'      => $exdate,
             'sektor'        => $sektor,
+            'sktor_tambahan'=> $sektor1,
             'keterangan'    => $keterangan
         );
 
@@ -91,6 +93,8 @@ class Data_zahir extends CI_Controller
         $nmabarang      = $this->input->post('barang_isi');
         $qty            = $this->input->post('qty_isi');
         $exdate         = $this->input->post('date_isi');
+        $sektor         = $this->input->post('sektor_isi');
+        $sektor1         = $this->input->post('sktor_terkait_isi');
 
         $data = array(
 
@@ -100,7 +104,9 @@ class Data_zahir extends CI_Controller
             'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'qty'           => $qty,
-            'exp_date'      => $exdate
+            'exp_date'      => $exdate,
+            'sektor'        => $sektor,
+            'sktor_tambahan'=> $sektor1
         );
 
         $data1 = array(
