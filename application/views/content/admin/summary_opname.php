@@ -152,7 +152,7 @@
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Buku Zahir</th>
                                                     <th>Box Saldo Buku</th>
-                                                    <th>Box Saldo Pcs</th>
+                                                    <th>Pcs Saldo Buku</th>
                                                     <th>Saldo Fisik</th>
                                                     <th>Box Fisik</th>
                                                     <th>Pcs Fisik</th>
