@@ -155,24 +155,40 @@ class M_Opname extends CI_Model
     public function listMatchVivo()
     {
         return $this->db->query("SELECT 
+        x.id_barang,
+        x.kode_barang,
+        x.exp_date,
+        x.nama_barang,
+        x.sektor,
+        x.qty_a AS saldo_buku,
+        x.stok_box AS box_buku,
+        x.stok_pcs AS pcs_buku,
+        COALESCE(x.qty_c,0) as faktur_pending,
+        x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
+        x.qty_b as saldo_fisik,
+        x.stkbox as box_fisik,
+        x.stkpcs as pcs_fisik,
+        (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) = x.qty_a THEN 'match' ELSE 'not match' END) AS hasil
+        FROM
+        (Select 
+        a.id_barang,
         a.kode_barang,
-        b.nama_barang, 
-        b.exp_date,
-        b.sektor,
-        COALESCE(c.qty,0) AS faktur_pending,
-        sum(b.qty) as saldo_buku,
-        sum(b.stok_box) as box_buku,
-        sum(b.stok_pcs) as pcs_buku,
-        sum(a.QTY1) as saldo_fisik,
-        sum(a.stok_box1) as box_fisik,
-        sum(a.stok_pcs1) as pcs_fisik,
-        (sum(a.QTY1)-COALESCE(c.qty,0))-sum(b.qty) as selisih,
-        CASE WHEN (sum(a.QTY1)-COALESCE(c.qty,0))-sum(b.qty) = 0 THEN 'match' ELSE 'not' END AS hasil 
-        FROM tb_opname a 
-        JOIN tb_barang_zahir b ON b.id_opname = a.id_opname 
-        LEFT JOIN tb_pending c on c.kode_pending = a.kode_pending 
-        GROUP BY a.kode_barang,a.exp_date");
+        a.nama_barang,
+        a.exp_date,
+        a.sektor,
+        a.stok_box,
+        a.stok_pcs,
+        a.sktor_tambahan,
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
+(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
+(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
+(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+        from tb_barang_zahir a  group by a.nama_barang,a.exp_date) as x  
+        ORDER BY x.id_barang");
     }
+
 
     // SELECT 
     //     x.nama_barang,
