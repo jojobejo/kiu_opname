@@ -56,7 +56,7 @@
                                                         <td><?= $o->nama_barang ?></td>
                                                         <td><?= $o->stok_box1 ?></td>
                                                         <td><?= $o->stok_pcs1 ?></td>
-                                                        <td><?= $newDate ?></td>
+                                                        <td><?= $o->exp_date ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $o->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>

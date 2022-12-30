@@ -60,7 +60,7 @@
                                                     <tr>
                                                         <td hidden><?= $no++?></td>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $newDate ?></td>
+                                                        <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->sktor_tambahan ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {

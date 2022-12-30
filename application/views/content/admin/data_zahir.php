@@ -65,7 +65,7 @@
                                                         <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->kode_pending ?></td>
                                                         <td><?= $b->nama_barang ?> </td>
-                                                        <td><?= $newDate ?></td>
+                                                        <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td><?= $b->sektor ?></td>
                                                         <td><?= $b->sktor_tambahan ?></td>

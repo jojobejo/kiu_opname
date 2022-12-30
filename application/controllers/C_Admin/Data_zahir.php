@@ -69,6 +69,7 @@ class Data_zahir extends CI_Controller
         $data1 = array(
             'kode_barang'   => $kdbarang,
             'kode_pending'  => $kdpending,
+            'nama_barang'   => $nmabarang,
             'stok_box1'     => "0",
             'stok_pcs1'     => "0",
             'exp_date'      => $exdate,

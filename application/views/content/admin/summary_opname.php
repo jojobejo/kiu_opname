@@ -152,7 +152,7 @@
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Buku Zahir</th>
                                                     <th>Box Saldo Buku</th>
-                                                    <th>Pcs Saldo Buku</th>
+                                                    <th>Box Saldo Pcs</th>
                                                     <th>Saldo Fisik</th>
                                                     <th>Box Fisik</th>
                                                     <th>Pcs Fisik</th>
@@ -163,11 +163,11 @@
                                             <tbody>
                                                 <?php foreach ($listVivo as $b) :
                                                     $originalDate = $b->exp_date;
-                                                    $newDate = date("m/d/Y", strtotime($originalDate)); ?>
+                                                    $newDate = date("d/m/Y", strtotime($originalDate)); ?>
                                                     <tr>
                                                         <td hidden><?= $b->id_opname ?></td>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $newDate ?></td>
+                                                        <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->faktur_pending ?></td>
                                                         <td><?= $b->saldo_buku ?></td>
                                                         <td><?= $b->box_buku ?></td>

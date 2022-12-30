@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Exp Date<span class="required">*</span></label>
-                            <div class="col-sm-8"><input class="form-control" type="date" id="exp_isi" name="exp_isi" value="<?= $b->exp_date ?>" /></div>
+                            <div class="col-sm-8"><input class="form-control" type="text" id="exp_isi" name="exp_isi" value="<?= $b->exp_date ?>" /></div>
                         </div>
                     </div>
                     <div class="form-group">
