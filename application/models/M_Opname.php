@@ -271,18 +271,30 @@ class M_Opname extends CI_Model
     public function countfakturPending()
     {
         return $this->db->query("SELECT 
-        COUNT(x.nama_barang) as total,
-        COUNT(CASE WHEN  x.qty_b - COALESCE(x.qty_c,0) = x.qty_a then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN  x.qty_b - COALESCE(x.qty_c,0) != x.qty_a then 1 ELSE NULL END) as 'not'
-        From
-        ( Select 
+        COUNT(x.kode_barang) as total,
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
+        
+        FROM
+        (Select 
         a.id_barang,
         a.kode_barang,
         a.nama_barang,
-       	sum(a.qty) as qty_a, (SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending group by c.kode_pending) as qty_c,
-        (select sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b
-        from tb_barang_zahir a group by a.kode_barang 
-        ) as x  
+        a.exp_date,
+        a.sektor,
+        a.stok_box,
+        a.stok_pcs,
+        a.sktor_tambahan,
+        
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang  group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang  group by c.nama_barang) as qty_c,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.nama_barang ) as qty_b,
+(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang group by d.nama_barang ) as stkbox,
+(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang group by e.nama_barang ) as stkpcs,
+(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+         
+        from tb_barang_zahir a  group by a.nama_barang) as x  
+        ORDER BY x.id_barang
         
         ");
     }
