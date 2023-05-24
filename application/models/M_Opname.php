@@ -23,6 +23,71 @@ class M_Opname extends CI_Model
         return $query;
     }
 
+    // START SERVERSIDE - BARANG - OPNAME
+
+    var $table = 'tb_list_opname'; //nama tabel dari database
+    var $column_order = array('id_opname', 'kode_barang', 'nama_barang', 'exp_date', 'hasil_dimensi'); //field yang ada di table user
+    var $column_search = array('nama_barang', 'exp_date'); //field yang diizin untuk pencarian 
+    var $order = array('nama_barang' => 'asc'); // default order 
+
+    private function _get_datatables_query()
+    {
+
+        $this->db->from($this->table);
+
+        $i = 0;
+
+        foreach ($this->column_search as $item) // looping awal
+        {
+            if ($_POST['search']['value']) // jika datatable mengirimkan pencarian dengan metode POST
+            {
+
+                if ($i === 0) // looping awal
+                {
+                    $this->db->group_start();
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+
+                if (count($this->column_search) - 1 == $i)
+                    $this->db->group_end();
+            }
+            $i++;
+        }
+
+        if (isset($_POST['order'])) {
+            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else if (isset($this->order)) {
+            $order = $this->order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+    function get_datatables()
+    {
+        $this->_get_datatables_query();
+        if ($_POST['length'] != -1)
+            $this->db->limit($_POST['length'], $_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function count_filtered()
+    {
+        $this->_get_datatables_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function count_all()
+    {
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+    // END SERVERSIDE - BARANG - OPNAME
+
     public function getOpname($sektor)
     {
         $this->db->select('tb_barang_zahir.hasil_dimensi,tb_barang_zahir.kode_barang,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
@@ -121,6 +186,12 @@ class M_Opname extends CI_Model
         from tb_barang_zahir a WHERE a.sektor = '$sektor'  group by a.nama_barang,a.exp_date) as x  
         ORDER BY x.id_barang
         ");
+    }
+
+
+    public function countFivo()
+    {
+        return $this->db->get('countFivo')->result();
     }
 
     public function countVivo()
@@ -282,6 +353,12 @@ class M_Opname extends CI_Model
        FROM tb_barang_zahir a GROUP BY a.kode_barang 
        ) AS x
         ");
+    }
+
+
+    public function hitung_persentase_kecocokan()
+    {
+        return $this->db->get('hitung_persentase_kecocokan')->result();
     }
 
     public function countfakturPending()
