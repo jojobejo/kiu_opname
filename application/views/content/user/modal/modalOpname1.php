@@ -1,5 +1,5 @@
 <!-- MODAL ADD -->
-<?php foreach ($opname as $b) : ?>
+<!-- <?php foreach ($opname as $b) : ?>
     <div class="modal fade" id="modalOpname<?= $b->id_opname ?>">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -57,5 +57,5 @@
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-    </div>
+    </div> -->
 <?php endforeach; ?>

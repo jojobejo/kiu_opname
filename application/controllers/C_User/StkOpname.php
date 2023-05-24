@@ -27,28 +27,46 @@ class StkOpname extends CI_Controller
 
             if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "1") {
 
-                $sektor = $this->session->userdata('sektor');
-
-                $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
-                $data['opname'] = $this->M_Opname->getHitungOpname($sektor)->result();
-
                 $data['page_title'] = 'Stok Opname'; 
+                // $data['opname'] = $this->M_Opname->getAllBarang();
 
                 $this->load->view('partial/user/header',$data);
                 $this->load->view('content/user/stock_opname1', $data);
                 $this->load->view('partial/user/footer');
-                $this->load->view('content/user/ajax/selectbarang');
-                
-            } elseif ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "2") {
-
-                $sektor = $this->session->userdata('sektor');
-                $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
-                $this->load->view('partial/user/header',$data);
-                $this->load->view('content/user/stock_opname2', $data);
-                $this->load->view('partial/user/footer');
-                $this->load->view('content/user/ajax/selectbarang');
+                $this->load->view('content/user/ajax/ajaxBarangOpname');   
             }
         }
+    }
+
+    public function get_list_barang_opname() {
+        $list = $this->M_Opname->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->nama_barang;
+            $row[] = $field->exp_date;
+            $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname('."'".$field->id_barang."'".')">
+            <i class="fa fa-solid fa-pencil-alt"></i></a>';
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_Opname->count_all(),
+            "recordsFiltered" => $this->M_Opname->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    public function getDataBarang($id)
+    {
+        $data = $this->M_Opname->getBarangById($id);
+        
+        echo json_encode($data);
     }
 
     public function addOpnameData()

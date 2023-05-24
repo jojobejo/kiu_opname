@@ -25,8 +25,8 @@ class M_Opname extends CI_Model
 
     // START SERVERSIDE - BARANG - OPNAME
 
-    var $table = 'tb_list_opname'; //nama tabel dari database
-    var $column_order = array('id_opname', 'kode_barang', 'nama_barang', 'exp_date', 'hasil_dimensi'); //field yang ada di table user
+    var $table = 'tb_barang_zahir'; //nama tabel dari database
+    var $column_order = array('nama_barang', 'exp_date', 'id_barang',); //field yang ada di table user
     var $column_search = array('nama_barang', 'exp_date'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order 
 
@@ -87,6 +87,20 @@ class M_Opname extends CI_Model
     }
 
     // END SERVERSIDE - BARANG - OPNAME
+
+    public function getAllBarang()
+    {
+        return $this->db->get('tb_barang_zahir')->result();
+    }
+
+    public function getBarangById($id)
+    {
+        $this->db->from('tb_barang_zahir');
+        $this->db->where('id_barang',$id);
+        $query = $this->db->get();
+ 
+        return $query->row();
+    }
 
     public function getOpname($sektor)
     {

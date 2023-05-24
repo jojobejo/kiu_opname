@@ -22,7 +22,7 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/user/modal/modalOpname1'); ?>
+            <?php $this->load->view('content/user/modal/modalOpname'); ?>
 
             <!-- Main content -->
             <section class="content">
@@ -33,37 +33,20 @@
                                 <div class="d-flex justify-content-center">
                                     <!-- CARD BODY -->
                                     <div class="card-body table-responsive">
-                                        <table id="dataTBUserSO" class="table table-bordered table-striped">
+                                        <table id="getBarang" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Box</th>
-                                                    <th>Pcs</th>
                                                     <th>Expire Date</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($opname as $o) :
-                                                    $originalDate = $o->exp_date;
-                                                    $newDate = date("m/d/Y", strtotime($originalDate));
-                                                ?>
-                                                    <tr>
-                                                        <td class="text-center"><?= $no++ ?></td>
-                                                        <td><?= $o->nama_barang ?></td>
-                                                        <td><?= $o->stok_box1 ?></td>
-                                                        <td><?= $o->stok_pcs1 ?></td>
-                                                        <td><?= $o->exp_date ?></td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $o->id_opname ?>">
-                                                                <i class="fa fa-solid fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
