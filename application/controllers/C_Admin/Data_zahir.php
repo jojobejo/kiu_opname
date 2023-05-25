@@ -40,7 +40,6 @@ class Data_zahir extends CI_Controller
         $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $panjang        = $this->input->post('panjang_isi');
-        $idopname       = $this->input->post('id_opname_isi');
         $lebar          = $this->input->post('lebar_isi');
         $tinggi         = $this->input->post('tinggi_isi');
         $dimensi        = $panjang * $lebar * $tinggi;
@@ -52,7 +51,6 @@ class Data_zahir extends CI_Controller
 
         $data = array(
             'kode_barang'   => $kdbarang,
-            'id_opname'     => $idopname,
             'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'panjang'       => $panjang,
@@ -66,17 +64,6 @@ class Data_zahir extends CI_Controller
             'keterangan'    => $keterangan
         );
 
-        $data1 = array(
-            'kode_barang'   => $kdbarang,
-            'kode_pending'  => $kdpending,
-            'nama_barang'   => $nmabarang,
-            'stok_box1'     => "0",
-            'stok_pcs1'     => "0",
-            'exp_date'      => $exdate,
-            'QTY1'          => "0"
-        );
-
-        $this->M_Opname->addBarang($data1);
         $this->M_barang->insertDataZahir($data);
         redirect('data_zahir');
     }
@@ -87,7 +74,6 @@ class Data_zahir extends CI_Controller
             redirect('login');
         }
 
-        $idopname       = $this->input->post('opname_isi');
         $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
         $kdpending      = $this->input->post('pending_isi');
@@ -100,7 +86,6 @@ class Data_zahir extends CI_Controller
         $data = array(
 
             'id_barang'     => $idbarang,
-            'id_opname'     => $idopname,
             'kode_barang'   => $kdbarang,
             'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
@@ -110,14 +95,7 @@ class Data_zahir extends CI_Controller
             'sktor_tambahan'=> $sektor1
         );
 
-        $data1 = array(
-            'id_opname'     => $idopname,
-            'kode_barang'   => $kdbarang,
-            'kode_pending'  => $kdpending,
-        );
-
-        $this->M_barang->editDataZahir($data, $idbarang);
-        $this->M_barang->editDataOpname($data1, $idopname);
+        $this->M_barang->editDataOpname($data, $idbarang);
         redirect('data_zahir');
     }
 

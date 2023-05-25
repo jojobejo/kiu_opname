@@ -22,14 +22,6 @@
                         <div class="col-sm-8"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="" /></div>
                     </div>
                 </div>
-                <div class="form-group" hidden>
-                    <div class="row">
-                        <label class="col-sm-3 control-label text-right" for="id_bar">Id Opname<span class="required">*</span></label>
-                        <?php foreach ($idopname as $id) { ?>
-                            <div class="col-sm-8"><input class="form-control" type="text" id="id_opname_isi" name="id_opname_isi" value="<?php echo $id + 1 ?>" /></div>
-                        <?php } ?>
-                    </div>
-                </div>
                 <div class="form-group">
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang <span class="required">*</span></label>
@@ -122,7 +114,7 @@
     $originalDate = $b->exp_date;
     $newDate = date("m/d/Y", strtotime($originalDate)); ?>
     <!-- MODAL ADD -->
-    <div class="modal fade" id="editZahir<?= $b->id_opname ?>">
+    <div class="modal fade" id="editZahir<?= $b->id_barang ?>">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -137,12 +129,6 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">id barang<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="id_isi" name="id_isi" value="<?= $b->id_barang ?>" /></div>
-                        </div>
-                    </div>
-                    <div class="form-group" hidden>
-                        <div class="row">
-                            <label class="col-sm-3 control-label text-right" for="id_bar">id pending<span class="required">*</span></label>
-                            <div class="col-sm-8"><input class="form-control" type="text" id="opname_isi" name="opname_isi" value="<?= $b->id_opname ?>" /></div>
                         </div>
                     </div>
                     <div class="form-group">

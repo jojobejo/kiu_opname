@@ -24,8 +24,8 @@ class M_Opname extends CI_Model
 
     // START SERVERSIDE - BARANG - OPNAME
 
-    var $table = 'tb_barang_zahir'; //nama tabel dari database
-    var $column_order = array('nama_barang', 'exp_date', 'id_barang',); //field yang ada di table user
+    var $table = 'tb_master_barang'; //nama tabel dari database
+    var $column_order = array('nama_barang', 'exp_date', 'id_master_barang',); //field yang ada di table user
     var $column_search = array('nama_barang', 'exp_date'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order 
 
@@ -94,10 +94,10 @@ class M_Opname extends CI_Model
 
     public function getBarangById($id)
     {
-        $this->db->from('tb_barang_zahir');
-        $this->db->where('id_barang',$id);
+        $this->db->from('tb_master_barang');
+        $this->db->where('id_master_barang', $id);
         $query = $this->db->get();
- 
+
         return $query->row();
     }
 
@@ -210,28 +210,15 @@ class M_Opname extends CI_Model
     public function countVivo()
     {
         return $this->db->query("SELECT 
-        COUNT(x.kode_barang) as total,
-        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
-        
+		COUNT(x.id_barang) as total,
+        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
         FROM
         (Select 
-        a.id_barang,
-        a.kode_barang,
-        a.nama_barang,
-        a.exp_date,
-        a.sektor,
-        a.stok_box,
-        a.stok_pcs,
-        a.sktor_tambahan,
-        
-(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
-(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
-(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
-(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
-(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
-         
+         a.id_barang,
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qtyBesar,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qtyPending,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qtyOpname
         from tb_barang_zahir a  group by a.nama_barang,a.exp_date) as x  
         ORDER BY x.id_barang");
     }
@@ -372,6 +359,24 @@ class M_Opname extends CI_Model
     public function hitung_persentase_kecocokan()
     {
         return $this->db->get('hitung_persentase_kecocokan')->result();
+    }
+
+    public function countPersentaseAllBarangWithPending()
+    {
+        return $this->db->query("SELECT 
+		COUNT(x.id_barang) as total,
+        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
+        FROM
+        (Select 
+        a.id_barang,
+        a.kode_barang,
+         sum(a.qty) as qtyBesar,
+        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang group by c.kode_barang) as qtyPending,
+        (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qtyOpname 
+        from tb_barang_zahir a group by a.kode_barang) as x  
+        ORDER BY x.id_barang  ASC 
+        ");
     }
 
     public function countfakturPending()

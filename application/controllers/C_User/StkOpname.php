@@ -47,7 +47,7 @@ class StkOpname extends CI_Controller
             $row = array();
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
-            $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_barang . "'" . ')">
+            $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_master_barang . "'" . ')">
             <i class="fa fa-solid fa-pencil-alt"></i></a>';
 
             $data[] = $row;
