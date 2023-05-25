@@ -16,15 +16,11 @@ class Admin extends CI_Controller
 
     function index()
     {
-        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
-            redirect("login");
-        }
-
-        $data['page_title'] = 'Dashboard Admin'; 
+        $data['page_title'] = 'Dashboard Admin';
         $data['totalUser'] = $this->M_Opname->countUser()->result();
         $data['selisihFaktur'] = $this->M_Opname->hitung_persentase_kecocokan();
 
-        $this->load->view('partial/admin/header',$data);
+        $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/dashboard', $data);
         $this->load->view('partial/admin/footer');
     }

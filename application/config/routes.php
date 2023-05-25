@@ -66,6 +66,7 @@ $route['u_match_progress'] = 'C_User/C_matchProgress';
 $route['u_list_barang'] = 'C_User/C_listBarang';
 $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['getBarangServer'] = 'C_User/StkOpname/get_list_barang_opname';
+$route['inputOpname'] = 'C_User/StkOpname/addOpnameData';
 $route['getBarangOpname/(:any)'] = 'C_User/StkOpname/getDataBarang/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

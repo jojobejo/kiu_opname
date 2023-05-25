@@ -49,13 +49,13 @@
             dataType: "JSON",
             success: function(data) {
 
-                $('[name="id_isi"]').val(data.id_barang);
-                $('[name="kode_isi"]').val(data.kode_barang);
-                $('[name="dimensi_isi"]').val(data.hasil_dimensi);
-                $('[name="nama_isi"]').val(data.nama_barang);
-                $('[name="box_isi"]').val(this);
-                $('[name="pcs_isi"]').val(this);
-                $('[name="date_isi"]').val(data.exp_date);
+                $('[id="id_isi"]').val(data.id_barang);
+                $('[id="kode_isi"]').val(data.kode_barang);
+                $('[id="dimensi_isi"]').val(data.hasil_dimensi);
+                $('[id="nama_isi"]').val(data.nama_barang);
+                $('[id="box_isi"]').val();
+                $('[id="pcs_isi"]').val();
+                $('[id="date_isi"]').val(data.exp_date);
                 $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Input Data Opname'); // Set title to Bootstrap modal title
 

@@ -42,6 +42,19 @@ class Login extends CI_Controller
 
                     $this->session->set_userdata($data_session);
                     redirect('admin');
+                } else if ($key->username == $username && password_verify($password, $key->password) && $key->role == "admin1") {
+                    $data_session = array(
+                        'id_user'       => $key->id_user,
+                        'username'      => $key->username,
+                        'nama_user'     => $key->nama_user,
+                        'role'          => $key->role,
+                        'sektor'        => $key->sektor,
+                        'team_opname'   => $key->team_opname,
+                        'status'    => "is_login"
+                    );
+                    $this->session->set_userdata($data_session);
+                    redirect('admin');
+                    
                 } else if ($key->username == $username && password_verify($password, $key->password) && $key->role == "user") {
                     $data_session = array(
                         'id_user'       => $key->id_user,

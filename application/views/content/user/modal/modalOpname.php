@@ -3,10 +3,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Input Barang Opname</h3>
+                <h3 class="modal-title" style="text-align: center;">Input Barang Opname</h3>
             </div>
             <div class="modal-body form">
-                <form action="#" id="form_add_opname" class="form-horizontal">
+                <form action="<?= base_url('inputOpname') ?>" method="POST" id="form_add_opname" class="form-horizontal">
+                    <?php echo form_open_multipart('inputOpname'); ?>
                     <input type="hidden" value="" name="id" />
                     <div class="form-body">
                         <div class="form-group" hidden>
@@ -30,7 +31,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="text" id="nama_isi" name="nama_isi" value="" readonly/></div>
+                                <div class="col-sm-8"><input class="form-control" type="text" id="nama_isi" name="nama_isi" value="" readonly /></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -52,12 +53,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

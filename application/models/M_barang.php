@@ -14,7 +14,7 @@ class M_barang extends CI_Model
 
     public function getidOpname()
     {
-        $query = $this->db->select('id_opname')
+        $query = $this->db->select('id_barang')
             ->from('tb_barang_zahir')
             ->get();
         $row = $query->last_row();

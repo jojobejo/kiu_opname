@@ -4,10 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Opname extends CI_Model
 {
-    public function addOpname($data, $idbarang)
+    public function addOpname($data)
     {
-        $this->db->where('id_opname', $idbarang);
-        return $this->db->update('tb_opname', $data);
+        return $this->db->insert('tb_opname', $data);
     }
 
     public function addBarang($data1)

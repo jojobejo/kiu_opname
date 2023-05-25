@@ -23,104 +23,110 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <?php foreach ($selisihFaktur as $p) : ?>
-                                        <h3><?= $p->total ?></h3>
-                                    <?php endforeach; ?>
-                                    <p>Jumlah Barang</p>
+            <?php if ($this->session->userdata('role') == 'admin') : ?>
+                <section class="content">
+                    <div class="container-fluid">
+                        <!-- Small boxes (Stat box) -->
+                        <div class="row">
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <?php foreach ($selisihFaktur as $p) : ?>
+                                            <h3><?= $p->total ?></h3>
+                                        <?php endforeach; ?>
+                                        <p>Jumlah Barang</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                    <a href="<?php echo base_url('data_zahir') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="<?php echo base_url('data_zahir') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <?php
-                                    foreach ($selisihFaktur as $s) {
-                                        $match = $s->match;
-                                        $not   = $s->not;
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <?php
+                                        foreach ($selisihFaktur as $s) {
+                                            $match = $s->match;
+                                            $not   = $s->not;
+                                            $total = $s->total;
+
+                                            $vM = ($match / $total) * 100;
+                                            $vN = ($not / $total) * 100;
+                                            $hM =  round((float)$vM, 2);
+                                        } ?>
+                                        <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
+                                        <p>Persentase Kecocokan</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                    <a href="<?php echo base_url('quick_count') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-danger">
+                                    <div class="inner">
+                                        <?php
+                                        foreach ($selisihFaktur as $s) {
+                                            $match = $s->match;
+                                            $not   = $s->not;
+                                            $total = $s->total;
+
+                                            $vM = ($match / $total) * 100;
+                                            $vN = ($not / $total) * 100;
+                                            $hM =  round((float)$vN, 2);
+                                        } ?>
+                                        <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
+                                        <p>Persentase Tidak Cocok</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                    <a href="<?php echo base_url('quick_count') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-3 col-6">
+                                <!-- small box -->
+                                <div class="small-box bg-warning">
+                                    <?php foreach ($totalUser as $s) {
                                         $total = $s->total;
-
-                                        $vM = ($match / $total) * 100;
-                                        $vN = ($not / $total) * 100;
-                                        $hM =  round((float)$vM, 2);
+                                        $hM =  round((float)$total);
                                     } ?>
-                                    <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
-                                    <p>Persentase Kecocokan</p>
+                                    <div class="inner">
+                                        <h3><?= json_encode($hM) ?></h3>
+                                        <p>Pengguna</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-person-add"></i>
+                                    </div>
+                                    <a href="<?php echo base_url('user') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="<?php echo base_url('quick_count') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
+                            <!-- ./col -->
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <?php
-                                    foreach ($selisihFaktur as $s) {
-                                        $match = $s->match;
-                                        $not   = $s->not;
-                                        $total = $s->total;
+                        <!-- /.row -->
+                        <!-- Main row -->
+                        <div class="row">
+                            <!-- Left col -->
+                            <section class="col-lg-7 connectedSortable">
 
-                                        $vM = ($match / $total) * 100;
-                                        $vN = ($not / $total) * 100;
-                                        $hM =  round((float)$vN, 2);
-                                    } ?>
-                                    <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
-                                    <p>Persentase Tidak Cocok</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="<?php echo base_url('quick_count') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
+                            </section>
+                            <!-- right col -->
                         </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-warning">
-                                <?php foreach ($totalUser as $s) {
-                                    $total = $s->total;
-                                    $hM =  round((float)$total);
-                                    } ?>
-                                <div class="inner">
-                                    <h3><?= json_encode($hM)?></h3>
-                                    <p>Pengguna</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="<?php echo base_url('user') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                    </div>
-                    <!-- /.row -->
-                    <!-- Main row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-7 connectedSortable">
+                        <!-- /.row (main row) -->
+                    </div><!-- /.container-fluid -->
+                </section>
+            <?php elseif ($this->session->userdata('role') == 'admin1') : ?>
+                <section class="content">
 
-                        </section>
-                        <!-- right col -->
-                    </div>
-                    <!-- /.row (main row) -->
-                </div><!-- /.container-fluid -->
-            </section>
+                </section>
+            <?php endif; ?>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
