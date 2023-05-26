@@ -39,7 +39,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/adminlte.js') ?>"></script>
 <!-- ChartJS -->
-<script src="<?php echo base_url('assets/plugins/chart.js/Chart.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
 <!-- FLOT CHARTS -->
 <script src="<?php echo base_url('assets/plugins/flot/jquery.flot.js') ?>"></script>
 <script src="<?php echo base_url('assets/plugins/flot/plugins/jquery.flot.pie.js') ?>"></script>
@@ -54,20 +54,50 @@
       "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    $("#example2").DataTable({
+    var table1;
+    var table2;
+
+    //serverside-table-listvivo
+    table1 = $('#example2').DataTable({
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "processing": true,
+      "serverSide": true,
+      "order": [],
+
+      "ajax": {
+        "url": "<?php echo site_url('getServerFifo') ?>",
+        "type": "POST"
+      },
+
+      "columnDefs": [{
+        "targets": [0],
+        "orderable": false,
+      }, ],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-    $("#example3").DataTable({
+    //serversid-table-Allbarang
+    table2 = $('#example3').DataTable({
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
+      "processing": true,
+      "serverSide": true,
+      "order": [],
+
+      "ajax": {
+        "url": "<?php echo site_url('getServerListSummaryAllBarang') ?>",
+        "type": "POST"
+      },
+
+      "columnDefs": [{
+        "targets": [0],
+        "orderable": false,
+      }, ],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
+
   });
-
 </script>
 
 </body>

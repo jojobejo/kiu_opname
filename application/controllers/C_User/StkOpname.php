@@ -75,6 +75,7 @@ class StkOpname extends CI_Controller
         $sektor         = $this->session->userdata('sektor');
         $nmbarang       = $this->input->post('nama_isi');
         $kdbarang       = $this->input->post('kode_isi');
+        $pending       = $this->input->post('pending_isi');
         $box            = $this->input->post('box_isi');
         $pcs            = $this->input->post('pcs_isi');
         $dimensi        = $this->input->post('dimensi_isi');
@@ -84,6 +85,7 @@ class StkOpname extends CI_Controller
         $data = array(
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmbarang,
+            'kode_pending'  => $pending,
             'stok_box1'     => $box,
             'stok_pcs1'     => $pcs,
             'exp_date'      => $exdate,

@@ -23,11 +23,12 @@ class C_matchProgress extends CI_Controller
 
         $sektor = $this->session->userdata('sektor');
 
-        $data['page_title'] = 'Match Progress'; 
+        $data['page_title'] = 'Match Progress';
         $data['jmlBarang'] = $this->M_Opname->getMatchUser($sektor)->result();
+        $data['opname'] = $this->M_Opname->getOpnameid($sektor);
 
-        $this->load->view('partial/user/header',$data);
-        $this->load->view('content/user/match_progress',$data);
+        $this->load->view('partial/user/header', $data);
+        $this->load->view('content/user/match_progress', $data);
         $this->load->view('partial/user/footer');
         $this->load->view('content/user/ajax/ajaxMatchProgress');
     }
@@ -42,7 +43,5 @@ class C_matchProgress extends CI_Controller
 
         $data['barang'] = $this->M_barang->getBarang($sektor)->result();
         $data['selesih'] = $this->M_Opname->getHasilMatch()->result();
-
     }
-
 }

@@ -29,8 +29,9 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <section class="content">
+            <?php $this->load->view('content/user/modal/modalEditOpname'); ?>
 
+            <section class="content">
                 <section class="content">
                     <div class="container-fluids">
                         <div class="row">
@@ -46,37 +47,35 @@
                                                     <th hidden>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
-                                                    <th>Sektor Tambahan</th>
                                                     <th>Hasil</th>
+                                                    <th>Aksi Edit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                                <?php 
+                                                <?php
                                                 $no = 1;
-                                                foreach ($jmlBarang as $b) : 
-                                                      $originalDate = $b->exp_date;
-                                                      $newDate = date("m/d/Y", strtotime($originalDate)); ?>
+                                                foreach ($jmlBarang as $b) :
+                                                    $originalDate = $b->exp_date;
+                                                    $newDate = date("m/d/Y", strtotime($originalDate)); ?>
                                                     <tr>
-                                                        <td hidden><?= $no++?></td>
+                                                        <td hidden><?= $no++ ?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
-                                                        <td><?= $b->sktor_tambahan ?></td>
                                                         <?php
-                                                        if ($b->hasil == 'match') {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-success btn-sm">
-                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                                                        if ($b->hasil == 'match') : ?>
+                                                            <td>
+                                                                <a class="btn btn-success btn-sm"><i class="fa fa-solid  fa-check"></i></a>
+                                                            </td>
+                                                        <?php else : ?>
+                                                            <td>
+                                                                <a class="btn btn-danger btn-sm"><i class="fa fa-solid  fa-ban"></i></a>
+                                                            </td>
+                                                        <?php endif; ?>
+                                                        <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEditOpname<?= $b->idopname  ?>">
+                                                                <i class="fa fa-solid  fa-pencil-alt"></i>
                                                             </a>
-                                                        </td>';
-                                                        } else {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                            </a>
-                                                        </td>';
-                                                        }
-                                                        ?>
+                                                            <?= $b->idopname ?></td>
                                                         <!-- <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?><?= $b->id_opname ?>">
                                                                 <i class="fa fa-solid fa-pencil-alt"></i>

@@ -1,3 +1,7 @@
-1. Buat Serverside untuk list match not match Fivo
-2. Buat Serverside untuk list all barang
 3. Mencocokan persentase dashboard
+
+faktur pending fifo 
+tulisan quick count vivo diganti
+penambahan kodelot  
+allbarang group by kode_barang , nama_barang , 
+Fifo group by kode_barang , nama_barang , kodelot, exp_date

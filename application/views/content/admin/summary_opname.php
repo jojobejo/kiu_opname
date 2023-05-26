@@ -146,7 +146,6 @@
                                         <table id="example2" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th hidden>id</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Faktur Pending</th>
@@ -156,44 +155,12 @@
                                                     <th>Saldo Fisik</th>
                                                     <th>Box Fisik</th>
                                                     <th>Pcs Fisik</th>
+                                                    <th>Sektor</th>
                                                     <th>Selisih</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($listVivo as $b) :
-                                                    $originalDate = $b->exp_date;
-                                                    $newDate = date("d/m/Y", strtotime($originalDate)); ?>
-                                                    <tr>
-                                                        <td hidden><?= $b->id_opname ?></td>
-                                                        <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->exp_date ?></td>
-                                                        <td><?= $b->faktur_pending ?></td>
-                                                        <td><?= $b->saldo_buku ?></td>
-                                                        <td><?= $b->box_buku ?></td>
-                                                        <td><?= $b->pcs_buku ?></td>
-                                                        <td><?= $b->saldo_fisik ?></td>
-                                                        <td><?= $b->box_fisik ?></td>
-                                                        <td><?= $b->pcs_fisik ?></td>
-                                                        <td><?= $b->selisih ?></td>
-                                                        <?php
-                                                        if ($b->hasil == 'match') {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-success btn-sm">
-                                                                <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                            </a>
-                                                        </td>';
-                                                        } else {
-                                                            echo '<td>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                            </a>
-                                                        </td>';
-                                                        }
-                                                        ?>
-
-                                                    </tr>
-                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -230,8 +197,6 @@
                                         <table id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th hidden>id</th>
-                                                    <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Saldo Buku</th>
                                                     <th>Faktur Pending</th>
@@ -242,33 +207,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($listPending as $b) : ?>
-                                                    <tr>
-                                                        <td hidden><?= $b->id_barang ?></td>
-                                                        <td><?= $b->kode_barang ?></td>
-                                                        <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->saldo_buku ?></td>
-                                                        <td><?= $b->faktur_pending ?></td>
-                                                        <td><?= $b->qty_b ?></td>
-                                                        <td><?= $b->selisih ?></td>
-                                                        <td><?= $b->sektor ?></td>
-                                                        <?php
-                                                        if ($b->hasil == 'match') {
-                                                            echo '<td>
-                                                                <a href="#" class="btn btn-success btn-sm">
-                                                                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                        } else {
-                                                            echo '<td>
-                                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal">
-                                                                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
-                                                                </a>
-                                                            </td>';
-                                                        }
-                                                        ?>
-                                                    </tr>
-                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>

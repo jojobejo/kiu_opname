@@ -12,6 +12,7 @@ class C_summaryOpaname extends CI_Controller
         parent::__construct();
         $this->load->model("M_Opname");
         $this->load->model("M_barang");
+        $this->load->model("M_SFifo");
         $this->load->library('form_validation');
     }
 
@@ -22,10 +23,7 @@ class C_summaryOpaname extends CI_Controller
             redirect("login");
         }
 
-        $data['page_title'] = 'Match Progress || Quick Count'; 
-
-        $data['selisih']  = $this->M_Opname->countAll()->result();
-        $data['listBarang'] = $this->M_Opname->listBarangMatch()->result();
+        $data['page_title'] = 'Match Progress || Quick Count';
 
         $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
         $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
@@ -33,9 +31,96 @@ class C_summaryOpaname extends CI_Controller
         $data['selisihFaktur'] = $this->M_Opname->countPersentaseAllBarangWithPending()->result();
         $data['listPending']   = $this->M_Opname->listCountByPending()->result();
 
-        $this->load->view('partial/admin/header',$data);
+        $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/summary_opname', $data);
         $this->load->view('partial/admin/footersummary');
+    }
+
+    function getListMatchFivo()
+    {
+        $list = $this->M_SFifo->get_datatables();
+        $data = array();
+        $no = $this->input->post('start');
+        foreach ($list as $field) {
+            $no++;
+            $row = array();
+            $row[] = $field->nama_barang;
+            $row[] = $field->exp_date;
+            $row[] = $field->faktur_pending;
+            $row[] = $field->saldo_buku;
+            $row[] = $field->box_buku;
+            $row[] = $field->pcs_buku;
+            $row[] = $field->saldo_fisik;
+            $row[] = $field->box_fisik;
+            $row[] = $field->pcs_fisik;
+            $row[] = $field->sektor;
+            $row[] = $field->selisih;
+            if ($field->hasil == 'match') {
+                $row[] =  '<td>
+                <a href="#" class="btn btn-success btn-sm">
+                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                </a>
+            </td>';
+            } else {
+                $row[] =  '<td>
+                <a href="#" class="btn btn-danger btn-sm">
+                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                </a>
+            </td>';
+            }
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_SFifo->count_all(),
+            "recordsFiltered" => $this->M_SFifo->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
+    function getlistAllBarang()
+    {
+        $list = $this->M_Opname->get_datatables1();
+        $data = array();
+        $no = $this->input->post('start');
+        foreach ($list as $field) {
+            $no++;
+            $row = array();
+            $row[] = $field->nama_barang;
+            $row[] = $field->saldo_buku;
+            $row[] = $field->faktur_pending;
+            $row[] = $field->qtyOpname;
+            $row[] = $field->selisih;
+            $row[] = $field->sektor;
+            if ($field->hasil == 'match') {
+                $row[] =  '<td>
+                <a href="#" class="btn btn-success btn-sm">
+                    <i class="fa fa-solid fa-check"><h3 hidden>&nbsp;MATCH</h3></i>
+                </a>
+            </td>';
+            } else {
+                $row[] =  '<td>
+                <a href="#" class="btn btn-danger btn-sm">
+                    <i class="fa fa-solid fa-ban"><h3 hidden>&nbsp;NOT MATCH</h3></i>
+                </a>
+            </td>';
+            }
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_Opname->count_all1(),
+            "recordsFiltered" => $this->M_Opname->count_filtered1(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
     }
 
     public function excelAllBarang()
