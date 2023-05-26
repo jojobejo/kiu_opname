@@ -29,9 +29,8 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <?php $this->load->view('content/user/modal/modalEditOpname'); ?>
-
             <section class="content">
+
                 <section class="content">
                     <div class="container-fluids">
                         <div class="row">
@@ -40,6 +39,7 @@
                                     <div class="card-header">
                                         <h3>List Barang Tidak Cocok</h3>
                                     </div>
+                                    <?php $this->load->view("content/user/modal/modalEditOpname") ?>
                                     <div class="card-body">
                                         <table id="tbMatchProgressUser" class="table table-bordered table-striped">
                                             <thead>
@@ -48,7 +48,6 @@
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Hasil</th>
-                                                    <th>Aksi Edit</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -63,24 +62,20 @@
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
                                                         <?php
-                                                        if ($b->hasil == 'match') : ?>
-                                                            <td>
-                                                                <a class="btn btn-success btn-sm"><i class="fa fa-solid  fa-check"></i></a>
-                                                            </td>
-                                                        <?php else : ?>
-                                                            <td>
-                                                                <a class="btn btn-danger btn-sm"><i class="fa fa-solid  fa-ban"></i></a>
-                                                            </td>
-                                                        <?php endif; ?>
-                                                        <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEditOpname<?= $b->idopname  ?>">
-                                                                <i class="fa fa-solid  fa-pencil-alt"></i>
+                                                        if ($b->hasil == 'match') {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-success btn-sm " data-toggle="modal" data-target="#modalEditOpname">
+                                                                    <i class="fa fa-solid fa-check"></i>
                                                             </a>
-                                                            <?= $b->idopname ?></td>
-                                                        <!-- <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $b->id_opname ?><?= $b->id_opname ?>">
-                                                                <i class="fa fa-solid fa-pencil-alt"></i>
+                                                        </td>';
+                                                        } else {
+                                                            echo '<td>
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#modalEditOpname' . $b->idopname . '">
+                                                                    <i class="fa fa-solid fa-ban"></i>
                                                             </a>
-                                                        </td> -->
+                                                        </td>';
+                                                        }
+                                                        ?>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

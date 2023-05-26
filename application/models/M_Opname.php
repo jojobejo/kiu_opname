@@ -197,53 +197,63 @@ class M_Opname extends CI_Model
         where tb_barang_zahir.sektor = '$sektor'");
     }
 
-    public function getOpnameid($sektor)
+    public function getBarangOpname()
     {
-        return $this->db->query("SELECT 
-        b.* , 
-        a.hasil_dimensi
-        FROM tb_opname b
-        join tb_barang_zahir a ON a.kode_barang = b.kode_barang 
-        where a.sektor = '$sektor'");
+        return $this->db->get('tb_opname')->result();
+    }
+    public function getInputOpname($sektor)
+    {
+        return $this->db->query("SELECT
+        COALESCE(b.id_opname,0)as idopname ,a.kode_barang, a.nama_barang , b.exp_date , a.hasil_dimensi , b.stok_box1 , b.stok_pcs1 , a.sektor , b.kode_pending
+        FROM tb_barang_zahir a 
+        LEFT JOIN tb_opname b ON b.kode_barang = a.kode_barang
+        WHERE a.sektor = '$sektor'");
+    }
+
+    public function editInputOpname($data,$idopname)
+    {
+        $this->db->where('id_opname', $idopname);
+        return $this->db->update('tb_opname', $data);
     }
 
     public function getMatchUser($sektor)
     {
         return $this->db->query("SELECT 
-		x.idopname,
+        COALESCE(x.idopname,0) as idopname,
         x.nama_barang,
-         x.exp_date,
-         x.sektor,
-         x.qty_a AS saldo_buku,
-         x.stok_box as saldo_buku_box,
-         x.stok_pcs as saldo_buku_pcs,
-         x.salqty as saldo_fisik,
-         x.stkbox as fisik_box,
-         x.stkpcs as fisik_pcs,
-         x.sktor_tambahan,
-         COALESCE(x.qty_c,0) as faktur_pending,
-         x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
-         (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) - x.qty_a = 0  THEN 'match' ELSE 'not match' END) AS hasil
-         FROM
-         (Select 
-         a.id_barang,
-         a.kode_barang,
-         a.nama_barang,
-         a.exp_date,
-         a.sektor,
-         a.stok_box,
-         a.stok_pcs,
-         a.sktor_tambahan,
- 
- (SELECT d.id_opname  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as idopname,
- (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,     
- (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang AND c.kode_pending = a.kode_pending  group by c.kode_barang,c.kode_pending) as qty_c,
- (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
- (SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
- (SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
- (SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
-         from tb_barang_zahir a WHERE a.sektor='$sektor' group by a.nama_barang,a.exp_date) as x  
-         ORDER BY x.nama_barang  ASC
+        x.exp_date,
+        x.sektor,
+        x.qty_a AS saldo_buku,
+        x.stok_box as saldo_buku_box,
+        x.stok_pcs as saldo_buku_pcs,
+        x.salqty as saldo_fisik,
+        x.stkbox as fisik_box,
+        x.stkpcs as fisik_pcs,
+        x.sktor_tambahan,
+        COALESCE(x.qty_c,0) as faktur_pending,
+        x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
+        (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) - x.qty_a = 0  THEN 'match' ELSE 'not match' END) AS hasil
+        FROM
+        (Select 
+        a.id_barang,
+        a.kode_barang,
+        a.nama_barang,
+        a.exp_date,
+        a.sektor,
+        a.stok_box,
+        a.stok_pcs,
+        a.sktor_tambahan,
+
+(SELECT h.id_opname from tb_opname h where h.kode_barang = a.kode_barang ) as idopname,        
+(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending and c.kode_barang = a.kode_barang group by c.nama_barang) as qty_c,
+(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
+(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
+(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
+(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+         
+        from tb_barang_zahir a WHERE a.sektor='$sektor' group by a.nama_barang,a.exp_date) as x  
+        ORDER BY `x`.`nama_barang` ASC
               
         ");
     }

@@ -24,8 +24,8 @@ class C_matchProgress extends CI_Controller
         $sektor = $this->session->userdata('sektor');
 
         $data['page_title'] = 'Match Progress';
-        $data['jmlBarang'] = $this->M_Opname->getMatchUser($sektor)->result();
-        $data['opname'] = $this->M_Opname->getOpnameid($sektor);
+        $data['jmlBarang']  = $this->M_Opname->getMatchUser($sektor)->result();
+        $data['opname']     = $this->M_Opname->getInputOpname($sektor)->result();
 
         $this->load->view('partial/user/header', $data);
         $this->load->view('content/user/match_progress', $data);
@@ -43,5 +43,31 @@ class C_matchProgress extends CI_Controller
 
         $data['barang'] = $this->M_barang->getBarang($sektor)->result();
         $data['selesih'] = $this->M_Opname->getHasilMatch()->result();
+    }
+
+    public function editInputOpname()
+    {
+        $idopname       = $this->input->post('id_isi');
+        $nmbarang       = $this->input->post('nama_isi');
+        $kdbarang       = $this->input->post('kdbarang_isi');
+        $pending        = $this->input->post('pending_isi');
+        $box            = $this->input->post('box_isi');
+        $pcs            = $this->input->post('pcs_isi');
+        $dimensi        = $this->input->post('dimensi_isi');
+        $qty            = ($box * $dimensi) + $pcs;
+        $exdate         = $this->input->post('exp_isi');
+
+        $data = array(
+            'kode_barang'   => $kdbarang,
+            'nama_barang'   => $nmbarang,
+            'kode_pending'  => $pending,
+            'stok_box1'     => $box,
+            'stok_pcs1'     => $pcs,
+            'exp_date'      => $exdate,
+            'QTY1'          => $qty,
+        );
+
+        $this->M_Opname->editInputOpname($data,$idopname);
+        redirect('u_match_progress');
     }
 }

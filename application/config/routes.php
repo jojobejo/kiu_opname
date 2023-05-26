@@ -65,6 +65,7 @@ $route['def_user'] = 'C_User/Def_user';
 $route['u_opname'] = 'C_User/StkOpname';
 $route['faktur_pending'] = 'C_Admin/FakturPending';
 $route['u_match_progress'] = 'C_User/C_matchProgress';
+$route['editInputOpname'] = 'C_User/C_matchProgress/editInputOpname';
 $route['u_list_barang'] = 'C_User/C_listBarang';
 $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['getBarangServer'] = 'C_User/StkOpname/get_list_barang_opname';
