@@ -244,7 +244,7 @@ class M_Opname extends CI_Model
         a.stok_pcs,
         a.sktor_tambahan,
 
-(SELECT h.id_opname from tb_opname h where h.kode_barang = a.kode_barang ) as idopname,        
+(SELECT h.id_opname from tb_opname h where h.kode_barang = a.kode_barang and h.exp_date = a.exp_date) as idopname,        
 (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
 (SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending and c.kode_barang = a.kode_barang group by c.nama_barang) as qty_c,
 (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
