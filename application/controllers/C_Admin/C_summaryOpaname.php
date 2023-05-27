@@ -24,12 +24,8 @@ class C_summaryOpaname extends CI_Controller
         }
 
         $data['page_title'] = 'Match Progress || Quick Count';
-
         $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
-        $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
-
         $data['selisihFaktur'] = $this->M_Opname->countPersentaseAllBarangWithPending()->result();
-        $data['listPending']   = $this->M_Opname->listCountByPending()->result();
 
         $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/summary_opname', $data);
