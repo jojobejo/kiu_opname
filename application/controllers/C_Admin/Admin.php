@@ -18,7 +18,7 @@ class Admin extends CI_Controller
     {
         $data['page_title'] = 'Dashboard Admin';
         $data['totalUser'] = $this->M_Opname->countUser()->result();
-        $data['selisihFaktur'] = $this->M_Opname->hitung_persentase_kecocokan();
+        // $data['selisihFaktur'] = $this->M_Opname->hitung_persentase_kecocokan();
 
         $this->load->view('partial/admin/header', $data);
         $this->load->view('content/admin/dashboard', $data);
