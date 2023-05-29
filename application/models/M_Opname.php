@@ -210,7 +210,7 @@ class M_Opname extends CI_Model
         WHERE a.sektor = '$sektor'");
     }
 
-    public function editInputOpname($data,$idopname)
+    public function editInputOpname($data, $idopname)
     {
         $this->db->where('id_opname', $idopname);
         return $this->db->update('tb_opname', $data);
@@ -313,6 +313,7 @@ class M_Opname extends CI_Model
     public function v_listMatchVivo()
     {
         return $this->db->query("SELECT 
+		x.kode_barang,
         x.nama_barang,
         x.exp_date,
         x.sektor,
