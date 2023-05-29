@@ -332,7 +332,7 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $siswa = $this->M_Opname->listMatchVivo()->result();
+        $siswa = $this->M_Opname->v_listMatchVivo()->result();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
