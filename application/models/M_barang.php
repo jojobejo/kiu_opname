@@ -58,6 +58,11 @@ class M_barang extends CI_Model
 
     // DB MODEL ZAHIR
 
+    var $table = 'tb_barang_zahir'; //nama tabel dari database
+    var $column_order = array('id_barang', 'nama_barang', 'exp_date', 'sektor'); //field yang ada di table user
+    var $column_search = array('nama_barang', 'exp_date', 'sektor'); //field yang diizin untuk pencarian 
+    var $order = array('nama_barang' => 'asc'); // default order
+
     public function getBarangZahir()
     {
         return $this->db->get('tb_barang_zahir')->result();

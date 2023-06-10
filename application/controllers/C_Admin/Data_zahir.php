@@ -30,6 +30,41 @@ class Data_zahir extends CI_Controller
         $this->load->view('partial/admin/footer');
     }
 
+    public function getServerZahir()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        }
+
+        $list = $this->M_barang->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->kode_barang;
+            $row[] = $field->kode_pending;
+            $row[] = $field->nama_barang;
+            $row[] = $field->expired_date;
+            $row[] = $field->qty;
+            $row[] = $field->sektor;
+            $row[] = $field->keterangan;
+            $row[] = '<a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir' . $field->id_barang . '"><i class="fa fa-solid fa-pencil-alt"></i></a>' . '' . 
+            '<a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir<?= $b->id_barang ?>">
+            <i class="fa fa-solid fa-trash"></i>
+        </a>';
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_barang->count_all(),
+            "recordsFiltered" => $this->M_barang->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
     public function addBarang()
     {
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
@@ -60,7 +95,7 @@ class Data_zahir extends CI_Controller
             'qty'           => $qty,
             'exp_date'      => $exdate,
             'sektor'        => $sektor,
-            'sktor_tambahan'=> $sektor1,
+            'sktor_tambahan' => $sektor1,
             'keterangan'    => $keterangan
         );
 
@@ -92,7 +127,7 @@ class Data_zahir extends CI_Controller
             'qty'           => $qty,
             'exp_date'      => $exdate,
             'sektor'        => $sektor,
-            'sktor_tambahan'=> $sektor1
+            'sktor_tambahan' => $sektor1
         );
 
         $this->M_barang->editDataOpname($data, $idbarang);
