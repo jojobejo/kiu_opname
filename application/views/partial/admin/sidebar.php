@@ -39,6 +39,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('tracking_input') ?>" class="nav-link">
+              <i class="nav-icon fas fa-globe"></i>
+              <p>
+                Tracking Input
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url('user') ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>

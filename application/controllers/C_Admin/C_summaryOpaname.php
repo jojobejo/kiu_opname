@@ -49,7 +49,6 @@ class C_summaryOpaname extends CI_Controller
             $row[] = $field->saldo_fisik;
             $row[] = $field->box_fisik;
             $row[] = $field->pcs_fisik;
-            $row[] = $field->sektor;
             $row[] = $field->selisih;
             if ($field->hasil == 'match') {
                 $row[] =  '<td>
@@ -91,7 +90,6 @@ class C_summaryOpaname extends CI_Controller
             $row[] = $field->faktur_pending;
             $row[] = $field->qtyOpname;
             $row[] = $field->selisih;
-            $row[] = $field->sektor;
             if ($field->hasil == 'match') {
                 $row[] =  '<td>
                 <a href="#" class="btn btn-success btn-sm">

@@ -155,7 +155,6 @@
                                                     <th>Saldo Fisik</th>
                                                     <th>Box Fisik</th>
                                                     <th>Pcs Fisik</th>
-                                                    <th>Sektor</th>
                                                     <th>Selisih</th>
                                                     <th>Hasil</th>
                                                 </tr>
@@ -202,7 +201,6 @@
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Fisik</th>
                                                     <th>Selisih</th>
-                                                    <th>Sektor</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>

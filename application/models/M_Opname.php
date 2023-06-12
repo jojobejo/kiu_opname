@@ -90,7 +90,7 @@ class M_Opname extends CI_Model
     // START SERVER SIDE - ALL-BARANG
 
     var $table1 = 'v_listmatchallbarang'; //nama tabel dari database
-    var $column_order1 = array('nama_barang', 'saldo_buku', 'faktur_pending', 'qtyOpname', 'selisih', 'sektor', 'hasil'); //field yang ada di table user
+    var $column_order1 = array('nama_barang', 'saldo_buku', 'faktur_pending', 'qtyOpname', 'selisih','hasil'); //field yang ada di table user
     var $column_search1 = array('nama_barang'); //field yang diizin untuk pencarian 
     var $order1 = array('nama_barang' => 'asc'); // default order 
 
@@ -204,7 +204,7 @@ class M_Opname extends CI_Model
     public function getInputOpname($sektor)
     {
         return $this->db->query("SELECT
-        COALESCE(b.id_opname,0)as idopname ,a.kode_barang, a.nama_barang , b.exp_date , a.hasil_dimensi , b.stok_box1 , b.stok_pcs1 , a.sektor , b.kode_pending
+        COALESCE(b.id_opname,0)as idopname ,a.kode_barang, a.nama_barang , b.exp_date , a.hasil_dimensi , b.stok_box1 , b.stok_pcs1, b.kode_pending
         FROM tb_barang_zahir a 
         LEFT JOIN tb_opname b ON b.kode_barang = a.kode_barang
         WHERE a.sektor = '$sektor'");
@@ -219,43 +219,40 @@ class M_Opname extends CI_Model
     public function getMatchUser($sektor)
     {
         return $this->db->query("SELECT 
-        COALESCE(x.idopname,0) as idopname,
+		x.id_opname,
+        x.kode_barang,
         x.nama_barang,
         x.exp_date,
+        x.qtyZahir,
+        COALESCE(x.qtyPending,0) AS qtyPending,
+        x.qtyFisik,
+        x.box_zahir,
+        x.stok_box1,
+        x.pcs_zahir,
+        x.stok_pcs1,
+        x.hasil_dimensi,
         x.sektor,
-        x.qty_a AS saldo_buku,
-        x.stok_box as saldo_buku_box,
-        x.stok_pcs as saldo_buku_pcs,
-        x.salqty as saldo_fisik,
-        x.stkbox as fisik_box,
-        x.stkpcs as fisik_pcs,
-        x.sktor_tambahan,
-        COALESCE(x.qty_c,0) as faktur_pending,
-        x.qty_b - COALESCE(x.qty_c,0)-x.qty_a AS selisih,
-        (CASE WHEN x.qty_b - COALESCE(x.qty_c,0) - x.qty_a = 0  THEN 'match' ELSE 'not match' END) AS hasil
+(CASE WHEN x.qtyFisik - x.qtyPending = x.qtyZahir THEN 'match' ELSE 'not match' END) AS hasil
         FROM
         (Select 
-        a.id_barang,
+        a.id_opname,
         a.kode_barang,
         a.nama_barang,
         a.exp_date,
+		a.kode_pending,
+        a.stok_box1,
+        a.stok_pcs1,
+        a.QTY1,
         a.sektor,
-        a.stok_box,
-        a.stok_pcs,
-        a.sktor_tambahan,
-
-(SELECT h.id_opname from tb_opname h where h.kode_barang = a.kode_barang and h.exp_date = a.exp_date) as idopname,        
-(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending and c.kode_barang = a.kode_barang group by c.nama_barang) as qty_c,
-(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
-(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
-(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
-(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
          
-        from tb_barang_zahir a WHERE a.sektor='$sektor' group by a.nama_barang,a.exp_date) as x  
-        ORDER BY `x`.`nama_barang` ASC
-              
-        ");
+(SELECT SUM(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date) as qtyZahir,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending and c.kode_barang = a.kode_barang group by c.nama_barang) as qtyPending,
+(SELECT SUM(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qtyFisik,
+(SELECT d.stok_box FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS box_zahir,
+(SELECT d.stok_pcs FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS pcs_zahir,
+(SELECT d.hasil_dimensi FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS hasil_dimensi
+         
+from tb_opname a  group by a.nama_barang,a.exp_date) as x WHERE x.sektor = $sektor  ORDER BY `x`.`nama_barang` ASC");
     }
 
     public function prsenUser($sektor)
@@ -573,11 +570,11 @@ class M_Opname extends CI_Model
         return $this->db->query("SELECT COUNT(user.nama_user)-3 as total FROM user");
     }
 
-    public function countBaranguser($sektor)
+    public function countBaranguser()
     {
         return $this->db->query("SELECT
         COUNT(tb_barang_zahir.kode_barang) as total_barang
-         FROM tb_barang_zahir where tb_barang_zahir.sektor = '$sektor'
+         FROM tb_barang_zahir 
         ");
     }
 }

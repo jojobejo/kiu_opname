@@ -22,6 +22,8 @@
             </div>
             <!-- /.content-header -->
 
+            <?php $this->load->view('content/admin/modal/modalTrackingInput') ?>
+
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -29,37 +31,29 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data barang Zahir</h3>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fas fa-plus"></i>
-                                        Tambah Data Zahir
-                                    </button>
-
-                                    <?php $this->load->view('content/admin/modal/modalZahir') ?>
-
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="dbzahir" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Kode Barang</th>
-                                                    <th>Kode Pending</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Expired Date</th>
-                                                    <th>Qty</th>
-                                                    <th>Keterangan</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                                    <h3 class="card-title">Tracking Input</h3>
                                 </div>
 
+                                <div class="card-body">
+                                    <table id="dbtracking" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Kode Barang</th>
+                                                <th>Kode Pending</th>
+                                                <th>Nama Barang</th>
+                                                <th>Expired Date</th>
+                                                <th>Qty Box</th>
+                                                <th>Qty Pcs</th>
+                                                <th>Qty Besar</th>
+                                                <th>Sektor Inputer</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

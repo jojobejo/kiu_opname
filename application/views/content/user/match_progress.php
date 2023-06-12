@@ -37,7 +37,7 @@
                             <div class="col-md">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3>List Barang Tidak Cocok</h3>
+                                        <h3>List Barang Telah Terinput</h3>
                                     </div>
                                     <?php $this->load->view("content/user/modal/modalEditOpname") ?>
                                     <div class="card-body">
@@ -47,11 +47,12 @@
                                                     <th hidden>No</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
+                                                    <th>Box Fisik</th>
+                                                    <th>Pcs Fisik</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <?php
                                                 $no = 1;
                                                 foreach ($jmlBarang as $b) :
@@ -61,6 +62,8 @@
                                                         <td hidden><?= $no++ ?></td>
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
+                                                        <td><?= $b->stok_box1 ?></td>
+                                                        <td><?= $b->stok_pcs1 ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
@@ -70,7 +73,7 @@
                                                         </td>';
                                                         } else {
                                                             echo '<td>
-                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#modalEditOpname' . $b->idopname . '">
+                                                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#modalEditOpname' . $b->id_opname . '">
                                                                     <i class="fa fa-solid fa-ban"></i>
                                                             </a>
                                                         </td>';

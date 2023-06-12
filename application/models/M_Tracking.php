@@ -3,12 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class M_SFifo extends CI_Model
+class M_Tracking extends CI_Model
 {
-    var $table = 'v_listmatchfifo'; //nama tabel dari database
-    var $column_order = array('nama_barang', 'exp_date', 'faktur_pending', 'saldo_buku', 'box_buku', 'pcs_buku', 'saldo_fisik', 'box_fisik', 'pcs_fisik', 'selisih','hasil'); //field yang ada di table user
-    var $column_search = array('nama_barang', 'exp_date'); //field yang diizin untuk pencarian 
-    var $order = array('nama_barang' => 'asc'); // default order 
+    //ServerSide-tb-opname
+    var $table = 'v_trackingopname'; //nama tabel dari database
+    var $column_order = array('id_opname', 'kode_barang', 'kode_pending', 'nama_barang', 'stok_box1', 'stok_pcs1', 'QTY1', 'sektor'); //field yang ada di table user
+    var $column_search = array('nama_barang', 'exp_date', 'sektor'); //field yang diizin untuk pencarian 
+    var $order = array('nama_barang' => 'asc'); // default order
 
     private function _get_datatables_query()
     {
@@ -66,4 +67,18 @@ class M_SFifo extends CI_Model
         return $this->db->count_all_results();
     }
 
+    public function get_by_id($id)
+    {
+        $this->db->from('v_trackingopname');
+        $this->db->where('id_opname', $id);
+        $query = $this->db->get();
+
+        return $query->row();
+    }
+
+    public function update_opname_edited($where, $data)
+    {
+        $this->db->update('tb_opname', $data, $where);
+        return $this->db->affected_rows();
+    }
 }
