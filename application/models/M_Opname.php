@@ -14,13 +14,6 @@ class M_Opname extends CI_Model
         return $this->db->insert('tb_opname', $data1);
     }
 
-    public function list_barang()
-    {
-        $this->db->select('tb_barang_zahir.kode_barang,tb_barang_zahir.sektor,tb_barang_zahir.nama_barang,tb_barang_zahir.exp_date');
-        $this->db->FROM('tb_barang_zahir');
-        $query = $this->db->get();
-        return $query;
-    }
 
     // START SERVERSIDE - BARANG - OPNAME
 
@@ -232,7 +225,7 @@ class M_Opname extends CI_Model
         x.stok_pcs1,
         x.hasil_dimensi,
         x.sektor,
-(CASE WHEN x.qtyFisik - x.qtyPending = x.qtyZahir THEN 'match' ELSE 'not match' END) AS hasil
+        (CASE WHEN x.qtyFisik - COALESCE(x.qtyPending,0) = x.qtyZahir THEN 'match' ELSE 'not match' END) AS hasil
         FROM
         (Select 
         a.id_opname,
@@ -246,13 +239,13 @@ class M_Opname extends CI_Model
         a.sektor,
          
 (SELECT SUM(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date) as qtyZahir,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_pending = a.kode_pending and c.kode_barang = a.kode_barang group by c.nama_barang) as qtyPending,
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qtyPending,
 (SELECT SUM(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qtyFisik,
 (SELECT d.stok_box FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS box_zahir,
 (SELECT d.stok_pcs FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS pcs_zahir,
 (SELECT d.hasil_dimensi FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS hasil_dimensi
          
-from tb_opname a  group by a.nama_barang,a.exp_date) as x WHERE x.sektor = $sektor  ORDER BY `x`.`nama_barang` ASC");
+from tb_opname a where a.sektor = $sektor  group by a.nama_barang,a.exp_date) as x  ORDER BY `x`.`nama_barang` ASC");
     }
 
     public function prsenUser($sektor)

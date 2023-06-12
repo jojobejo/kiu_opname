@@ -25,6 +25,7 @@ class C_matchProgress extends CI_Controller
 
         $data['page_title'] = 'Match Progress';
         $data['jmlBarang']  = $this->M_Opname->getMatchUser($sektor)->result();
+        
         $this->load->view('partial/user/header', $data);
         $this->load->view('content/user/match_progress', $data);
         $this->load->view('partial/user/footer');

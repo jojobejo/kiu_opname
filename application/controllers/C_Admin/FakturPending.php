@@ -61,13 +61,15 @@ class FakturPending extends CI_Controller
 
     function editFakturPending()
     {
-        $idbarang      = $this->input->post('id_isi');
+        $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
+        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('nama_isi');
         $expdate        = $this->input->post('exp_isi');
         $qtyisi         = $this->input->post('qty_isi');
         $data = array(
-            'id_pending'     => $idbarang,
+            'id_pending'    => $idbarang,
+            'kode_pending'  => $kdpending,
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmabarang,
             'exp_date'      => $expdate,

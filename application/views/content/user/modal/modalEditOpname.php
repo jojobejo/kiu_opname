@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <?php echo form_open_multipart('editInputOpname'); ?>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">id_opname<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="id_isi" name="id_isi" value="<?= $o->id_opname ?>" readonly /></div>
@@ -34,7 +34,7 @@
                             <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="<?= $o->stok_pcs1 ?>" /></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Dimensi<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="number" id="dimensi_isi" name="dimensi_isi" value="<?= $o->hasil_dimensi ?>" /></div>
