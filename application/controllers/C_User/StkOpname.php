@@ -75,7 +75,7 @@ class StkOpname extends CI_Controller
         $sektor         = $this->session->userdata('sektor');
         $nmbarang       = $this->input->post('nama_isi');
         $kdbarang       = $this->input->post('kode_isi');
-        $pending       = $this->input->post('pending_isi');
+        $pending        = $this->input->post('pending_isi');
         $box            = $this->input->post('box_isi');
         $pcs            = $this->input->post('pcs_isi');
         $dimensi        = $this->input->post('dimensi_isi');
@@ -90,7 +90,8 @@ class StkOpname extends CI_Controller
             'stok_pcs1'     => $pcs,
             'exp_date'      => $exdate,
             'QTY1'          => $qty,
-            'sektor'        => $sektor
+            'sektor'        => $sektor,
+            'keterangan'    => 'StockOpname'
         );
 
         $this->M_Opname->addOpname($data);

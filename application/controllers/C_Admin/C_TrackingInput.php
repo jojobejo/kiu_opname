@@ -84,7 +84,8 @@ class C_TrackingInput extends CI_Controller
         $data = array(
             'stok_box1' => $stkBox,
             'stok_pcs1' => $stkPcs,
-            'QTY1'      => ($stkBox * $dimensi) + $stkPcs
+            'QTY1'      => ($stkBox * $dimensi) + $stkPcs,
+            'keterangan' => 'PENYESUAIAN-QTY'
         );
         $this->M_Tracking->update_opname_edited(array('id_opname' => $this->input->post('id_isi')), $data);
         echo json_encode(array("status" => TRUE));
