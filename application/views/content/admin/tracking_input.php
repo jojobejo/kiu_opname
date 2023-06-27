@@ -35,6 +35,10 @@
                                 </div>
 
                                 <div class="card-body">
+                                    <a type="button" class="btn btn-success" href="<?= base_url('exportTrackingInputer') ?>">
+                                        <i class="fas fa-file-excel"></i>&nbsp;
+                                        Export Data To Excel
+                                    </a>
                                     <table id="dbtracking" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
