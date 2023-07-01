@@ -8,7 +8,6 @@ class C_TrackingInput extends CI_Controller
 
 {
 
-
     function __construct()
     {
         parent::__construct();
@@ -51,11 +50,6 @@ class C_TrackingInput extends CI_Controller
             $row[] = $field->sektor;
             $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_opname(' . "'" . $field->id_opname . "'" . ')"><i class="fa fa-solid fa-pencil-alt"></i></a>';
 
-            //     $row[] = '<a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir' . $field->id_opname . '">
-            //     <i class="fa fa-solid fa-pencil-alt"></i></a>' . '&nbsp;' .
-            //         '<a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir' . $field->id_opname . '">
-            //     <i class="fa fa-solid fa-trash"></i>
-            // </a>';
             $data[] = $row;
         }
 

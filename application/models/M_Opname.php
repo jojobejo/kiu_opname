@@ -294,7 +294,7 @@ from tb_opname a where a.sektor = $sektor  group by a.nama_barang,a.exp_date) as
                 (Select 
                 a.id_barang,
         (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang) as qtyZahir,     
-        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang group by c.kode_barang) as qtyPending,
+        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qtyPending,
         (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qtyOpname
                 from tb_barang_zahir a  group by a.kode_barang,a.nama_barang,a.exp_date) as x  
                 ORDER BY x.id_barang");

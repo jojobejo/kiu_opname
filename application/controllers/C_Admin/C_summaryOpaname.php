@@ -16,7 +16,6 @@ class C_summaryOpaname extends CI_Controller
         $this->load->library('form_validation');
     }
 
-
     function index()
     {
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
