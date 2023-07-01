@@ -258,9 +258,9 @@ class C_summaryOpaname extends CI_Controller
         $excel->getProperties()->setCreator('it_karisma')
             ->setLastModifiedBy('laporan_editedBy:')
             ->setTitle("Data Laporan By-Expired Date")
-            ->setSubject("Vivo By-Expdate")
-            ->setDescription("Rekap Opname Fifo Barang")
-            ->setKeywords("Fifo Barang");
+            ->setSubject("FeFo By-Expdate")
+            ->setDescription("Rekap Opname FeFo Barang")
+            ->setKeywords("FeFo Barang");
 
         // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
         $style_col = array(
@@ -290,7 +290,7 @@ class C_summaryOpaname extends CI_Controller
             )
         );
 
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan FiFo-By Expired Date"); // Set kolom A1 dengan tulisan "DATA SISWA"
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan FeFo-By Expired Date"); // Set kolom A1 dengan tulisan "DATA SISWA"
         $excel->getActiveSheet()->mergeCells('A1:N1'); // Set Merge Cell pada kolom A1 sampai E1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
@@ -387,12 +387,12 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
 
         // Set judul file excel nya
-        $excel->getActiveSheet(0)->setTitle("Laporan Barang Fifo");
+        $excel->getActiveSheet(0)->setTitle("Laporan Barang FeFo");
         $excel->setActiveSheetIndex(0);
 
         // Proses file excel
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="laporan_fifo_barang.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="laporan_fefo_barang.xlsx"'); // Set nama file excel nya
         header('Cache-Control: max-age=0');
 
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');

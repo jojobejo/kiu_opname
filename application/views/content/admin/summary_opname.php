@@ -100,7 +100,7 @@
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#revenue-chart" data-toggle="tab">List Fifo</a>
+                                            <a class="nav-link" href="#revenue-chart" data-toggle="tab">List FeFo</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#sales-chart" data-toggle="tab">List All Barang</a>

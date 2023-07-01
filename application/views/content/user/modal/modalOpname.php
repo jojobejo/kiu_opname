@@ -58,7 +58,6 @@
                                 <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="" /></div>
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
