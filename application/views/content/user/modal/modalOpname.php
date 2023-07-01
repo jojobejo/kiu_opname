@@ -42,6 +42,12 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                                <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
+                                <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="" readonly /></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Box<span class="required">*</span></label>
                                 <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="" /></div>
                             </div>
@@ -52,12 +58,7 @@
                                 <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="" /></div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="" readonly /></div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
