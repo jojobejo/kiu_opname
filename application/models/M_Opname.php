@@ -83,7 +83,7 @@ class M_Opname extends CI_Model
     // START SERVER SIDE - ALL-BARANG
 
     var $table1 = 'v_listmatchallbarang'; //nama tabel dari database
-    var $column_order1 = array('nama_barang', 'saldo_buku', 'faktur_pending', 'qtyOpname', 'selisih','hasil'); //field yang ada di table user
+    var $column_order1 = array('nama_barang', 'saldo_buku', 'faktur_pending', 'qtyOpname', 'selisih', 'hasil'); //field yang ada di table user
     var $column_search1 = array('nama_barang'); //field yang diizin untuk pencarian 
     var $order1 = array('nama_barang' => 'asc'); // default order 
 
@@ -288,8 +288,8 @@ from tb_opname a where a.sektor = $sektor  group by a.nama_barang,a.exp_date) as
     {
         return $this->db->query("SELECT 
 		COUNT(x.id_barang) as total,
-        COUNT(CASE WHEN (x.qtyZahir -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN (x.qtyZahir -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
+        COUNT(CASE WHEN (x.qtyZahir + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qtyZahir + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
                 FROM
                 (Select 
                 a.id_barang,
@@ -438,8 +438,8 @@ from tb_opname a where a.sektor = $sektor  group by a.nama_barang,a.exp_date) as
     {
         return $this->db->query("SELECT 
 		COUNT(x.id_barang) as total,
-        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN (x.qtyBesar -COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
+        COUNT(CASE WHEN (x.qtyBesar + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (x.qtyBesar + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
         FROM
         (Select 
         a.id_barang,
