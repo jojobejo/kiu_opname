@@ -22,7 +22,7 @@
                                 <div class="col-sm-8"><input class="form-control" type="text" id="kode_isi" name="kode_isi" value="" readonly /></div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Kode Pending <span class="required">*</span></label>
                                 <div class="col-sm-8"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="" readonly /></div>
@@ -42,6 +42,12 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                                <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
+                                <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="" readonly /></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Box<span class="required">*</span></label>
                                 <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="" /></div>
                             </div>
@@ -50,12 +56,6 @@
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Pcs<span class="required">*</span></label>
                                 <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="" /></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="" readonly /></div>
                             </div>
                         </div>
                     </div>
