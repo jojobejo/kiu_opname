@@ -34,6 +34,8 @@ class C_TrackingInput extends CI_Controller
             redirect("login");
         }
 
+        $user = $this->session->userdata('username');
+
         $list = $this->M_Tracking->get_datatables();
         $data = array();
         $no = $_POST['start'];
@@ -48,7 +50,11 @@ class C_TrackingInput extends CI_Controller
             $row[] = $field->stok_pcs1;
             $row[] = $field->QTY1;
             $row[] = $field->sektor;
-            $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_opname(' . "'" . $field->id_opname . "'" . ')"><i class="fa fa-solid fa-pencil-alt"></i></a>';
+            if ($user == 'superadmin') {
+                $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_opname(' . "'" . $field->id_opname . "'" . ')"><i class="fa fa-solid fa-pencil-alt"></i></a>';
+            } else {
+                $row[] = '-';
+            }
 
             $data[] = $row;
         }
@@ -73,13 +79,15 @@ class C_TrackingInput extends CI_Controller
     {
         $stkBox  = $this->input->post('box_isi');
         $stkPcs  = $this->input->post('pcs_isi');
+        $user    = $this->session->userdata('username');
         $dimensi = $this->input->post('dimensi_isi');
 
         $data = array(
             'stok_box1' => $stkBox,
             'stok_pcs1' => $stkPcs,
             'QTY1'      => ($stkBox * $dimensi) + $stkPcs,
-            'keterangan' => 'PENYESUAIAN-QTY'
+            'inputer_edit'  => $user,
+            'keterangan_edit' => 'Penyesuaian Qty'
         );
         $this->M_Tracking->update_opname_edited(array('id_opname' => $this->input->post('id_isi')), $data);
         echo json_encode(array("status" => TRUE));

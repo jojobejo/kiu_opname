@@ -21,6 +21,14 @@ class M_barang extends CI_Model
         return $row;
     }
 
+    public function getbarangeditzahir($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_barang_zahir');
+        $this->db->where('id_barang', $id);
+        return $this->db->get()->result();
+    }
+
     public function getBarang($sektor)
     {
         // return $this->db->query('SELECT tb_barang.id_barang,tb_barang.nama_barang,tb_barang.sektor,tb_barang.stok_barang,tb_gudang.kode_gudang,tb_gudang.nama_gudang
@@ -58,7 +66,7 @@ class M_barang extends CI_Model
     // DB MODEL ZAHIR
 
     var $table = 'tb_barang_zahir'; //nama tabel dari database
-    var $column_order = array('kode_barang', 'kode_pending', 'nama_barang', 'exp_date','qty','keterangan','id_barang'); //field yang ada di table user
+    var $column_order = array('kode_barang', 'kode_pending', 'nama_barang', 'exp_date', 'qty', 'keterangan', 'id_barang'); //field yang ada di table user
     var $column_search = array('nama_barang', 'kode_barang'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order
 

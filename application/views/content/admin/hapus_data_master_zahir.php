@@ -3,7 +3,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
+            <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="200">
         </div>
 
         <?php $this->load->view('partial/admin/navbar') ?>
@@ -29,40 +29,30 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Data barang Zahir</h3>
+                                    <h2 class="card-title">Edit Data barang Zahir</h2>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fas fa-plus"></i>
-                                        Tambah Data Zahir
-                                    </button>
-
-                                    
-
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="dbzahir" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Kode Barang</th>
-                                                    <th>Kode Pending</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Expired Date</th>
-                                                    <th>Qty</th>
-                                                    <th>Keterangan</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                                    <?php foreach ($barang as $b) :
+                                        $originalDate = $b->exp_date;
+                                        $newDate = date("m/d/Y", strtotime($originalDate)); ?>
+                                        <div class="modal-body">
+                                            <h3>!!!Anda akan menghapus data !!! </h3>
+                                            <br>
+                                            <h3><?php echo $b->nama_barang ?></h3>
+                                            <br>
+                                            <h3>Data yang sudah terhapus tidak dapat di kembalikan lagi</h3>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <a href="<?= base_url('data_zahir') ?>" type="button" class="btn btn-default">Close</a>
+                                            <a class="btn btn-danger" href="<?php echo base_url("C_Admin/Data_zahir/hapusBarang/$b->id_barang") ?>">Hapus</a>
+                                        </div>
+                                        </form>
+                                    <?php endforeach; ?>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                </div>
             </section>
             <!-- /.content -->
         </div>

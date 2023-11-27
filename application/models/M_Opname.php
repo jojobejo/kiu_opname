@@ -245,7 +245,7 @@ class M_Opname extends CI_Model
 (SELECT d.stok_pcs FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS pcs_zahir,
 (SELECT d.hasil_dimensi FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS hasil_dimensi
          
-from tb_opname a where a.sektor = $sektor  group by a.nama_barang,a.exp_date) as x  ORDER BY `x`.`nama_barang` ASC");
+from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC");
     }
 
     public function prsenUser($sektor)

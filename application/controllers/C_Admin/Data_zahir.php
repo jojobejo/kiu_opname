@@ -47,8 +47,8 @@ class Data_zahir extends CI_Controller
             $row[] = $field->exp_date;
             $row[] = $field->qty;
             $row[] = $field->keterangan;
-            $row[] = '<a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editZahir' . $field->id_barang . '"><i class="fa fa-solid fa-pencil-alt"></i></a>' . '&nbsp;&nbsp;&nbsp;' . 
-            '<a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusZahir'. $field->id_barang .'">
+            $row[] = '<a href="' . base_url('edit_data_zahir/' . $field->id_barang . '') . '" class="btn btn-warning btn-sm"><i class="fa fa-solid fa-pencil-alt"></i></a>' . '&nbsp;&nbsp;&nbsp;' .
+                '<a href="' . base_url('hapus_data_zahir/' . $field->id_barang . '') . '" class="btn btn-danger btn-sm">
             <i class="fa fa-solid fa-trash"></i>
         </a>';
             $data[] = $row;
@@ -133,5 +133,32 @@ class Data_zahir extends CI_Controller
         $this->M_barang->zahirDel($idbarang);
 
         redirect("list_barang");
+    }
+
+    public function editDataZahir($id)
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        }
+
+        $data['page_title'] = 'Edit Data Barang Zahir || Stok Opname';
+        $data['barang'] = $this->M_barang->getbarangeditzahir($id);
+
+        $this->load->view('partial/admin/header', $data);
+        $this->load->view('content/admin/edit_data_master_zahir', $data);
+        $this->load->view('partial/admin/footer');
+    }
+    public function hapusDataZahir($id)
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        }
+
+        $data['page_title'] = 'Edit Data Barang Zahir || Stok Opname';
+        $data['barang'] = $this->M_barang->getbarangeditzahir($id);
+
+        $this->load->view('partial/admin/header', $data);
+        $this->load->view('content/admin/hapus_data_master_zahir', $data);
+        $this->load->view('partial/admin/footer');
     }
 }
