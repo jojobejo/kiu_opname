@@ -30,58 +30,6 @@
 
             <!-- Main content -->
             <section class="content">
-                <!-- <div class="container-fluids">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="card">
-                                <!-- CARD BODY -->
-                                <!-- <div class="card-body">
-
-                                    <!--  MATCH DATA   -->
-                                    <?php foreach ($selesih as $s) {
-                                        $match =  $s->match;
-                                        $not =  $s->not;
-                                    } ?>
-                                    <!--  END MATCH DATA   -->
-
-                                    <!-- <div class="d-flex justify-content-center">
-                                        <canvas id="myChart" class="chartCus"></canvas>
-                                        <script>
-                                            var xValues = ["Cocok", "Tidak Cocok"];
-                                            var yValues = [<?php echo json_encode($match); ?>, <?php echo json_encode($not); ?>];
-                                            var barColors = [
-                                                "#00aba9",
-                                                "#b91d47"
-                                            ];
-
-                                            new Chart("myChart", {
-                                                type: "doughnut",
-                                                data: {
-                                                    labels: xValues,
-                                                    datasets: [{
-                                                        backgroundColor: barColors,
-                                                        data: yValues
-                                                    }]
-                                                },
-                                                options: {
-                                                    title: {
-                                                        display: true,
-                                                        text: "Grafik Kecocokan"
-                                                    }
-                                                }
-                                            });
-                                        </script>
-                                    </div>
-                                </div> -->
-                                <!-- ./CARD BODY -->
-                            <!-- </div>
-                        </div>
-                    </div>
-                </div> -->
-
-                <?php $this->load->view('content/user/modal/modalOpnameResult1'); ?>
-                <?php $this->load->view('content/user/modal/modalOpnameResult2'); ?>
-
                 <section class="content">
                     <div class="container-fluids">
                         <div class="row">
