@@ -40,37 +40,7 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
-                                <?php
-                                foreach ($selisihVivo as $s) {
-                                    $match = $s->match;
-                                    $not   = $s->not;
-                                    $total = $s->total;
-
-                                    $vM = ($match / $total) * 100;
-                                    $vN = ($not / $total) * 100;
-
-                                    $dataPointsVivo = array(
-                                        array("label" => "Match", "y" => $vM),
-                                        array("label" => "Not Match", "y" => $vN)
-                                    );
-                                }
-                                ?>
-
-                                <?php
-                                foreach ($selisihFaktur as $a) {
-                                    $matchF = $a->match;
-                                    $notF   = $a->not;
-                                    $totalF = $a->total;
-
-                                    $pM = ($matchF / $totalF) * 100;
-                                    $pN = ($notF / $totalF) * 100;
-
-                                    $dataPoints = array(
-                                        array("label" => "Match", "y" => $pM),
-                                        array("label" => "Not Match", "y" => $pN),
-                                    );
-                                }
-                                ?>
+                              
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm">
@@ -117,31 +87,7 @@
                                             <i class="fas fa-file-excel"></i>&nbsp;
                                             Export Data To Excel
                                         </a>
-                                        <div class="col-8 ml-2">
-                                            <div class="row">
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">TOTAL BARANG : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($total, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">BARANG MATCH : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($match, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">BARANG NOT MATCH : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($not, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      
 
                                         <table id="example2" class="table table-bordered table-striped">
                                             <thead>
@@ -168,31 +114,7 @@
                                             <i class="fas fa-file-excel"></i>&nbsp;
                                             Export Data To Excel
                                         </a>
-                                        <div class="col-8 ml-2">
-                                            <div class="row">
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">TOTAL BARANG : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($totalF, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">BARANG MATCH : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($matchF, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm">
-                                                    <div class="row">
-                                                        <h6 class="font-weight-bold">BARANG NOT MATCH : </h6>
-                                                        &nbsp;
-                                                        <h6><?= json_encode($notF, JSON_NUMERIC_CHECK) ?></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                         <table id="example3" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
