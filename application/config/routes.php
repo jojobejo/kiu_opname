@@ -79,5 +79,6 @@ $route['serverInputer'] = 'C_Admin/C_TrackingInput/getServerTracking';
 $route['editOpname/(:any)'] = 'C_Admin/C_TrackingInput/opname_edit/$1';
 $route['opnameEdited'] = 'C_Admin/C_TrackingInput/ajax_update_opname';
 $route['exportTrackingInputer'] = 'C_Admin/C_TrackingInput/exportInputer';
+$route['u_sop'] = 'C_User/Def_user/sop_penggunaan';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
