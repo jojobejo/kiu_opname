@@ -1,0 +1,351 @@
+/ / count vivo
+select
+    count(`x`.`kode_barang`) AS `total`,
+    count(
+        case
+            when `x`.`qty_b` - coalesce(`x`.`qty_c`, 0) - `x`.`qty_a` = 0 then 1
+            else NULL
+        end
+    ) AS `match`,
+    count(
+        case
+            when `x`.`qty_b` - coalesce(`x`.`qty_c`, 0) - `x`.`qty_a` <> 0 then 1
+            else NULL
+        end
+    ) AS `not`
+from
+    (
+        select
+            `a`.`id_barang` AS `id_barang`,
+            `a`.`kode_barang` AS `kode_barang`,
+            `a`.`nama_barang` AS `nama_barang`,
+            `a`.`exp_date` AS `exp_date`,
+            `a`.`stok_box` AS `stok_box`,
+            `a`.`stok_pcs` AS `stok_pcs`,
+(
+                select
+                    sum(`g`.`qty`)
+                from
+                    `db_stockopname`.`tb_barang_zahir` `g`
+                where
+                    `g`.`kode_barang` = `a`.`kode_barang`
+                    and `g`.`exp_date` = `a`.`exp_date`
+                group by
+                    `g`.`nama_barang`
+            ) AS `qty_a`,
+(
+                select
+                    sum(`c`.`qty`)
+                from
+                    `db_stockopname`.`tb_pending` `c`
+                where
+                    `c`.`kode_barang` = `a`.`kode_barang`
+                    and `c`.`exp_date` = `a`.`exp_date`
+                group by
+                    `c`.`nama_barang`
+            ) AS `qty_c`,
+(
+                select
+                    sum(`b`.`QTY1`)
+                from
+                    `db_stockopname`.`tb_opname` `b`
+                where
+                    `b`.`kode_barang` = `a`.`kode_barang`
+                    and `b`.`exp_date` = `a`.`exp_date`
+                group by
+                    `b`.`nama_barang`
+            ) AS `qty_b`,
+(
+                select
+                    sum(`d`.`stok_box1`)
+                from
+                    `db_stockopname`.`tb_opname` `d`
+                where
+                    `d`.`kode_barang` = `a`.`kode_barang`
+                    and `d`.`exp_date` = `a`.`exp_date`
+                group by
+                    `d`.`nama_barang`
+            ) AS `stkbox`,
+(
+                select
+                    sum(`e`.`stok_pcs1`)
+                from
+                    `db_stockopname`.`tb_opname` `e`
+                where
+                    `e`.`kode_barang` = `a`.`kode_barang`
+                    and `e`.`exp_date` = `a`.`exp_date`
+                group by
+                    `e`.`nama_barang`
+            ) AS `stkpcs`,
+(
+                select
+                    `f`.`QTY1`
+                from
+                    `db_stockopname`.`tb_opname` `f`
+                where
+                    `f`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `f`.`nama_barang`
+            ) AS `salqty`
+        from
+            `db_stockopname`.`tb_barang_zahir` `a`
+        group by
+            `a`.`nama_barang`,
+            `a`.`exp_date`
+    ) `x`
+order by
+    `x`.`id_barang` / / hitung_persentase
+select
+    count(`x`.`kode_barang`) AS `total`,
+    count(
+        case
+            when `x`.`qty_b` - coalesce(`x`.`qty_c`, 0) - `x`.`qty_a` = 0 then 1
+            else NULL
+        end
+    ) AS `match`,
+    count(
+        case
+            when `x`.`qty_b` - coalesce(`x`.`qty_c`, 0) - `x`.`qty_a` <> 0 then 1
+            else NULL
+        end
+    ) AS `not`
+from
+    (
+        select
+            `a`.`id_barang` AS `id_barang`,
+            `a`.`kode_barang` AS `kode_barang`,
+            `a`.`nama_barang` AS `nama_barang`,
+            `a`.`exp_date` AS `exp_date`,
+            `a`.`stok_box` AS `stok_box`,
+            `a`.`stok_pcs` AS `stok_pcs`,
+(
+                select
+                    sum(`g`.`qty`)
+                from
+                    `db_stockopname`.`tb_barang_zahir` `g`
+                where
+                    `g`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `g`.`nama_barang`
+            ) AS `qty_a`,
+(
+                select
+                    sum(`c`.`qty`)
+                from
+                    `db_stockopname`.`tb_pending` `c`
+                where
+                    `c`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `c`.`nama_barang`
+            ) AS `qty_c`,
+(
+                select
+                    sum(`b`.`QTY1`)
+                from
+                    `db_stockopname`.`tb_opname` `b`
+                where
+                    `b`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `b`.`nama_barang`
+            ) AS `qty_b`,
+(
+                select
+                    sum(`d`.`stok_box1`)
+                from
+                    `db_stockopname`.`tb_opname` `d`
+                where
+                    `d`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `d`.`nama_barang`
+            ) AS `stkbox`,
+(
+                select
+                    sum(`e`.`stok_pcs1`)
+                from
+                    `db_stockopname`.`tb_opname` `e`
+                where
+                    `e`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `e`.`nama_barang`
+            ) AS `stkpcs`,
+(
+                select
+                    `f`.`QTY1`
+                from
+                    `db_stockopname`.`tb_opname` `f`
+                where
+                    `f`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `f`.`nama_barang`
+            ) AS `salqty`
+        from
+            `db_stockopname`.`tb_barang_zahir` `a`
+        group by
+            `a`.`nama_barang`
+    ) `x`
+order by
+    `x`.`id_barang` / / v_listmatchallbarang
+select
+    `x`.`id_barang` AS `id_barang`,
+    `x`.`kode_barang` AS `kode_barang`,
+    `x`.`nama_barang` AS `nama_barang`,
+    `x`.`qtyZahir` AS `saldo_buku`,
+    coalesce(`x`.`qtyPending`, 0) AS `faktur_pending`,
+    coalesce(`x`.`qtyOpname`, 0) - coalesce(`x`.`qtyPending`, 0) - `x`.`qtyZahir` AS `selisih`,
+    coalesce(`x`.`qtyOpname`, 0) AS `qtyOpname`,
+case
+        when coalesce(`x`.`qtyOpname`, 0) - coalesce(`x`.`qtyPending`, 0) = `x`.`qtyZahir` then 'match'
+        else 'not match'
+    end AS `hasil`
+from
+    (
+        select
+            `a`.`id_barang` AS `id_barang`,
+            `a`.`kode_barang` AS `kode_barang`,
+            `a`.`nama_barang` AS `nama_barang`,
+            sum(`a`.`qty`) AS `qtyZahir`,
+(
+                select
+                    sum(`c`.`qty`)
+                from
+                    `db_stockopname`.`tb_pending` `c`
+                where
+                    `c`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `c`.`kode_barang`
+            ) AS `qtyPending`,
+(
+                select
+                    sum(`b`.`QTY1`)
+                from
+                    `db_stockopname`.`tb_opname` `b`
+                where
+                    `b`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `b`.`kode_barang`
+            ) AS `qtyOpname`
+        from
+            `db_stockopname`.`tb_barang_zahir` `a`
+        group by
+            `a`.`kode_barang`
+    ) `x`
+order by
+    `x`.`id_barang` / / v_listmatchfifo
+select
+    `x`.`nama_barang` AS `nama_barang`,
+    `x`.`exp_date` AS `exp_date`,
+    `x`.`qtyZahir` AS `saldo_buku`,
+    `x`.`stok_box` AS `box_buku`,
+    `x`.`stok_pcs` AS `pcs_buku`,
+    coalesce(`x`.`qtyPending`, 0) AS `faktur_pending`,
+    coalesce(`x`.`qtyOpname`, 0) AS `saldo_fisik`,
+    coalesce(`x`.`stkbox`, 0) AS `box_fisik`,
+    coalesce(`x`.`stkpcs`, 0) AS `pcs_fisik`,
+    coalesce(`x`.`qtyOpname`, 0) - coalesce(`x`.`qtyPending`, 0) - `x`.`qtyZahir` AS `selisih`,
+case
+        when coalesce(`x`.`qtyOpname`, 0) - coalesce(`x`.`qtyPending`, 0) = `x`.`qtyZahir` then 'match'
+        else 'not match'
+    end AS `hasil`
+from
+    (
+        select
+            `a`.`id_barang` AS `id_barang`,
+            `a`.`kode_barang` AS `kode_barang`,
+            `a`.`nama_barang` AS `nama_barang`,
+            `a`.`exp_date` AS `exp_date`,
+            `a`.`stok_box` AS `stok_box`,
+            `a`.`stok_pcs` AS `stok_pcs`,
+(
+                select
+                    sum(`g`.`qty`)
+                from
+                    `db_stockopname`.`tb_barang_zahir` `g`
+                where
+                    `g`.`kode_barang` = `a`.`kode_barang`
+                    and `g`.`exp_date` = `a`.`exp_date`
+                group by
+                    `g`.`kode_barang`
+            ) AS `qtyZahir`,
+(
+                select
+                    sum(`c`.`qty`)
+                from
+                    `db_stockopname`.`tb_pending` `c`
+                where
+                    `c`.`kode_barang` = `a`.`kode_barang`
+                    and `c`.`exp_date` = `a`.`exp_date`
+                group by
+                    `c`.`kode_barang`
+            ) AS `qtyPending`,
+(
+                select
+                    sum(`b`.`QTY1`)
+                from
+                    `db_stockopname`.`tb_opname` `b`
+                where
+                    `b`.`kode_barang` = `a`.`kode_barang`
+                    and `b`.`exp_date` = `a`.`exp_date`
+                group by
+                    `b`.`kode_barang`
+            ) AS `qtyOpname`,
+(
+                select
+                    sum(`d`.`stok_box1`)
+                from
+                    `db_stockopname`.`tb_opname` `d`
+                where
+                    `d`.`kode_barang` = `a`.`kode_barang`
+                    and `d`.`exp_date` = `a`.`exp_date`
+                group by
+                    `d`.`kode_barang`
+            ) AS `stkbox`,
+(
+                select
+                    sum(`e`.`stok_pcs1`)
+                from
+                    `db_stockopname`.`tb_opname` `e`
+                where
+                    `e`.`kode_barang` = `a`.`kode_barang`
+                    and `e`.`exp_date` = `a`.`exp_date`
+                group by
+                    `e`.`kode_barang`
+            ) AS `stkpcs`,
+(
+                select
+                    `f`.`QTY1`
+                from
+                    `db_stockopname`.`tb_opname` `f`
+                where
+                    `f`.`kode_barang` = `a`.`kode_barang`
+                group by
+                    `f`.`kode_barang`
+            ) AS `salqty`
+        from
+            `db_stockopname`.`tb_barang_zahir` `a`
+        group by
+            `a`.`kode_barang`,
+            `a`.`nama_barang`,
+            `a`.`exp_date`
+    ) `x`
+order by
+    `x`.`id_barang` / / v_trackingopname
+select
+    `a`.`id_opname` AS `id_opname`,
+    `a`.`kode_barang` AS `kode_barang`,
+    `a`.`kode_pending` AS `kode_pending`,
+    `a`.`nama_barang` AS `nama_barang`,
+    `a`.`exp_date` AS `exp_date`,
+    `b`.`hasil_dimensi` AS `hasil_dimensi`,
+    `a`.`stok_box1` AS `stok_box1`,
+    `a`.`stok_pcs1` AS `stok_pcs1`,
+    `a`.`QTY1` AS `QTY1`,
+    `a`.`sektor` AS `sektor`,
+    `a`.`keterangan` AS `keterangan`
+from
+    (
+        `db_stockopname`.`tb_opname` `a`
+        join `db_stockopname`.`tb_master_barang` `b` on(
+            `b`.`kode_barang` = `a`.`kode_barang`
+            and `b`.`exp_date` = `a`.`exp_date`
+        )
+    )

@@ -32,12 +32,10 @@
                                     <h3 class="card-title">Data barang Zahir</h3>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#exampleModal">
+                                    <a href="<?= base_url('add_data_zahir') ?>" type="button" class="btn btn-primary m-2 ml-3">
                                         <i class="fas fa-plus"></i>
                                         Tambah Data Zahir
-                                    </button>
-
-                                    
+                                    </a>
 
                                     <!-- /.card-header -->
                                     <div class="card-body">

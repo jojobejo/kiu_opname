@@ -172,4 +172,14 @@ class M_barang extends CI_Model
         $this->db->where('id_pending', $idbarang);
         return $this->db->delete('tb_pending');
     }
+
+    // add_exp_zahir
+    public function add_exp_zahir($data)
+    {
+        return $this->db->insert('tb_barang_zahir', $data);
+    }
+    public function add_exp_zahir_master($data)
+    {
+        return $this->db->insert('tb_master_barang', $data);
+    }
 }
