@@ -51,7 +51,7 @@
                                                     <div class="col-sm-9"><input class="form-control" type="text" id="panjang" name="panjang" value="<?= $b->panjang ?>" hidden /></div>
                                                     <div class="col-sm-9"><input class="form-control" type="text" id="lebar" name="lebar" value="<?= $b->lebar ?>" hidden /></div>
                                                     <div class="col-sm-9"><input class="form-control" type="text" id="tinggi" name="tinggi" value="<?= $b->tinggi ?>" hidden /></div>
-                                                    <div class="col-sm-9"><input class="form-control" type="text" id="tinggi" name="hs_dimensi" value="<?= $b->hasil_dimensi ?>" hidden /></div>
+                                                    <div class="col-sm-9"><input class="form-control" type="text" id="hs_dimensi" name="hs_dimensi" value="<?= $b->hasil_dimensi ?>" hidden /></div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
