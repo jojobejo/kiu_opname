@@ -98,7 +98,7 @@ class C_TrackingInput extends CI_Controller
             'QTY1'      => ($stkBox * $dimensi) + $stkPcs,
             'sektor'      => $sktor_i,
             'inputer_edit'  => $user,
-            'keterangan_edit' => 'Penyesuaian Qty - By Admin'
+            'keterangan' => 'Penyesuaian Qty - By Admin'
         );
         $this->M_Tracking->inserted_opname_edit($data);
         echo json_encode(array("status" => TRUE));
