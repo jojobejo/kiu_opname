@@ -150,8 +150,11 @@
       success: function(data) {
         $('[name="id_isi"]').val(data.id_opname);
         $('[name="dimensi_isi"]').val(data.hasil_dimensi);
-        $('[name="box_isi"]').val(data.stok_box1);
-        $('[name="pcs_isi"]').val(data.stok_pcs1);
+        $('[name="kode_barang"]').val(data.kode_barang);
+        $('[name="nama_barang"]').val(data.nama_barang);
+        $('[name="sektor_i"]').val(data.sektor);
+        $('[name="kode_pending"]').val(data.kode_pending);
+        $('[name="exp_date"]').val(data.exp_date);
         $('[name="qty_isi"]').val(data.stok_box1 * data.hasil_dimensi + data.stok_pcs1);
         $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
       },

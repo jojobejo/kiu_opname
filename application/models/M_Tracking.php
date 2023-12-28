@@ -82,6 +82,11 @@ class M_Tracking extends CI_Model
         return $this->db->affected_rows();
     }
 
+    public function inserted_opname_edit($data)
+    {
+        return $this->db->insert('tb_opname', $data);
+    }
+
     public function view_tracking()
     {
         return $this->db->get('v_trackingopname')->result();

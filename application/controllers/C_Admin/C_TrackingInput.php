@@ -77,19 +77,30 @@ class C_TrackingInput extends CI_Controller
 
     public function ajax_update_opname()
     {
+
+        $kdbarang   = $this->input->post('kode_barang');
+        $kdpending  = $this->input->post('kode_pending');
+        $expdate    = $this->input->post('exp_date');
+        $nmbarang   = $this->input->post('nama_barang');
+        $sktor_i   = $this->input->post('sektor_i');
         $stkBox  = $this->input->post('box_isi');
         $stkPcs  = $this->input->post('pcs_isi');
         $user    = $this->session->userdata('username');
         $dimensi = $this->input->post('dimensi_isi');
 
         $data = array(
+            'kode_barang'   => $kdbarang,
+            'nama_barang'   => $nmbarang,
+            'kode_pending'  => $kdpending,
             'stok_box1' => $stkBox,
             'stok_pcs1' => $stkPcs,
+            'exp_date' => $expdate,
             'QTY1'      => ($stkBox * $dimensi) + $stkPcs,
+            'sektor'      => $sktor_i,
             'inputer_edit'  => $user,
-            'keterangan_edit' => 'Penyesuaian Qty'
+            'keterangan_edit' => 'Penyesuaian Qty - By Admin'
         );
-        $this->M_Tracking->update_opname_edited(array('id_opname' => $this->input->post('id_isi')), $data);
+        $this->M_Tracking->inserted_opname_edit($data);
         echo json_encode(array("status" => TRUE));
     }
 
