@@ -48,7 +48,9 @@ class StkOpname extends CI_Controller
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
             $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_master_barang . "'" . ')">
-            <i class="fa fa-solid fa-pencil-alt"></i></a>';
+            <i class="fa fa-solid fa-pencil-alt"></i></a> &nbsp;&nbsp;&nbsp;' .
+                '<a href="#" class="btn btn-success btn-sm" href="javascript:void(0)" title="Edit" onclick="addExpOpname(' . "'" . $field->id_master_barang . "'" . ')">
+            <i class="fa fa-solid fa-plus"></i></a>';
 
             $data[] = $row;
         }
@@ -70,6 +72,65 @@ class StkOpname extends CI_Controller
         echo json_encode($data);
     }
 
+    public function addOpnameDataExp()
+    {
+        $sektor         = $this->session->userdata('sektor');
+        $nmbarang       = $this->input->post('nama_isi');
+        $kdbarang       = $this->input->post('kode_isi');
+        $pending        = $this->input->post('pending_isi');
+        $box            = $this->input->post('box_isi');
+        $pcs            = $this->input->post('pcs_isi');
+        $dimensi        = $this->input->post('dimensi_isi');
+        $qty            = ($box * $dimensi) + $pcs;
+        $exdate         = $this->input->post('date_isi');
+        $panjang        = $this->input->post('panjang_isi');
+        $lebar          = $this->input->post('lebar_isi');
+        $tinggi         = $this->input->post('tinggi_isi');
+
+        $dataopname = array(
+            'kode_barang'   => $kdbarang,
+            'nama_barang'   => $nmbarang,
+            'kode_pending'  => $pending,
+            'stok_box1'     => $box,
+            'stok_pcs1'     => $pcs,
+            'exp_date'      => $exdate,
+            'QTY1'          => $qty,
+            'sektor'        => $sektor,
+            'keterangan'    => 'StockOpname'
+        );
+
+        $datazahir = array(
+            'kode_pending'  => '-',
+            'kode_barang'   => $kdbarang,
+            'nama_barang'   => $nmbarang,
+            'panjang'   => $panjang,
+            'lebar'   => $lebar,
+            'tinggi'   => $tinggi,
+            'hasil_dimensi'   => $dimensi,
+            'stok_box'     => '0',
+            'stok_pcs'     => '0',
+            'qty'          => '0',
+            'exp_date'      => $exdate,
+            'keterangan'    => 'input expired baru'
+        );
+
+        $datamasterbarang = array(
+            'kode_barang'   => $kdbarang,
+            'kode_pending'  => '-',
+            'nama_barang'   => $nmbarang,
+            'panjang'   => $panjang,
+            'lebar'   => $lebar,
+            'tinggi'   => $tinggi,
+            'hasil_dimensi'   => $dimensi,
+            'exp_date'      => $exdate,
+            'keterangan'    => 'input expired baru'
+        );
+
+        $this->M_Opname->addOpname($dataopname);
+        $this->M_Opname->addOpnameExpbz($datazahir);
+        $this->M_Opname->addOpnameExpmb($datamasterbarang);
+        redirect('u_opname');
+    }
     public function addOpnameData()
     {
         $sektor         = $this->session->userdata('sektor');

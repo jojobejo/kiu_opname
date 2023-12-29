@@ -565,4 +565,13 @@ from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC"
          FROM tb_barang_zahir 
         ");
     }
+
+    public function addOpnameExpbz($data)
+    {
+        return $this->db->insert('tb_barang_zahir', $data);
+    }
+    public function addOpnameExpmb($data)
+    {
+        return $this->db->insert('tb_master_barang', $data);
+    }
 }

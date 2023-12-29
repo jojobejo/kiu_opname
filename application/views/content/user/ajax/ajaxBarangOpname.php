@@ -66,4 +66,36 @@
             }
         });
     }
+
+    function addExpOpname(id) {
+        save_method = 'update';
+        $('#form_add_exp')[0].reset(); // reset form on modals
+        $('.form-group').removeClass('has-error'); // clear error class
+        $('.help-block').empty(); // clear error string
+
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?php echo site_url('getBarangOpname') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('[id="kode_isi"]').val(data.kode_barang);
+                $('[id="pending_isi"]').val(data.kode_pending);
+                $('[id="nama_isi"]').val(data.nama_barang);
+                $('[id="panjang_isi"]').val(data.panjang);
+                $('[id="lebar_isi"]').val(data.lebar);
+                $('[id="tinggi_isi"]').val(data.tinggi);
+                $('[id="dimensi_isi"]').val(data.hasil_dimensi);
+                $('[id="box_isi"]').val();
+                $('[id="pcs_isi"]').val();
+                $('[id="date_isi"]').val();
+                $('#modal_form_exp').modal('show'); // show bootstrap modal when complete loaded
+                $('.modal-title').text('Input Exp Data Opname'); // Set title to Bootstrap modal title
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    }
 </script>

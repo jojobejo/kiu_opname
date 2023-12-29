@@ -75,6 +75,7 @@ $route['u_list_barang'] = 'C_User/C_listBarang';
 $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['getBarangServer'] = 'C_User/StkOpname/get_list_barang_opname';
 $route['inputOpname'] = 'C_User/StkOpname/addOpnameData';
+$route['inputOpnameExp'] = 'C_User/StkOpname/addOpnameDataExp';
 $route['getBarangOpname/(:any)'] = 'C_User/StkOpname/getDataBarang/$1';
 $route['tracking_input'] = 'C_Admin/C_TrackingInput';
 $route['serverInputer'] = 'C_Admin/C_TrackingInput/getServerTracking';

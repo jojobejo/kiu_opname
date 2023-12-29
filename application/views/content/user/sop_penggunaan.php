@@ -34,15 +34,16 @@
                             </div>
                             <div class="">
                                 
-                                <p style="font-size: larger;">1. Masuk pada menu opname</p>
-                                <p style="font-size: larger;">2. Cari barang yang akan dilakukan stok opname</p>
-                                <p style="font-size: larger;">3. pastikan nama barang dan expired date sudah sesuai dengan apa yang dihitung</p>
-                                <p style="font-size: larger;">4. inputkan kuantitas yang telah dilakukan peritungan dan sesuaikan dengan satuan , jika menghitung box input hitungan stock opname pada kolom box , jika menghitung pcs input hitungan stock opname pada kolom pcs</p>
-                                <p style="font-size: larger;">5. lakukan penginputan stock opname barang hingga selesai sesuai dengan area yang telah dibatasi</p>
-                                <p style="font-size: larger;">6. lakukan pengecekan match progress pada saat setelah melakukan semua penginputan pada area yang telah ditentukan</p>
-                                <p style="font-size: larger;">7. bila terdapat tanda silang merah maka tim area wajib menghitung kembali barang tersebut</p>
-                                <p style="font-size: larger;">8. penghitungan kembali dapat dilakukan dengan cara tekan tombol tanda silang merah kemudian edit inputan tersebut sesuai dengan revisi hitungan stock opname yang telah dilakukan</p>
-                                <p style="font-size: larger;">9. bila tanda centang hijau maka data opname match</p>
+                                <p style="font-size: larger;">1. User Masuk pada menu opname terlebih dahulu</p>
+                                <p style="font-size: larger;">2. Checker melakukan pengecekan dan menginputkan barang sesuai dengan hitungan yang dilakukan oleh pelaksana </p>
+                                <p style="font-size: larger;">3. pastikan cheker melakukan input data menyesuaikan nama barang dan expired date</p>
+                                <p style="font-size: larger;">4. checker dapat melakukan penambahan data expired date pada menu opname dengan cara klik tombol hijau pada nama barang yang akan ditambahakan datanya</p>
+                                <p style="font-size: larger;">5. inputkan kuantitas yang telah dilakukan peritungan dan sesuaikan dengan satuan , jika menghitung box input hitungan stock opname pada kolom box , jika menghitung pcs input hitungan stock opname pada kolom pcs</p>
+                                <p style="font-size: larger;">6. lakukan penginputan stock opname barang hingga selesai sesuai dengan area yang telah dibatasi</p>
+                                <p style="font-size: larger;">7. lakukan pengecekan match progress pada saat setelah melakukan semua penginputan pada area yang telah ditentukan</p>
+                                <p style="font-size: larger;">8. bila terdapat tanda silang merah maka tim area wajib menghitung kembali barang tersebut</p>
+                                <p style="font-size: larger;">9. penghitungan kembali atau revisi perhitungan dapat dilakukan dengan cara tekan tombol tanda silang merah kemudian edit inputan tersebut sesuai dengan revisi hitungan stock opname yang telah dilakukan</p>
+                                <p style="font-size: larger;">10. bila tanda centang hijau maka data opname match</p>
                             </div>
                         </div>
                         <!-- ./col -->
