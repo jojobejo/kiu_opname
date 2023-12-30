@@ -28,6 +28,8 @@ class StkOpname extends CI_Controller
             if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "1") {
 
                 $data['page_title'] = 'Stok Opname';
+
+
                 // $data['opname'] = $this->M_Opname->getAllBarang();
 
                 $this->load->view('partial/user/header', $data);
@@ -45,6 +47,7 @@ class StkOpname extends CI_Controller
         $no = $_POST['start'];
         foreach ($list as $field) {
             $row = array();
+            $row[] = $field->kode_barang;
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
             $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_master_barang . "'" . ')">

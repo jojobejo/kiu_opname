@@ -18,7 +18,7 @@ class M_Opname extends CI_Model
     // START SERVERSIDE - BARANG - OPNAME
 
     var $table = 'tb_master_barang'; //nama tabel dari database
-    var $column_order = array('nama_barang', 'exp_date', 'id_master_barang',); //field yang ada di table user
+    var $column_order = array('kode_barang','nama_barang', 'exp_date', 'id_master_barang',); //field yang ada di table user
     var $column_search = array('nama_barang', 'exp_date'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order 
 

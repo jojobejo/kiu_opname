@@ -36,6 +36,7 @@
                                         <table id="getBarang" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expire Date</th>
                                                     <th>Aksi</th>
