@@ -31,7 +31,7 @@
                         <div class="form-group" hidden>
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">dimensi <span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="text" id="dimensi_isi" name="dimensi_isi" value="" readonly /></div>
+                                <div class="col-sm-8"><input class="form-control" type="number" id="dimensi_isi" name="dimensi_isi" value="" readonly /></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,13 +49,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Box<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="" /></div>
+                                <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="0" /></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Pcs<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="" /></div>
+                                <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="0" /></div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                                     <input class="form-control" type="text" id="panjang_isi" name="panjang_isi" value="" readonly />
                                     <input class="form-control" type="text" id="lebar_isi" name="lebar_isi" value="" readonly />
                                     <input class="form-control" type="text" id="tinggi_isi" name="tinggi_isi" value="" readonly />
-                                    <input class="form-control" type="text" id="dimensi_isi" name="dimensi_isi" value="" readonly />
+                                    <input class="form-control" type="number" id="dimensi_isi" name="dimensi_isi" value="" readonly />
                                 </div>
                             </div>
                         </div>
