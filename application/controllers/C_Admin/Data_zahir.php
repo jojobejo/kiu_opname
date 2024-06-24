@@ -42,7 +42,6 @@ class Data_zahir extends CI_Controller
         foreach ($list as $field) {
             $row = array();
             $row[] = $field->kode_barang;
-            $row[] = $field->kode_pending;
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
             $row[] = $field->qty;
@@ -127,7 +126,6 @@ class Data_zahir extends CI_Controller
     public function add_exp_zahir_master()
     {
         $kdbarang       = $this->input->post('kode_isi');
-        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $qty            = $this->input->post('qty_isi');
         $panjang         = $this->input->post('panjang');
@@ -140,7 +138,6 @@ class Data_zahir extends CI_Controller
 
         $data = array(
             'kode_barang'   => $kdbarang,
-            'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'qty'           => $qty,
             'panjang'           => $panjang,
@@ -153,13 +150,11 @@ class Data_zahir extends CI_Controller
 
         $datamaster = array(
             'kode_barang'       => $kdbarang,
-            'kode_pending'      => $kdpending,
             'nama_barang'       => $nmabarang,
             'panjang'           => $panjang,
             'lebar'             => $lebar,
             'tinggi'            => $tinggi,
             'hasil_dimensi'     => $hs_dimensi,
-            'exp_date'          => $exdate,
             'keterangan'        => $keterangan,
         );
 
@@ -176,19 +171,18 @@ class Data_zahir extends CI_Controller
 
         $idbarang       = $this->input->post('id_isi');
         $kdbarang       = $this->input->post('kode_isi');
-        $kdpending      = $this->input->post('pending_isi');
         $nmabarang      = $this->input->post('barang_isi');
         $qty            = $this->input->post('qty_isi');
         $exdate         = $this->input->post('date_isi');
+        $ket            = $this->input->post('ket_isi');
 
         $data = array(
 
-            'id_barang'     => $idbarang,
             'kode_barang'   => $kdbarang,
-            'kode_pending'  => $kdpending,
             'nama_barang'   => $nmabarang,
             'qty'           => $qty,
             'exp_date'      => $exdate,
+            'keterangan'      => $ket
         );
 
         $this->M_barang->editDataOpname($data, $idbarang);
@@ -202,7 +196,7 @@ class Data_zahir extends CI_Controller
 
         $this->M_barang->zahirDel($idbarang);
 
-        redirect("list_barang");
+        redirect("data_zahir");
     }
 
     public function editDataZahir($id)

@@ -9,7 +9,7 @@ class M_barang extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get('tb_barang')->result();
+        return $this->db->get('tb_barang_zahir')->result();
     }
 
     public function getidOpname()

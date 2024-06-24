@@ -46,12 +46,6 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label class="col-sm-2 " for="id_bar">Kode Pending<span class="required">*</span></label>
-                                                    <div class="col-sm-9"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="<?= $b->kode_pending ?>" /></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
                                                     <label class="col-sm-2 " for="id_bar">Kode Barang<span class="required">*</span></label>
                                                     <div class="col-sm-9"><input class="form-control" type="text" id="kode_isi" name="kode_isi" value="<?= $b->kode_barang ?>" /></div>
                                                 </div>
@@ -77,7 +71,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label class="col-sm-2 " for="id_bar">Keterangan<span class="required">*</span></label>
-                                                    <div class="col-sm-9"><input class="form-control" type="text" id="sktor_terkait_isi" name="sktor_terkait_isi" value="<?= $b->keterangan  ?>" /></div>
+                                                    <div class="col-sm-9"><input class="form-control" type="text" id="ket_isi" name="ket_isi" value="<?= $b->keterangan  ?>" /></div>
                                                 </div>
                                             </div>
                                         </div>

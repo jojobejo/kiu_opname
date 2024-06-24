@@ -38,12 +38,6 @@
                                         $newDate = date("m/d/Y", strtotime($originalDate)); ?>
                                         <div class="modal-body">
                                             <?php echo form_open_multipart('C_Admin/Data_zahir/add_exp_zahir_master'); ?>
-                                            <div class="form-group" hidden>
-                                                <div class="row">
-                                                    <label class="col-sm-2 " for="id_bar">Kode Pending<span class="required">*</span></label>
-                                                    <div class="col-sm-9"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="<?= $b->kode_pending ?>" /></div>
-                                                </div>
-                                            </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label class="col-sm-2 " for="id_bar">Kode Barang<span class="required">*</span></label>

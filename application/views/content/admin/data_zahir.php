@@ -43,7 +43,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Kode Barang</th>
-                                                    <th>Kode Pending</th>
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Qty</th>
@@ -71,7 +70,7 @@
             <strong>Copyright &copy; 2022 <a href="https://kiu.co.id">PT.KARISMA INDOARGO UNIVERSAL</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.1
+                <b>Version</b> 1.0.3
             </div>
         </footer>
 

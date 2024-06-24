@@ -32,20 +32,6 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <label class="col-sm-3 control-label text-right" for="kd_barang">Sektor<span class="required te">*</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="sektor_isi" id="sektor_isi">
-                                <option value="">-- LOKASI SEKTOR --</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Panjang Dimensi<span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="number" id="panjang_isi" name="panjang_isi" value="" /></div>
                     </div>
@@ -65,7 +51,7 @@
                 <div class="form-group">
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Expired Date<span class="required">*</span></label>
-                        <div class="col-sm-8"><input class="form-control" type="date" id="date_isi" name="date_isi" value="" /></div>
+                        <div class="col-sm-8"><input class="form-control" type="text" id="date_isi" name="date_isi" value="" /></div>
                     </div>
                 </div>
             </div>
@@ -109,20 +95,6 @@
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama Barang <span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="text" id="barang_isi" name="barang_isi" value="<?= $b->nama_barang?>" /></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <label class="col-sm-3 control-label text-right" for="kd_barang">Sektor<span class="required te">*</span></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="sektor_isi" id="sektor_isi">
-                                <option value="<?= $b->sektor?>"><?= $b->sektor?></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">
