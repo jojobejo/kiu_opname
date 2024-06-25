@@ -47,20 +47,16 @@
                                                     <th>Kode Pending</th>
                                                     <th>Kode Barang</th>
                                                     <th>Nama Barang</th>
-                                                    <th>Expired Date</th>
                                                     <th>Qty</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <?php foreach ($barang as $b) : 
-                                                        $originalDate = $b->exp_date;
-                                                        $newDate = date("d/m/Y", strtotime($originalDate)); ?>
+                                                    <?php foreach ($barang as $b) : ?>
                                                         <td><?= $b->kode_pending ?></td>
                                                         <td><?= $b->kode_barang ?></td>
                                                         <td><?= $b->nama_barang ?></td>
-                                                        <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->qty ?></td>
                                                         <td>
                                                             <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edit<?= $b->id_pending ?>">

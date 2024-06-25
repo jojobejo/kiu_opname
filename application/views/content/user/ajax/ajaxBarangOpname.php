@@ -49,9 +49,8 @@
             dataType: "JSON",
             success: function(data) {
 
-                $('[id="id_isi"]').val(data.id_master_barang);
+                $('[id="id_isi"]').val(data.id_barang);
                 $('[id="kode_isi"]').val(data.kode_barang);
-                $('[id="pending_isi"]').val(data.kode_pending);
                 $('[id="dimensi_isi"]').val(data.hasil_dimensi);
                 $('[id="nama_isi"]').val(data.nama_barang);
                 $('[id="box_isi"]').val();

@@ -24,12 +24,6 @@
                         </div>
                         <div class="form-group" hidden>
                             <div class="row">
-                                <label class="col-sm-3 control-label text-right" for="id_bar">Kode Pending <span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="text" id="pending_isi" name="pending_isi" value="" readonly /></div>
-                            </div>
-                        </div>
-                        <div class="form-group" hidden>
-                            <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">dimensi <span class="required">*</span></label>
                                 <div class="col-sm-8"><input class="form-control" type="number" id="dimensi_isi" name="dimensi_isi" value="" readonly /></div>
                             </div>

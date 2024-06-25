@@ -49,9 +49,9 @@ class StkOpname extends CI_Controller
             $row = array();
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
-            $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_master_barang . "'" . ')">
+            $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="addOpname(' . "'" . $field->id_barang . "'" . ')">
             <i class="fa fa-solid fa-pencil-alt"></i></a> &nbsp;&nbsp;&nbsp;' .
-            '<a href="#" class="btn btn-success btn-sm" href="javascript:void(0)" title="Edit" onclick="addExpOpname(' . "'" . $field->id_master_barang . "'" . ')">
+            '<a href="#" class="btn btn-success btn-sm" href="javascript:void(0)" title="Edit" onclick="addExpOpname(' . "'" . $field->id_barang . "'" . ')">
             <i class="fa fa-solid fa-plus"></i></a>';
             $row[] = $field->kode_barang;
 
@@ -139,7 +139,6 @@ class StkOpname extends CI_Controller
         $sektor         = $this->session->userdata('sektor');
         $nmbarang       = $this->input->post('nama_isi');
         $kdbarang       = $this->input->post('kode_isi');
-        $pending        = $this->input->post('pending_isi');
         $box            = $this->input->post('box_isi');
         $pcs            = $this->input->post('pcs_isi');
         $dimensi        = $this->input->post('dimensi_isi');
@@ -149,7 +148,6 @@ class StkOpname extends CI_Controller
         $data = array(
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmbarang,
-            'kode_pending'  => $pending,
             'stok_box1'     => $box,
             'stok_pcs1'     => $pcs,
             'exp_date'      => $exdate,
