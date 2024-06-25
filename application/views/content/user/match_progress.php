@@ -63,7 +63,7 @@
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->stok_box1 ?></td>
-                                                        <td><?= $b->stk_pcs ?></td>
+                                                        <td><?= $b->stok_pcs1 ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
