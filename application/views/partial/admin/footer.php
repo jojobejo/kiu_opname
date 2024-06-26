@@ -102,8 +102,8 @@
     $('#btnSave').attr('disabled', true); //set button disable 
     var url;
 
-    if (save_method == 'add') {
-      url = "<?php echo site_url('person/ajax_add') ?>";
+    if (save_method == 'update') {
+      url = "<?php echo site_url('opnameEdited') ?>";
     } else {
       url = "<?php echo site_url('opnameEdited') ?>";
     }
@@ -158,8 +158,9 @@
         $('[name="qty_isi"]').val(data.stok_box1 * data.hasil_dimensi + data.stok_pcs1);
         $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
       },
-      error: function(jqXHR, textStatus, errorThrown) {
-        alert('Error get data from ajax');
+      error: function(xhr, status, error) {
+        var err = eval("(" + xhr.responseText + ")");
+        alert(err.Message);
       }
     });
   }

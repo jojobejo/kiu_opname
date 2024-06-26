@@ -43,7 +43,6 @@ class C_TrackingInput extends CI_Controller
             $row = array();
             $row[] = $field->id_opname;
             $row[] = $field->kode_barang;
-            $row[] = $field->kode_pending;
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
             $row[] = $field->stok_box1;
@@ -77,9 +76,8 @@ class C_TrackingInput extends CI_Controller
 
     public function ajax_update_opname()
     {
-
+        $idopname   = $this->input->post('id_isi');
         $kdbarang   = $this->input->post('kode_barang');
-        $kdpending  = $this->input->post('kode_pending');
         $expdate    = $this->input->post('exp_date');
         $nmbarang   = $this->input->post('nama_barang');
         $sktor_i   = $this->input->post('sektor_i');
@@ -91,7 +89,6 @@ class C_TrackingInput extends CI_Controller
         $data = array(
             'kode_barang'   => $kdbarang,
             'nama_barang'   => $nmbarang,
-            'kode_pending'  => $kdpending,
             'stok_box1' => $stkBox,
             'stok_pcs1' => $stkPcs,
             'exp_date' => $expdate,
@@ -100,7 +97,7 @@ class C_TrackingInput extends CI_Controller
             'inputer_edit'  => $user,
             'keterangan' => 'Penyesuaian Qty - By Admin'
         );
-        $this->M_Tracking->inserted_opname_edit($data);
+        $this->M_Tracking->update_opname_edited($idopname, $data);
         echo json_encode(array("status" => TRUE));
     }
 

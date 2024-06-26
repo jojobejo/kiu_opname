@@ -22,8 +22,6 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/admin/modal/modalTrackingInput') ?>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -31,32 +29,34 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Tracking Input</h3>
+                                    <h3 class="card-title">Data barang Zahir</h3>
+                                </div>
+                                <div>
+                                    <a href="<?= base_url('add_data_zahir') ?>" type="button" class="btn btn-primary m-2 ml-3">
+                                        <i class="fas fa-plus"></i>
+                                        Tambah Data Zahir
+                                    </a>
+
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="dbzahir" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Kode Barang</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Expired Date</th>
+                                                    <th>Qty</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
 
-                                <div class="card-body">
-                                    <a type="button" class="btn btn-success" href="<?= base_url('exportTrackingInputer') ?>">
-                                        <i class="fas fa-file-excel"></i>&nbsp;
-                                        Export Data To Excel
-                                    </a>
-                                    <table id="dbtracking" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>Kode Barang</th>
-                                                <th>Nama Barang</th>
-                                                <th>Expired Date</th>
-                                                <th>Qty Box</th>
-                                                <th>Qty Pcs</th>
-                                                <th>Qty Besar</th>
-                                                <th>Sektor Inputer</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
             <strong>Copyright &copy; 2022 <a href="https://kiu.co.id">PT.KARISMA INDOARGO UNIVERSAL</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.1
+                <b>Version</b> 1.0.3
             </div>
         </footer>
 
