@@ -219,13 +219,15 @@ class M_Opname extends CI_Model
         x.qtyZahir,
         x.qtyPending,
         (x.qtyZahir+x.qtyPending) AS saldoQty,
-        x.sumqtyFisik,
+        x.qtyFisik-(x.qtyZahir+x.qtyPending) AS qtyHasilOpname,
         x.qtyFisik,
-        x.sumqtyFisik-(x.qtyZahir+x.qtyPending) AS realQty,
         x.stok_box1,
         x.stok_pcs1,
+        FLOOR((x.qtyZahir+x.qtyPending)/x.hasil_dimensi) AS box_real,
+        (x.qtyZahir+x.qtyPending)- (FLOOR((x.qtyZahir+x.qtyPending)/x.hasil_dimensi)*x.hasil_dimensi) AS pcs_real,
+        x.sektor,
         x.hasil_dimensi,
-        (CASE WHEN x.sumqtyFisik-(x.qtyZahir+x.qtyPending) = 0 THEN 'match' ELSE 'not match' END) AS hasil
+        (CASE WHEN x.qtyFisik - COALESCE(x.qtyPending,0) = x.qtyZahir THEN 'match' ELSE 'not match' END) AS hasil
         FROM
         (Select 
         a.id_opname,
@@ -234,15 +236,16 @@ class M_Opname extends CI_Model
         a.exp_date,
         a.stok_box1,
         a.stok_pcs1,
-        a.QTY1 AS qtyFisik,
-        a.sektor,
-(SELECT SUM(h.stok_pcs1) FROM tb_opname h WHERE h.kode_barang = a.kode_barang AND h.exp_date = a.exp_date) as stk_pcs,         
+        a.QTY1,
+        a.sektor,  
 (SELECT SUM(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date) as qtyZahir,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang group by c.nama_barang) as qtyPending,
-(SELECT SUM(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as sumqtyFisik,
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qtyPending,
+(SELECT SUM(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qtyFisik,
+(SELECT d.stok_box FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS box_zahir,
+(SELECT d.stok_pcs FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS pcs_zahir,
 (SELECT d.hasil_dimensi FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS hasil_dimensi
          
-from tb_opname a where a.sektor = '$sektor') as x  ORDER BY `x`.`nama_barang` ASC");
+from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC");
     }
 
     public function prsenUser($sektor)
@@ -285,13 +288,13 @@ from tb_opname a where a.sektor = '$sektor') as x  ORDER BY `x`.`nama_barang` AS
     {
         return $this->db->query("SELECT 
 		COUNT(x.id_barang) as total,
-        COUNT(CASE WHEN (x.qtyZahir + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN COALESCE(x.qtyOpname,0)-(x.qtyZahir + COALESCE(x.qtyPending,0)) = 0 then 1 ELSE NULL END) as 'match',
         COUNT(CASE WHEN (x.qtyZahir + COALESCE(x.qtyPending,0))-COALESCE(x.qtyOpname,0) != 0 then 1 ELSE NULL END) as 'not'
                 FROM
                 (Select 
                 a.id_barang,
         (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang) as qtyZahir,     
-        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.nama_barang = a.nama_barang group by c.kode_barang) as qtyPending,
+        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qtyPending,
         (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qtyOpname
                 from tb_barang_zahir a  group by a.kode_barang,a.nama_barang,a.exp_date) as x  
                 ORDER BY x.id_barang");
