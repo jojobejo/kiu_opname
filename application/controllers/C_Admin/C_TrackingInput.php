@@ -50,7 +50,8 @@ class C_TrackingInput extends CI_Controller
             $row[] = $field->QTY1;
             $row[] = $field->sektor;
             if ($user == 'superadmin') {
-                $row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_opname(' . "'" . $field->id_opname . "'" . ')"><i class="fa fa-solid fa-pencil-alt"></i></a>';
+                $row[] = '<a href="#" class="btn btn-warning btn-sm" href="javascript:void(0)" title="Edit" onclick="editopnameuser(' . "'" . $field->id_opname . "'" . ')">
+            <i class="fa fa-solid fa-pencil-alt"></i></a>';
             } else {
                 $row[] = '-';
             }
@@ -71,6 +72,7 @@ class C_TrackingInput extends CI_Controller
     public function opname_edit($id)
     {
         $data = $this->M_Tracking->get_by_id($id);
+        
         echo json_encode($data);
     }
 
@@ -97,8 +99,8 @@ class C_TrackingInput extends CI_Controller
             'inputer_edit'  => $user,
             'keterangan' => 'Penyesuaian Qty - By Admin'
         );
-        $this->M_Tracking->update_opname_edited($idopname, $data);
-        echo json_encode(array("status" => TRUE));
+        $this->M_Tracking->editInputOpname($data, $idopname);
+        redirect('tracking_input');
     }
 
     public function exportInputer()

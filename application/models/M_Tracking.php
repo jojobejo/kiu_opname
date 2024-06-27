@@ -7,7 +7,7 @@ class M_Tracking extends CI_Model
 {
     //ServerSide-tb-opname
     var $table = 'v_trackingopname'; //nama tabel dari database
-    var $column_order = array('id_opname', 'kode_barang','nama_barang', 'stok_box1', 'stok_pcs1', 'QTY1', 'sektor'); //field yang ada di table user
+    var $column_order = array('id_opname', 'kode_barang', 'nama_barang', 'stok_box1', 'stok_pcs1', 'QTY1', 'sektor'); //field yang ada di table user
     var $column_search = array('nama_barang', 'exp_date', 'sektor'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order
 
@@ -78,7 +78,7 @@ class M_Tracking extends CI_Model
 
     public function update_opname_edited($where, $data)
     {
-        $this->db->update('tb_opname', $data, $where);
+        $this->db->update('tb_opname', $where, $data);
         return $this->db->affected_rows();
     }
 
@@ -107,5 +107,20 @@ class M_Tracking extends CI_Model
     (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qtyOpname
             from tb_barang_zahir a  group by a.kode_barang,a.nama_barang,a.exp_date) as x  
             ORDER BY x.id_barang");
+    }
+
+    public function editInputOpname($data, $idopname)
+    {
+        $this->db->where('id_opname', $idopname);
+        return $this->db->update('tb_opname', $data);
+    }
+
+    public function getBarangById($id)
+    {
+        $this->db->from('tb_opname');
+        $this->db->where('id_opname', $id);
+        $query = $this->db->get();
+
+        return $query->row();
     }
 }

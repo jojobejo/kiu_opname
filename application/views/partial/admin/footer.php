@@ -161,6 +161,39 @@
     });
   }
 
+  function editopnameuser(id) {
+    save_method = 'update';
+    $('#form_edit_opname')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+
+    //Ajax Load data from ajax
+    $.ajax({
+      url: "<?php echo site_url('editOpname') ?>/" + id,
+      type: "GET",
+      dataType: "JSON",
+      success: function(data) {
+
+        $('[name="id_isi"]').val(data.id_opname);
+        $('[name="dimensi_isi"]').val(data.hasil_dimensi);
+        $('[name="kode_barang"]').val(data.kode_barang);
+        $('[name="nama_barang"]').val(data.nama_barang);
+        $('[name="sektor_i"]').val(data.sektor);
+        $('[name="kode_pending"]').val(data.kode_pending);
+        $('[name="exp_date"]').val(data.exp_date);
+        $('[name="box_isi"]').val(data.stok_box1);
+        $('[name="pcs_isi"]').val(data.stok_pcs1);
+        $('[name="qty_isi"]').val((data.stok_box1 * data.hasil_dimensi) + data.stok_pcs1);
+        $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+        $('.modal-title').text('Input Data Opname'); // Set title to Bootstrap modal title
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error get data from ajax');
+      }
+    });
+  }
+
   function edit_opname(id) {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
