@@ -74,8 +74,8 @@
                 <h3 class="modal-title" style="text-align: center;">Input Epired Date Barang</h3>
             </div>
             <div class="modal-body form">
-                <form action="<?= base_url('inputOpnameExp') ?>" method="POST" id="form_add_exp" class="form-horizontal">
-                    <?php echo form_open_multipart('inputOpnameExp'); ?>
+                <form action="<?= base_url('addbarangReq') ?>" method="POST" id="form_add_exp" class="form-horizontal">
+                    <?php echo form_open_multipart('addbarangReq'); ?>
                     <input type="hidden" value="" name="id" />
                     <div class="form-body">
 
@@ -117,13 +117,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Box<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="" /></div>
+                                <div class="col-sm-8"><input class="form-control" type="number" id="box_isi" name="box_isi" value="0" /></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-sm-3 control-label text-right" for="id_bar">Pcs<span class="required">*</span></label>
-                                <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="" /></div>
+                                <div class="col-sm-8"><input class="form-control" type="number" id="pcs_isi" name="pcs_isi" value="0" /></div>
                             </div>
                         </div>
                     </div>

@@ -209,6 +209,7 @@ class M_Opname extends CI_Model
         return $this->db->update('tb_opname', $data);
     }
 
+
     public function getMatchUser($sektor)
     {
         return $this->db->query("SELECT 
@@ -573,5 +574,19 @@ from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC"
     public function addOpnameExpmb($data)
     {
         return $this->db->insert('tb_master_barang', $data);
+    }
+    public function addReqExp($data)
+    {
+        return $this->db->insert('tb_rq_exp_tmp', $data);
+    }
+
+    function barangreq($where)
+    {
+        $this->db->select('*');
+        $this->db->FROM('tb_rq_exp_tmp');
+        $this->db->where('tb_rq_exp_tmp.sektor', $where);
+
+        $query = $this->db->get();
+        return $query;
     }
 }

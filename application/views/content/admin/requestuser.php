@@ -34,7 +34,7 @@
                                 <div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table id="a" class="table table-bordered table-striped">
+                                        <table id="dbarangreq" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Kode Barang</th>
@@ -47,6 +47,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                             </tbody>
                                         </table>
                                     </div>

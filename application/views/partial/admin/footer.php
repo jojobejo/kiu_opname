@@ -49,6 +49,7 @@
 
     var dbzahir;
     var dbtracking;
+    var dbarangreq;
 
     $("#example1").DataTable({
       "responsive": true,
@@ -75,6 +76,26 @@
       }, ],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
+    dbarangreq = $('#dbarangreq').DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "processing": true,
+      "serverSide": true,
+      "order": [],
+
+
+      "ajax": {
+        "url": "<?php echo site_url('serverRequestExp') ?>",
+        "type": "POST"
+      },
+
+      "columnDefs": [{
+        "targets": [0],
+        "orderable": false,
+      }, ],
+    }).column(0).visible(false).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
     dbtracking = $('#dbtracking').DataTable({
       "responsive": true,
       "lengthChange": false,
@@ -94,6 +115,10 @@
         "orderable": false,
       }, ],
     }).column(0).visible(false).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    $('.confirmadd').on('click', function() {
+      return confirm('Are you sure?');
+    });
 
   });
 
@@ -168,6 +193,45 @@
   function reload_table() {
     table.ajax.reload(null, false); //reload datatable ajax 
   }
+
+  $("#selesaink").on('click', function() {
+    var idreq = $("#po_isi").val();
+
+    if (jml == 0) {
+      alert('tidak ada transaksi');
+    } else {
+      if (nopo == "") {
+        alert('Nomor PO tidak terisi');
+      } else if (tgl == "") {
+        alert('tgl order belum terisi');
+      } else {
+        $.ajax({
+          url: "<?= base_url('rekam_po_nk') ?>",
+          type: "POST",
+          data: {
+            kdpo: kdpo,
+            nopo: nopo,
+            nm_user: nm_user,
+            tgl: tgl,
+            departemen: departemen,
+            tujuan: tujuan,
+            jml: jml,
+            harga: harga
+          },
+          dataType: "JSON",
+          cache: false,
+          success: function(data) {
+            if (data.msg == "success") {
+              alert('PO telah di simpan');
+              location.reload(true);
+            } else {
+              alert('ada kesalahan data')
+            }
+          }
+        })
+      }
+    }
+  })
 </script>
 
 </body>
