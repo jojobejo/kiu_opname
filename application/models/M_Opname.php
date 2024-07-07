@@ -212,41 +212,112 @@ class M_Opname extends CI_Model
 
     public function getMatchUser($sektor)
     {
-        return $this->db->query("SELECT 
-		x.id_opname,
-        x.kode_barang,
-        x.nama_barang,
-        x.exp_date,
-        x.qtyZahir,
-        x.qtyPending,
-        (x.qtyZahir+x.qtyPending) AS saldoQty,
-        x.qtyFisik-(x.qtyZahir+x.qtyPending) AS qtyHasilOpname,
-        x.qtyFisik,
-        x.stok_box1,
-        x.stok_pcs1,
-        FLOOR((x.qtyZahir+x.qtyPending)/x.hasil_dimensi) AS box_real,
-        (x.qtyZahir+x.qtyPending)- (FLOOR((x.qtyZahir+x.qtyPending)/x.hasil_dimensi)*x.hasil_dimensi) AS pcs_real,
-        x.sektor,
-        x.hasil_dimensi,
-        (CASE WHEN x.qtyFisik - COALESCE(x.qtyPending,0) = x.qtyZahir THEN 'match' ELSE 'not match' END) AS hasil
-        FROM
-        (Select 
-        a.id_opname,
-        a.kode_barang,
-        a.nama_barang,
-        a.exp_date,
-        a.stok_box1,
-        a.stok_pcs1,
-        a.QTY1,
-        a.sektor,  
-(SELECT SUM(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date) as qtyZahir,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qtyPending,
-(SELECT SUM(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qtyFisik,
-(SELECT d.stok_box FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS box_zahir,
-(SELECT d.stok_pcs FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS pcs_zahir,
-(SELECT d.hasil_dimensi FROM tb_barang_zahir d WHERE d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date GROUP BY d.nama_barang) AS hasil_dimensi
-         
-from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC");
+        return $this->db->query("SELECT
+    x.id_opname,
+    x.kode_barang,
+    x.nama_barang,
+    x.exp_date,
+    x.qtyZahir,
+    COALESCE(x.qtyPending,0) AS qtyPending,
+    COALESCE((x.qtyZahir + x.qtyPending),0) AS saldoQty,
+    COALESCE(x.qtyFisik -(x.qtyZahir + x.qtyPending),0) AS qtyHasilOpname,
+    x.qtyFisik,
+    x.stok_box1,
+    x.stok_pcs1,
+    COALESCE(FLOOR((x.qtyZahir + x.qtyPending) / x.hasil_dimensi),0) AS box_real,
+    COALESCE((x.qtyZahir + x.qtyPending) - (
+        FLOOR((x.qtyZahir + x.qtyPending) / x.hasil_dimensi) * x.hasil_dimensi
+    ),0) AS pcs_real,
+    x.sektor,
+    x.hasil_dimensi,
+    (
+        CASE
+            WHEN x.qtyFisik - COALESCE(x.qtyPending, 0) = x.qtyZahir THEN 'match'
+            ELSE 'not match'
+        END
+    ) AS hasil
+FROM
+    (
+        Select
+            a.id_opname,
+            a.kode_barang,
+            a.nama_barang,
+            a.exp_date,
+            a.stok_box1,
+            a.stok_pcs1,
+            a.QTY1,
+            a.sektor,
+            (
+                SELECT
+                    SUM(g.qty)
+                from
+                    tb_barang_zahir g
+                where
+                    g.kode_barang = a.kode_barang
+                    and g.exp_date = a.exp_date
+            ) as qtyZahir,
+            (
+                SELECT
+                    sum(c.qty)
+                from
+                    tb_pending c
+                where
+                    c.kode_barang = a.kode_barang
+                    and c.exp_date = a.exp_date
+                group by
+                    c.nama_barang
+            ) as qtyPending,
+            (
+                SELECT
+                    SUM(b.QTY1)
+                from
+                    tb_opname b
+                where
+                    b.kode_barang = a.kode_barang
+                    AND b.exp_date = a.exp_date
+                group by
+                    b.nama_barang
+            ) as qtyFisik,
+            (
+                SELECT
+                    d.stok_box
+                FROM
+                    tb_barang_zahir d
+                WHERE
+                    d.kode_barang = a.kode_barang
+                    AND d.exp_date = a.exp_date
+                GROUP BY
+                    d.nama_barang
+            ) AS box_zahir,
+            (
+                SELECT
+                    d.stok_pcs
+                FROM
+                    tb_barang_zahir d
+                WHERE
+                    d.kode_barang = a.kode_barang
+                    AND d.exp_date = a.exp_date
+                GROUP BY
+                    d.nama_barang
+            ) AS pcs_zahir,
+            (
+                SELECT
+                    d.hasil_dimensi
+                FROM
+                    tb_barang_zahir d
+                WHERE
+                    d.kode_barang = a.kode_barang
+                    AND d.exp_date = a.exp_date
+                GROUP BY
+                    d.nama_barang
+            ) AS hasil_dimensi
+        from
+            tb_opname a
+        where
+            a.sektor = $sektor
+    ) as x
+ORDER BY
+    `x`.`nama_barang` ASC");
     }
 
     public function prsenUser($sektor)
