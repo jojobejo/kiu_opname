@@ -156,7 +156,7 @@ class C_TrackingInput extends CI_Controller
         // Buat header tabel nya pada baris ke 3
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO"); // Set kolom A3 dengan tulisan "NO"
         $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE BARANG"); // Set kolom B3 dengan tulisan "NIS"
-        $excel->setActiveSheetIndex(0)->setCellValue('C3', "KODE PENDING"); // Set kolom B3 dengan tulisan "NIS"
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "ID"); // Set kolom B3 dengan tulisan "NIS"
         $excel->setActiveSheetIndex(0)->setCellValue('D3', "NAMA BARANG"); // Set kolom E3 dengan tulisan "ALAMAT"
         $excel->setActiveSheetIndex(0)->setCellValue('E3', "EXP DATE"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
         $excel->setActiveSheetIndex(0)->setCellValue('F3', "QTY BOX"); // Set kolom E3 dengan tulisan "ALAMAT"
@@ -185,7 +185,7 @@ class C_TrackingInput extends CI_Controller
         foreach ($siswa as $data) { // Lakukan looping pada variabel siswa
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kode_barang);
-            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->kode_pending);
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->id_opname);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->nama_barang);
             $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->exp_date);
             $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->stok_box1);
