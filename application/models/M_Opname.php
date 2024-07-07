@@ -501,7 +501,7 @@ from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC"
         a.kode_barang,
         a.nama_barang,
         sum(a.qty) as qtyZahir,
-        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.kode_pending = a.kode_pending group by c.kode_barang) as qtyPending,
+        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.nama_barang = a.nama_barang group by c.kode_barang) as qtyPending,
         (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qtyOpname 
         from tb_barang_zahir a group by a.kode_barang) as x  
         ORDER BY x.id_barang  ASC 
