@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Reqexpdate extends CI_Model
 {
     var $table = 'v_requestexp'; //nama tabel dari database
-    var $column_order = array('kode_barang', 'nama_barang', 'exp_date', 'qty', 'stok_box', 'stok_pcs', 'id_tmp_req'); //field yang ada di table user
+    var $column_order = array('kode_barang', 'nama_barang', 'exp_date', 'qty', 'stok_box', 'stok_pcs', 'sektor', 'id_tmp_req'); //field yang ada di table user
     var $column_search = array('nama_barang', 'kode_barang'); //field yang diizin untuk pencarian 
     var $order = array('nama_barang' => 'asc'); // default order
 

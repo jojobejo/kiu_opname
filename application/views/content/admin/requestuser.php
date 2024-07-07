@@ -43,6 +43,7 @@
                                                     <th>Qty</th>
                                                     <th>stok_box</th>
                                                     <th>stok_pcs</th>
+                                                    <th>sektor</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>

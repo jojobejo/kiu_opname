@@ -77,6 +77,7 @@ class C_requestbarang extends CI_Controller
             $row[] = $field->qty;
             $row[] = $field->stok_box;
             $row[] = $field->stok_pcs;
+            $row[] = $field->sektor;
             $row[] =
                 '<a href="' . base_url('accrequest/' . $field->id_tmp_req . '') . '" id="confirms" class="btn btn-success btn-sm"><i class="fa fa-solid fa-plus"></i></a>';
             $data[] = $row;

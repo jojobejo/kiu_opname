@@ -144,9 +144,7 @@ from
             `a`.`kode_barang`
     ) `x`
 order by
-    `x`.`id_barang` 
-    
-    ----------------------------------------- VIEW LIST MATCH ALL BARANG --------------------------------------------------
+    `x`.`id_barang` ----------------------------------------- VIEW LIST MATCH ALL BARANG --------------------------------------------------
     CREATE VIEW v_trackingopname AS
 select
     `a`.`id_opname` AS `id_opname`,
@@ -168,3 +166,25 @@ from
             and `b`.`exp_date` = `a`.`exp_date`
         )
     )
+
+    -- VIEW REQUEST OPNAME
+CREATE VIEW v_requestexp AS
+select
+    `a`.`id_tmp_req` AS `id_tmp_req`,
+    `a`.`kode_barang` AS `kode_barang`,
+    `a`.`nama_barang` AS `nama_barang`,
+    `a`.`exp_date` AS `exp_date`,
+    `a`.`panjang` AS `panjang`,
+    `a`.`lebar` AS `lebar`,
+    `a`.`tinggi` AS `tinggi`,
+    `a`.`hasil_dimensi` AS `hasil_dimensi`,
+    `a`.`qty` AS `qty`,
+    `a`.`stok_box` AS `stok_box`,
+    `a`.`stok_pcs` AS `stok_pcs`,
+    `a`.`keterangan` AS `keterangan`,
+    `a`.`sektor` AS `sektor`,
+    `a`.`status` AS `status`
+from
+    `kiucoid_stockopname`.`tb_rq_exp_tmp` `a`
+where
+    `a`.`status` = '1'
