@@ -325,7 +325,7 @@ from tb_opname a where a.sektor = $sektor) as x  ORDER BY `x`.`nama_barang` ASC"
         a.stok_box,
         a.stok_pcs,
 (SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang) as qtyZahir,     
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.kode_pending = a.kode_pending group by c.kode_barang) as qtyPending,
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.nama_barang = a.nama_barang group by c.kode_barang) as qtyPending,
 (SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qtyOpname,
 (SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang ) as stkbox,
 (SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang ) as stkpcs,
