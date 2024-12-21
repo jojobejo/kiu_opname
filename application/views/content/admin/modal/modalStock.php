@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Stock Barang<span class="required">*</span></label>
-                        <div class="col-sm-8"><input class="form-control" type="number" id="stok_isi" name="stok_isi" value="" placeholder="input jumlah stok"/></div>
+                        <div class="col-sm-8"><input class="form-control" type="number" id="stok_isi" name="stok_isi" value="" placeholder="input jumlah stok" /></div>
                     </div>
                 </div>
             </div>

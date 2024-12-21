@@ -49,6 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
 $route['default_controller'] = 'login';
 $route['list_barang'] = 'C_Admin/ListBarang';
 $route['admin'] = 'C_Admin/admin';
@@ -87,5 +88,6 @@ $route['barangReq'] = 'C_Admin/C_requestbarang';
 $route['addbarangReq'] = 'C_Admin/C_requestbarang/addtmpreq';
 $route['serverRequestExp'] = 'C_Admin/C_requestbarang/serverRequestExp';
 $route['accrequest/(:any)'] = 'C_Admin/C_requestbarang/accrequest/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

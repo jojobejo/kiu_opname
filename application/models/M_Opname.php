@@ -228,7 +228,7 @@ class M_Opname extends CI_Model
     COALESCE((x.qtyZahir + x.qtyPending) - (
         FLOOR((x.qtyZahir + x.qtyPending) / x.hasil_dimensi) * x.hasil_dimensi
     ),0) AS pcs_real,
-    x.sektor,
+    x.sektor,   
     x.hasil_dimensi,
     (
         CASE
@@ -437,7 +437,7 @@ ORDER BY
     //     (SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.kode_barang ) as salqty
     //     from tb_barang_zahir a group by a.nama_barang,a.exp_date) as x  
     //     WHERE x.sektor = '1'
-    //     ORDER BY x.id_barang  ASC 
+    //     ORDER BY x.id_barang  ASC    
 
 
     // CODE BENAR , KONSEP SALAH ->
