@@ -31,9 +31,7 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <?php foreach ($selisihFaktur as $p) : ?>
-                                        <h3><?= $p->total ?></h3>
-                                    <?php endforeach; ?>
+                                    <h3>0</h3>
                                     <p>Jumlah Barang</p>
                                 </div>
                                 <div class="icon">
@@ -47,17 +45,17 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <?php
-                                    foreach ($selisihFaktur as $s) {
-                                        $match = $s->match;
-                                        $not   = $s->not;
-                                        $total = $s->total;
+                                    <!-- <?php
+                                            foreach ($selisihFaktur as $s) {
+                                                $match = $s->match;
+                                                $not   = $s->not;
+                                                $total = $s->total;
 
-                                        $vM = ($match / $total) * 100;
-                                        $vN = ($not / $total) * 100;
-                                        $hM =  round((float)$vM, 2);
-                                    } ?>
-                                    <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
+                                                $vM = ($match / $total) * 100;
+                                                $vN = ($not / $total) * 100;
+                                                $hM =  round((float)$vM, 2);
+                                            } ?> -->
+                                    <!-- <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3> -->
                                     <p>Persentase Kecocokan</p>
                                 </div>
                                 <div class="icon">
@@ -70,17 +68,17 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <?php
-                                    foreach ($selisihFaktur as $s) {
-                                        $match = $s->match;
-                                        $not   = $s->not;
-                                        $total = $s->total;
+                                    <!-- <?php
+                                            foreach ($selisihFaktur as $s) {
+                                                $match = $s->match;
+                                                $not   = $s->not;
+                                                $total = $s->total;
 
-                                        $vM = ($match / $total) * 100;
-                                        $vN = ($not / $total) * 100;
-                                        $hM =  round((float)$vN, 2);
-                                    } ?>
-                                    <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3>
+                                                $vM = ($match / $total) * 100;
+                                                $vN = ($not / $total) * 100;
+                                                $hM =  round((float)$vN, 2);
+                                            } ?> -->
+                                    <!-- <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3> -->
                                     <p>Persentase Tidak Cocok</p>
                                 </div>
                                 <div class="icon">
@@ -93,12 +91,12 @@
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
                             <div class="small-box bg-warning">
-                                <?php foreach ($totalUser as $s) {
-                                    $total = $s->total;
-                                    $hM =  round((float)$total);
-                                    } ?>
+                                <!-- <?php foreach ($totalUser as $s) {
+                                            $total = $s->total;
+                                            $hM =  round((float)$total);
+                                        } ?> -->
                                 <div class="inner">
-                                    <h3><?= json_encode($hM)?></h3>
+                                    <!-- <h3><?= json_encode($hM) ?></h3> -->
                                     <p>Pengguna</p>
                                 </div>
                                 <div class="icon">

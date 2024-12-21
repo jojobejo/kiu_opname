@@ -21,11 +21,11 @@ class Admin extends CI_Controller
         }
 
         $data['page_title'] = 'Dashboard Admin'; 
-        $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
-        $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
-        $data['totalUser'] = $this->M_Opname->countUser()->result();
-        $data['selisihFaktur'] = $this->M_Opname->countfakturPending()->result();
-        $data['listPending']   = $this->M_Opname->listCountByPending()->result();
+        // $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
+        // $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
+        // $data['totalUser'] = $this->M_Opname->countUser()->result();
+        // $data['selisihFaktur'] = $this->M_Opname->countfakturPending()->result();
+        // $data['listPending']   = $this->M_Opname->listCountByPending()->result();
 
         $this->load->view('partial/admin/header',$data);
         $this->load->view('content/admin/dashboard', $data);

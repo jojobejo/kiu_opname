@@ -25,29 +25,15 @@ class StkOpname extends CI_Controller
             redirect("login");
         } else {
 
-            if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "1") {
+            $sektor = $this->session->userdata('sektor');
+            $data['page_title']         = 'Stok Opname';
 
-                $sektor = $this->session->userdata('sektor');
+            $data['get_nama_barang']    = $this->M_Opname->getmasterbarang();
 
-                $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
-                $data['opname'] = $this->M_Opname->getHitungOpname($sektor)->result();
-
-                $data['page_title'] = 'Stok Opname'; 
-
-                $this->load->view('partial/user/header',$data);
-                $this->load->view('content/user/stock_opname1', $data);
-                $this->load->view('partial/user/footer');
-                $this->load->view('content/user/ajax/selectbarang');
-                
-            } elseif ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user" ||  $this->session->userdata("team_opname") == "2") {
-
-                $sektor = $this->session->userdata('sektor');
-                $data['barang'] = $this->M_Opname->getOpname($sektor)->result();
-                $this->load->view('partial/user/header',$data);
-                $this->load->view('content/user/stock_opname2', $data);
-                $this->load->view('partial/user/footer');
-                $this->load->view('content/user/ajax/selectbarang');
-            }
+            $this->load->view('partial/user/header', $data);
+            $this->load->view('content/user/stock_opname1', $data);
+            $this->load->view('partial/user/footer');
+            $this->load->view('content/user/ajax/selectbarang');
         }
     }
 

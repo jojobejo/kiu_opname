@@ -15,10 +15,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?php echo base_url('data_zahir') ?>" class="nav-link">
-              <i class="nav-icon fas fa-desktop"></i>
+            <a href="<?php echo base_url('faktur_pending') ?>" class="nav-link">
+              <i class="nav-icon fa fa-clock"></i>
               <p>
-                Data Zahir
+                Data Opname
               </p>
             </a>
           </li>

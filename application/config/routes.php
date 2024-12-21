@@ -67,3 +67,5 @@ $route['u_list_barang'] = 'C_User/C_listBarang';
 $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['useropname'] = 'C_User/C_listBarang/get_data_user';

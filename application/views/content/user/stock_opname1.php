@@ -22,55 +22,40 @@
             </div>
             <!-- /.content-header -->
 
-            <?php $this->load->view('content/user/modal/modalOpname1'); ?>
-
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluids">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="card">
-                                <div class="d-flex justify-content-center">
-                                    <!-- CARD BODY -->
-                                    <div class="card-body table-responsive">
-                                        <table id="dataTBUserSO" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Box</th>
-                                                    <th>Pcs</th>
-                                                    <th>Expire Date</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                foreach ($opname as $o) :
-                                                    $originalDate = $o->exp_date;
-                                                    $newDate = date("m/d/Y", strtotime($originalDate));
-                                                ?>
-                                                    <tr>
-                                                        <td class="text-center"><?= $no++ ?></td>
-                                                        <td><?= $o->nama_barang ?></td>
-                                                        <td><?= $o->stok_box1 ?></td>
-                                                        <td><?= $o->stok_pcs1 ?></td>
-                                                        <td><?= $o->exp_date ?></td>
-                                                        <td>
-                                                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#modalOpname<?= $o->id_opname ?>">
-                                                                <i class="fa fa-solid fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- ./CARD BODY -->
-                                </div>
-                            </div>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Input Opname</h3>
+                    </div>
+                    <div class="card-body">
+                        <?php echo form_open_multipart('useropname'); ?>
+                        <div class="form-group">
+                            <label for="">Nama Barang</label>
+                            <select class="form-control" name="nama_isi" id="nama_isi" style="width: 100%;">
+                            </select>
+                            <input type="text" class="form-control" name="nm_isi" id="nm_isi" hidden>
+                            <input type="text" class="form-control" name="kode_barang" id="kode_barang" hidden>
+                            <input type="number" class="form-control" name="dimensi" id="dimensi" value="0" hidden>
                         </div>
+                        <div class="form-group">
+                            <label for="">Qty Pcs</label>
+                            <input type="number" class="form-control" name="qty_pcs" id="qty_pcs" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Qty Box</label>
+                            <input type="number" class="form-control" name="qty_box" id="qty_box" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Sektor</label>
+                            <input type="number" class="form-control" name="sektor_isi" id="sektor_isi">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Expired Date</label>
+                            <input type="date" class="form-control" name="exp_isi" id="exp_isi">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">SAVE</button>
+                        </form>
                     </div>
                 </div>
             </section>

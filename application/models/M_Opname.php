@@ -373,4 +373,11 @@ class M_Opname extends CI_Model
          FROM tb_barang_zahir where tb_barang_zahir.sektor = '$sektor'
         ");
     }
+
+    public function getmasterbarang()
+    {
+        return $this->db->query("SELECT
+        FROM
+        ")->result();
+    }
 }

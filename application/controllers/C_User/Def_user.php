@@ -23,8 +23,8 @@ class Def_user extends CI_Controller
         $sektor = $this->session->userdata('sektor');
 
         $data['page_title'] = 'Dashbord || User Sektor' . $sektor; 
-        $data['barang'] = $this->M_Opname->countBaranguser($sektor)->result();
-        $data['jmlBarang'] = $this->M_Opname->prsenUser($sektor)->result();
+        // $data['barang'] = $this->M_Opname->countBaranguser($sektor)->result();
+        // $data['jmlBarang'] = $this->M_Opname->prsenUser($sektor)->result();
 
         $this->load->view('partial/user/header',$data);
         $this->load->view('content/user/dashboard',$data);
