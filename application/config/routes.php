@@ -68,4 +68,10 @@ $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['useropname'] = 'C_User/C_listBarang/get_data_user';
+$route['addopname']        = 'C_User/StkOpname/add_opname_user';
+$route['selectbarang']      = 'C_User/StkOpname/selectbarang';
+$route['get_data_barang']   = 'C_User/StkOpname/get_data_barang';
+$route['get_exp']           = 'C_User/StkOpname/get_exp';
+
+$route['detail_input/(:any)/(:any)'] = 'C_User/C_matchProgress/detail_input/$1/$2';
+$route['input_edit/(:any)'] = 'C_User/C_matchProgress/input_edit/$1';

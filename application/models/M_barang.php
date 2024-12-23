@@ -105,4 +105,32 @@ class M_barang extends CI_Model
         return $this->db->delete('tb_pending');
     }
 
+    public function selectbarang($search)
+    {
+        $this->db->select('*');
+        $this->db->limit('5');
+        $this->db->from('tb_master_barang');
+        $this->db->like('nama_barang', $search);
+        return $this->db->get()->result_array();
+    }
+
+    public function get_exp_date($kdbarang)
+    {
+        $this->db->from('v_barang_with_expdate');
+        $this->db->where('kode_barang', $kdbarang);
+        return $this->db->get();
+    }
+
+    function get_detail_data($namabarang)
+    {
+        $query =  $this->db->get_where("tb_master_barang", array('kode_barang' => $namabarang))->result();
+        foreach ($query as $key) {
+            # code...
+            $data = array(
+                'kode_barang' => $key->kode_barang,
+                'hasil_dimensi' => $key->hasil_dimensi
+            );
+        }
+        return $data;
+    }
 }

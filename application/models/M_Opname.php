@@ -374,10 +374,63 @@ class M_Opname extends CI_Model
         ");
     }
 
-    public function getmasterbarang()
+    public function inputopname($data)
+    {
+        return $this->db->insert('tb_opname', $data);
+    }
+
+    public function list_input($sektor)
     {
         return $this->db->query("SELECT
+        x.kode_barang AS kodebarang,
+        x.nama_barang AS namabarang,
+        x.exp_date AS exp,
+        x.hasil_dimensi AS dimensi,
+        x.qty_opname AS qty_opname,
+        x.qtymaster,
+        (COALESCE(x.qtymaster,0) - COALESCE(x.qty_opname,0)) AS selisih,
+        (CASE WHEN x.qtymaster - x.qty_opname = 0 THEN 'match' ELSE 'not match' END) AS hasil
         FROM
+        (
+            SELECT	
+            a.kode_barang, 
+            c.nama_barang,
+            c.hasil_dimensi,
+            a.exp_date,
+            SUM(a.qty) AS qty_opname,
+            a.stock_box,
+            a.stock_pcs,
+            (SELECT SUM(b.qty) FROM tb_saldo_exp b WHERE b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date) AS qtymaster
+            FROM tb_opname a
+            JOIN tb_master_barang c ON c.kode_barang = a.kode_barang
+            WHERE a.inputer = '$sektor'
+            GROUP BY a.kode_barang , a.exp_date
+        ) AS x
         ")->result();
+    }
+
+    public function detail_input($user, $kdbarang)
+    {
+        return $this->db->query("SELECT
+        a.*,
+        b.nama_barang AS nama_barangs,
+        b.kode_barang AS kodebarangs,
+        b.hasil_dimensi AS dimensi
+        FROM tb_opname a
+        JOIN tb_master_barang b ON b.kode_barang = a.kode_barang
+        WHERE a.inputer = '$user' AND a.kode_barang = '$kdbarang'
+        ")->result();
+    }
+
+    public function edited_opname($id, $data)
+    {
+        $this->db->where('id_opname', $id);
+        return $this->db->update('tb_opname', $data);
+    }
+
+    public function hapus_opname($id)
+    {
+        $this->db->where('id_opname', $id);
+        return $this->db->delete('tb_opname');
     }
 }

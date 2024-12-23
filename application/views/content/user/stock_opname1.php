@@ -29,14 +29,20 @@
                         <h3 class="card-title">Input Opname</h3>
                     </div>
                     <div class="card-body">
-                        <?php echo form_open_multipart('useropname'); ?>
+                        <?php echo form_open_multipart('addopname'); ?>
                         <div class="form-group">
                             <label for="">Nama Barang</label>
-                            <select class="form-control" name="nama_isi" id="nama_isi" style="width: 100%;">
+                            <select class="form-control" name="nm_isi" id="nm_isi" style="width: 100%;">
+                                <option value="&nbsp" selected>Masukan Nama Barang</option>
                             </select>
-                            <input type="text" class="form-control" name="nm_isi" id="nm_isi" hidden>
-                            <input type="text" class="form-control" name="kode_barang" id="kode_barang" hidden>
-                            <input type="number" class="form-control" name="dimensi" id="dimensi" value="0" hidden>
+                            <input type="text" class="form-control" name="kode_barang" id="kode_barang" readonly hidden>
+                            <input type="number" class="form-control" name="dimensi" id="dimensi" value="0" readonly hidden>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Expired Date</label>
+                            <select class="form-control" name="exp_isi" id="exp_isi">
+                                <option value="" selected>-- Pilih Kode Exp --</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="">Qty Pcs</label>
@@ -46,13 +52,9 @@
                             <label for="">Qty Box</label>
                             <input type="number" class="form-control" name="qty_box" id="qty_box" value="0">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label for="">Sektor</label>
-                            <input type="number" class="form-control" name="sektor_isi" id="sektor_isi">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Expired Date</label>
-                            <input type="date" class="form-control" name="exp_isi" id="exp_isi">
+                            <input type="number" class="form-control" name="sektor_isi" id="sektor_isi" value="<?= $this->session->userdata('sektor') ?>" hidden>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">SAVE</button>
                         </form>

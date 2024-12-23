@@ -35,35 +35,43 @@
                         <div class="col-md">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3>Match Progress - Inputter</h3>
+                                    <div class="row">
+                                        <a href="<?= base_url('u_match_progress') ?>" class="btn btn-primary mr-3"><i class="fas fa-home"></i></a>
+                                        <h3>Detail Inputer</h3>
+                                    </div>
                                 </div>
                                 <div class="card-body">
+                                    <?php $this->load->view('content/user/modal/modalinputer') ?>
                                     <table id="tbMatchProgressUser" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Barang</th>
                                                 <th>Expired Date</th>
-                                                <th>Hasil</th>
+                                                <th>Qty</th>
+                                                <th>PCS</th>
+                                                <th>BOX</th>
                                                 <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($listbr as $l) :
+                                            foreach ($detail_opname as $l) :
                                             ?>
                                                 <tr>
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $l->namabarang ?></td>
-                                                    <td><?= $l->exp ?></td>
-                                                    <?php if ($l->hasil == 'match') : ?>
-                                                        <td><a href="#" class="btn btn-sm btn-block btn-success"><i class="fas fa-check-circle"></i></a></td>
-                                                        <td><a href="<?= base_url('detail_input/' . $this->session->userdata('username') . '/' . $l->kodebarang) ?>" class="btn btn-sm btn-block btn-info"><i class="fas fa-eye"></i></a></td>
-                                                    <?php else : ?>
-                                                        <td><a href="#" class="btn btn-sm btn-block btn-danger"><i class="fas fa-times-circle"></i></a></td>
-                                                        <td><a href="<?= base_url('detail_input/' . $this->session->userdata('username') . '/' . $l->kodebarang) ?>" class="btn btn-sm btn-block btn-info"><i class="fas fa-eye"></i></a></td>
-                                                    <?php endif; ?>
+                                                    <td><?= $l->nama_barangs ?></td>
+                                                    <td><?= $l->exp_date ?></td>
+                                                    <td><?= $l->qty ?></td>
+                                                    <td><?= $l->stock_pcs ?></td>
+                                                    <td><?= $l->stock_box ?></td>
+                                                    <div class="row">
+                                                        <td>
+                                                            <a href="#" class="btn btn-sm btn-warning mr-1" data-target="#editopname<?= $l->id_opname ?>" data-toggle="modal"><i class="fas fa-pencil-alt"></i></a>
+                                                            <a href="#" class="btn btn-sm btn-danger" data-target="#hapus<?= $l->id_opname ?>" data-toggle="modal"><i class="fas fa-trash-alt"></i></a>
+                                                        </td>
+                                                    </div>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

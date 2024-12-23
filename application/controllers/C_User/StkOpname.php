@@ -14,9 +14,11 @@ class StkOpname extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model("M_Opname");
-        $this->load->model("M_barang");
         $this->load->library('form_validation');
+        $this->load->model(array(
+            'M_Opname' => 'opname',
+            'M_Barang' => 'barang'
+        ));
     }
 
     public function index()
@@ -28,7 +30,7 @@ class StkOpname extends CI_Controller
             $sektor = $this->session->userdata('sektor');
             $data['page_title']         = 'Stok Opname';
 
-            $data['get_nama_barang']    = $this->M_Opname->getmasterbarang();
+            // $data['get_nama_barang']    = $this->M_Opname->getmasterbarang();
 
             $this->load->view('partial/user/header', $data);
             $this->load->view('content/user/stock_opname1', $data);
@@ -37,40 +39,69 @@ class StkOpname extends CI_Controller
         }
     }
 
-    public function addOpnameData()
+    function selectbarang()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user") {
+            redirect("login");
+        } else {
+
+            $kdbarang = $this->input->post('nama_barang');
+            $data = $this->barang->selectbarang($kdbarang);
+            echo json_encode($data);
+        }
+    }
+
+    function get_data_barang()
+    {
+        $namabarang = $this->input->post('namabarang');
+        $data = $this->barang->get_detail_data($namabarang);
+        echo json_encode($data);
+    }
+
+    function get_exp()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user") {
+            redirect("login");
+        } else {
+            $kdbarang = $this->input->post('kodebarang', TRUE);
+            $data = $this->barang->get_exp_date($kdbarang)->result();
+            echo json_encode($data);
+        }
+    }
+
+    public function add_opname_user()
     {
 
-        $idbarang       = $this->input->post('id_isi');
-        $kdbarang       = $this->input->post('kode_isi');
-        $box            = $this->input->post('box_isi');
-        $pcs            = $this->input->post('pcs_isi');
-        $dimensi        = $this->input->post('dimensi_isi');
-        $qty            = ($box * $dimensi) + $pcs;
-        $exdate         = $this->input->post('date_isi');
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "user") {
+            redirect("login");
+        } else {
 
-        if ($this->session->userdata('team_opname') == '1') {
+            $namabarang     = $this->input->post('nm_isi');
+            $kdbarang       = $this->input->post('kode_barang');
+            $box            = $this->input->post('qty_box');
+            $pcs            = $this->input->post('qty_pcs');
+            $dimensi        = $this->input->post('dimensi');
+            $qty            = ($box * $dimensi) + $pcs;
+            $exdate         = $this->input->post('exp_isi');
+            $date            = date("Y-m-d H:i:s");
+
             $data = array(
-                'id_opname'     => $idbarang,
                 'kode_barang'   => $kdbarang,
-                'stok_box1'     => $box,
-                'stok_pcs1'     => $pcs,
+                'nama_barang'   => $namabarang,
+                'stock_box'     => $box,
+                'stock_pcs'     => $pcs,
                 'exp_date'      => $exdate,
-                'QTY1'          => $qty
+                'qty'           => $qty,
+                'sektor'        => $this->session->userdata('sektor'),
+                'keterangan'    => '-',
+                'inputer'       => $this->session->userdata('username'),
+                'inputer_edit'  => '-',
+                'keterangan_edit' => '-',
+                'input_at'      => $date,
+                'edit_at'       => $date
             );
 
-            $this->M_Opname->addOpname($data, $idbarang);
-            redirect('u_opname');
-        } elseif ($this->session->userdata('team_opname') == '2') {
-            $data = array(
-                'id_opname'     => $idbarang,
-                'kode_barang'   => $kdbarang,
-                'stok_box2'     => $box,
-                'stok_pcs2'     => $pcs,
-                'exp_date'      => $exdate
-                // 'QTY2'          => $qty
-            );
-
-            $this->M_Opname->addOpname($data, $idbarang);
+            $this->opname->inputopname($data);
             redirect('u_opname');
         }
     }
