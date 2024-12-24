@@ -39,7 +39,7 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/adminlte.js') ?>"></script>
 <!-- ChartJS -->
-<script src="<?php echo base_url('assets/plugins/chart.js/Chart.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
 <!-- FLOT CHARTS -->
 <script src="<?php echo base_url('assets/plugins/flot/jquery.flot.js') ?>"></script>
 <script src="<?php echo base_url('assets/plugins/flot/plugins/jquery.flot.pie.js') ?>"></script>
@@ -65,9 +65,8 @@
       "lengthChange": false,
       "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
   });
-
+  
 </script>
 
 </body>

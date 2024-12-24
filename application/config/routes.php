@@ -57,7 +57,6 @@ $route['user'] = 'C_Admin/user';
 $route['data_zahir'] = 'C_Admin/Data_zahir';
 $route['logout'] = 'login/logout';
 $route['match_progress'] = 'C_Admin/C_matchProgress';
-$route['quick_count'] = 'C_Admin/C_summaryOpaname';
 $route['addBarang'] = 'C_Admin/ListBarang/addBarang';
 $route['def_user'] = 'C_User/Def_user';
 $route['u_opname'] = 'C_User/StkOpname';
@@ -67,6 +66,8 @@ $route['u_list_barang'] = 'C_User/C_listBarang';
 $route['u_list_barang1'] = 'C_User/C_listBarang/get_data_user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['quick_count'] = 'C_Admin/C_summaryOpaname';
 
 $route['addopname']        = 'C_User/StkOpname/add_opname_user';
 $route['selectbarang']      = 'C_User/StkOpname/selectbarang';

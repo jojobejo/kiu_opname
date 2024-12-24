@@ -127,29 +127,21 @@ class M_Opname extends CI_Model
     {
         return $this->db->query("SELECT 
         COUNT(x.kode_barang) as total,
-        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
-        
+        COUNT(CASE WHEN (COALESCE(x.qty_b,0) - COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (COALESCE(x.qty_b,0) - COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
         FROM
         (Select 
-        a.id_barang,
         a.kode_barang,
         a.nama_barang,
         a.exp_date,
-        a.sektor,
-        a.stok_box,
-        a.stok_pcs,
-        a.sktor_tambahan,
-        
-(SELECT sum(g.qty) from tb_barang_zahir g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.nama_barang) as qty_c,
-(SELECT sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.nama_barang ) as qty_b,
-(SELECT sum(stok_box1)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.nama_barang ) as stkbox,
-(SELECT sum(stok_pcs1)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.nama_barang ) as stkpcs,
-(SELECT QTY1  from tb_opname f where f.kode_barang = a.kode_barang group by f.nama_barang ) as salqty
+(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qty_c,
+(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qty_b,
+(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang ) as stkbox,
+(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang ) as stkpcs,
+(SELECT f.qty  from tb_opname f where f.kode_barang = a.kode_barang group by f.kode_barang ) as salqty
          
-        from tb_barang_zahir a  group by a.nama_barang,a.exp_date) as x  
-        ORDER BY x.id_barang");
+        from tb_saldo_exp a  group by a.kode_barang , a.exp_date ) as x ");
     }
 
     public function listMatchVivo()
@@ -273,13 +265,14 @@ class M_Opname extends CI_Model
     public function countAll()
     {
         return $this->db->query("SELECT 
-        COUNT(CASE WHEN  x.qty_a = x.qty_b then 1 ELSE NULL END) as 'match',
-        COUNT(CASE WHEN x.qty_a != x.qty_b then 1 ELSE NULL END) as 'not'
+		COUNT(CASE WHEN  x.qty_a = COALESCE(x.qty_b,0) then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN x.qty_a != COALESCE(x.qty_b,0) then 1 ELSE NULL END) as 'not'
        FROM
        (SELECT 
        a.kode_barang,
-       sum(a.qty) AS qty_a , (SELECT sum(b.QTY1) FROM tb_opname b WHERE b.kode_barang = a.kode_barang GROUP BY b.kode_barang ) AS qty_b 
-       FROM tb_barang_zahir a GROUP BY a.kode_barang 
+       sum(a.qty) AS qty_a,
+       (SELECT sum(b.qty) FROM tb_opname b WHERE b.kode_barang = a.kode_barang GROUP BY b.kode_barang ) AS qty_b 
+       FROM tb_saldo_exp a GROUP BY a.kode_barang
        ) AS x
         ");
     }
@@ -343,20 +336,19 @@ class M_Opname extends CI_Model
 
     public function listBarangMatch()
     {
-        return $this->db->query(" SELECT 
-        x.id_barang,
+        return $this->db->query("SELECT 
         x.kode_barang,
         x.nama_barang,
         x.qty_a,
-        x.qty_b,
-        (CASE WHEN x.qty_a = x.qty_b THEN 'match' ELSE 'not match' END) AS hasil
+        COALESCE(x.qty_b,0) AS qty_b,
+        (CASE WHEN x.qty_a = COALESCE(x.qty_b,0) THEN 'match' ELSE 'not match' END) AS hasil
         From
         ( Select 
-        a.id_barang,
-        a.kode_barang,
-        a.nama_barang,
-        sum(a.qty) as qty_a, (select sum(b.QTY1) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b 
-        from tb_barang_zahir a group by a.kode_barang 
+         a.kode_barang,
+         a.nama_barang,
+        sum(a.qty) as qty_a, 
+        (select sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b 
+        from tb_saldo_exp a group by a.kode_barang 
         ) as x
         ");
     }

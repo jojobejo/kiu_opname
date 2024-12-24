@@ -1,19 +1,22 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
- 
-class C_listBarang extends CI_Controller {
- 
-    function __construct(){
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class C_listBarang extends CI_Controller
+{
+
+    function __construct()
+    {
         parent::__construct();
         $this->load->model('M_ServersideList');
     }
- 
-    function index(){
+
+    function index()
+    {
         $this->load->view('partial/user/header1');
         $this->load->view('content/user/list_barang');
         $this->load->view('partial/user/footerserver');
     }
- 
+
     function get_data_user()
     {
         $list = $this->M_ServersideList->get_datatables();
@@ -26,10 +29,10 @@ class C_listBarang extends CI_Controller {
             $row[] = $field->nama_barang;
             $row[] = $field->exp_date;
             $row[] = $field->sektor;
- 
+
             $data[] = $row;
         }
- 
+
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->M_ServersideList->count_all(),
@@ -39,5 +42,4 @@ class C_listBarang extends CI_Controller {
         //output dalam format JSON
         echo json_encode($output);
     }
- 
 }
