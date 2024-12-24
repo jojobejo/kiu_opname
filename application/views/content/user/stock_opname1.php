@@ -35,6 +35,7 @@
                             <select class="form-control" name="nm_isi" id="nm_isi" style="width: 100%;">
                                 <option value="&nbsp" selected>Masukan Nama Barang</option>
                             </select>
+                            <input type="text" class="form-control" name="nama_barang" id="nama_barang" readonly hidden>
                             <input type="text" class="form-control" name="kode_barang" id="kode_barang" readonly hidden>
                             <input type="number" class="form-control" name="dimensi" id="dimensi" value="0" readonly hidden>
                         </div>

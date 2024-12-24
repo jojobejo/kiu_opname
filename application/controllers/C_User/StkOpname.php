@@ -76,7 +76,7 @@ class StkOpname extends CI_Controller
             redirect("login");
         } else {
 
-            $namabarang     = $this->input->post('nm_isi');
+            $namabarang     = $this->input->post('nama_barang');
             $kdbarang       = $this->input->post('kode_barang');
             $box            = $this->input->post('qty_box');
             $pcs            = $this->input->post('qty_pcs');

@@ -18,14 +18,6 @@
             <a href="<?php echo base_url('faktur_pending') ?>" class="nav-link">
               <i class="nav-icon fa fa-clock"></i>
               <p>
-                Data Opname
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url('faktur_pending') ?>" class="nav-link">
-              <i class="nav-icon fa fa-clock"></i>
-              <p>
                 Faktur Pending
               </p>
             </a>

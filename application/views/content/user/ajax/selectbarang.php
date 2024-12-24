@@ -54,7 +54,8 @@
                 dataType: "JSON",
                 cache: false,
                 success: function(data) {
-                    $.each(data, function(kode_barang, hasil_dimensi) {
+                    $.each(data, function(nama_barang, kode_barang, hasil_dimensi) {
+                        $("#nama_barang").val(data.nama_barang);
                         $("#kode_barang").val(data.kode_barang);
                         $("#dimensi").val(data.hasil_dimensi);
                     });
@@ -73,7 +74,7 @@
                 async: true,
                 dataType: 'json',
                 success: function(data) {
-                    var html = '<option value="">-- Pilih Kode Exp --</option>';
+                    var html = '<option value="2222-12-12">2222-12-12</option>';
                     var i;
                     for (i = 0; i < data.length; i++) {
                         html += '<option value=' + data[i].exp_date + '>' + data[i].exp_date + '</option>';

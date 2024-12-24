@@ -22,14 +22,13 @@ class C_summaryOpaname extends CI_Controller
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
             redirect("login");
         } else {
-            $data['page_title'] = 'Match Progress || Quick Count';
-
-            // $data['selisih']  = $this->M_Opname->countAll()->result();
-            // $data['listBarang'] = $this->M_Opname->listBarangMatch()->result();
-            // $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
-            // $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
-            // $data['selisihFaktur'] = $this->M_Opname->countfakturPending()->result();
-            // $data['listPending']   = $this->M_Opname->listCountByPending()->result();
+            $data['page_title']     = 'Match Progress || Quick Count';
+            $data['selisih']        = $this->opname->countAll()->result();
+            $data['listBarang']     = $this->opname->listBarangMatch()->result();
+            $data['selisihVivo']    = $this->opname->countVivo()->result();
+            $data['listVivo']       = $this->opname->listMatchVivo()->result();
+            $data['selisihFaktur']  = $this->opname->countfakturPending()->result();
+            $data['listPending']    = $this->opname->listCountByPending()->result();
 
             $this->load->view('partial/admin/header', $data);
             $this->load->view('content/admin/summary_opname', $data);
@@ -109,7 +108,7 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $siswa = $this->M_Opname->listCountByPending()->result();
+        $siswa = $this->opname->listCountByPending()->result();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
@@ -250,7 +249,7 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $siswa = $this->M_Opname->listMatchVivo()->result();
+        $siswa = $this->opname->listMatchVivo()->result();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4

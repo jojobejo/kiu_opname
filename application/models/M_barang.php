@@ -127,6 +127,7 @@ class M_barang extends CI_Model
         foreach ($query as $key) {
             # code...
             $data = array(
+                'nama_barang' => $key->nama_barang,
                 'kode_barang' => $key->kode_barang,
                 'hasil_dimensi' => $key->hasil_dimensi
             );

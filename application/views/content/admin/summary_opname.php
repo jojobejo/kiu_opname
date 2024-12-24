@@ -95,7 +95,6 @@
                                         <i class="fas fa-table mr-1"></i>
                                         List Match - Not Match Barang
                                     </h3>
-
                                 </div>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
@@ -150,12 +149,12 @@
                                                     <th>Nama Barang</th>
                                                     <th>Expired Date</th>
                                                     <th>Faktur Pending</th>
+                                                    <th>Saldo Box</th>
+                                                    <th>Saldo Pcs</th>
                                                     <th>Saldo Buku Zahir</th>
-                                                    <th>Box Saldo Buku</th>
-                                                    <th>Box Saldo Pcs</th>
-                                                    <th>Saldo Fisik</th>
                                                     <th>Box Fisik</th>
                                                     <th>Pcs Fisik</th>
+                                                    <th>Saldo Fisik</th>
                                                     <th>Selisih</th>
                                                     <th>Hasil</th>
                                                 </tr>
@@ -169,12 +168,12 @@
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->exp_date ?></td>
                                                         <td><?= $b->faktur_pending ?></td>
+                                                        <td><?= $b->saldo_box ?></td>
+                                                        <td><?= $b->saldo_pcs ?></td>
                                                         <td><?= $b->saldo_buku ?></td>
-                                                        <td><?= $b->box_buku ?></td>
-                                                        <td><?= $b->pcs_buku ?></td>
-                                                        <td><?= $b->saldo_fisik ?></td>
                                                         <td><?= $b->box_fisik ?></td>
                                                         <td><?= $b->pcs_fisik ?></td>
+                                                        <td><?= $b->saldo_fisik ?></td>
                                                         <td><?= $b->selisih ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
@@ -237,7 +236,6 @@
                                                     <th>Faktur Pending</th>
                                                     <th>Saldo Fisik</th>
                                                     <th>Selisih</th>
-                                                    <th>Sektor</th>
                                                     <th>Hasil</th>
                                                 </tr>
                                             </thead>
@@ -249,9 +247,8 @@
                                                         <td><?= $b->nama_barang ?></td>
                                                         <td><?= $b->saldo_buku ?></td>
                                                         <td><?= $b->faktur_pending ?></td>
-                                                        <td><?= $b->qty_b ?></td>
+                                                        <td><?= $b->saldo_fisik ?></td>
                                                         <td><?= $b->selisih ?></td>
-                                                        <td><?= $b->sektor ?></td>
                                                         <?php
                                                         if ($b->hasil == 'match') {
                                                             echo '<td>
