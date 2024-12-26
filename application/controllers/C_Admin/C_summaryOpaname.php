@@ -36,6 +36,38 @@ class C_summaryOpaname extends CI_Controller
         }
     }
 
+    public function stock_controller()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        } else {
+
+            $sektor = $this->session->userdata('username');
+
+            $data['page_title']         = 'Stock Controller';
+            $data['stock_controller']   = $this->opname->get_stock_list_inputer();
+
+            $this->load->view('partial/admin/header', $data);
+            $this->load->view('content/admin/stock_controller', $data);
+            $this->load->view('partial/admin/footersummary');
+        }
+    }
+
+    public function detail_stock_controller($kdbr)
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        } else {
+
+            $data['page_title']         = 'Stock Tracing';
+            $data['detail_tracinng']    = $this->opname->list_detail_stock_controler($kdbr);
+
+            $this->load->view('partial/admin/header', $data);
+            $this->load->view('content/admin/detailstockinputer', $data);
+            $this->load->view('partial/admin/footersummary');
+        }
+    }
+
     public function excelAllBarang()
     {
 

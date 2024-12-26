@@ -83,26 +83,54 @@ class StkOpname extends CI_Controller
             $dimensi        = $this->input->post('dimensi');
             $qty            = ($box * $dimensi) + $pcs;
             $exdate         = $this->input->post('exp_isi');
-            $date            = date("Y-m-d H:i:s");
+            $date           = date("Y-m-d H:i:s");
+            $keterangan     = $this->input->post('keterangan');
 
-            $data = array(
-                'kode_barang'   => $kdbarang,
-                'nama_barang'   => $namabarang,
-                'stock_box'     => $box,
-                'stock_pcs'     => $pcs,
-                'exp_date'      => $exdate,
-                'qty'           => $qty,
-                'sektor'        => $this->session->userdata('sektor'),
-                'keterangan'    => '-',
-                'inputer'       => $this->session->userdata('username'),
-                'inputer_edit'  => '-',
-                'keterangan_edit' => '-',
-                'input_at'      => $date,
-                'edit_at'       => $date
-            );
-
-            $this->opname->inputopname($data);
-            redirect('u_opname');
+            if ($exdate == '2222-12-12') {
+                $datainput = array(
+                    'kode_barang'   => $kdbarang,
+                    'nama_barang'   => $namabarang,
+                    'qty'           => '0',
+                    'exp_date'      => $keterangan,
+                    'keterangan'    => 'Expired Tidak Ada'
+                );
+                $data = array(
+                    'kode_barang'   => $kdbarang,
+                    'nama_barang'   => $namabarang,
+                    'stock_box'     => $box,
+                    'stock_pcs'     => $pcs,
+                    'exp_date'      => $keterangan,
+                    'qty'           => $qty,
+                    'sektor'        => $this->session->userdata('sektor'),
+                    'keterangan'    => 'Expired Tidak Ada',
+                    'inputer'       => $this->session->userdata('username'),
+                    'inputer_edit'  => '-',
+                    'keterangan_edit' => '-',
+                    'input_at'      => $date,
+                    'edit_at'       => $date
+                );
+                $this->opname->inputopname($data);
+                $this->opname->inputsaldoexp($datainput);
+                redirect('u_opname');
+            } else {
+                $data = array(
+                    'kode_barang'   => $kdbarang,
+                    'nama_barang'   => $namabarang,
+                    'stock_box'     => $box,
+                    'stock_pcs'     => $pcs,
+                    'exp_date'      => $exdate,
+                    'qty'           => $qty,
+                    'sektor'        => $this->session->userdata('sektor'),
+                    'keterangan'    => 'opname',
+                    'inputer'       => $this->session->userdata('username'),
+                    'inputer_edit'  => '-',
+                    'keterangan_edit' => '-',
+                    'input_at'      => $date,
+                    'edit_at'       => $date
+                );
+                $this->opname->inputopname($data);
+                redirect('u_opname');
+            }
         }
     }
 }

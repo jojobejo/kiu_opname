@@ -12,8 +12,8 @@
             <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
-        <?php $this->load->view('partial/user/navbar') ?>
-        <?php $this->load->view('partial/user/sidebar') ?>
+        <?php $this->load->view('partial/admin/navbar') ?>
+        <?php $this->load->view('partial/admin/sidebar') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -35,35 +35,49 @@
                         <div class="col-md">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3>Match Progress - Inputter</h3>
+                                    <h3>Stock Controller</h3>
                                 </div>
                                 <div class="card-body">
-                                    <table id="tbMatchProgressUser" class="table table-bordered table-striped">
+                                    <table id="table_stock_controller" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Nama Barang</th>
-                                                <th>Hasil</th>
+                                                <th>nama_barang</th>
+                                                <th>Exdate</th>
+                                                <th>Saldo Fisik</th>
+                                                <th>Stock Box</th>
+                                                <th>Stock Pcs</th>
+                                                <th>Keterangan</th>
                                                 <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $no = 1;
-                                            foreach ($listbr as $l) :
-                                            ?>
+                                            <?php foreach ($detail_tracinng as $d) : ?>
                                                 <tr>
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= $l->namabarang ?></td>
-                                                    <?php if ($l->hasil == 'match') : ?>
-                                                        <td><a href="#" class="btn btn-sm btn-block btn-success"><i class="fas fa-check-circle"></i></a></td>
-                                                        <td><a href="<?= base_url('detail_input/' . $this->session->userdata('username') . '/' . $l->kodebarang) ?>" class="btn btn-sm btn-block btn-info"><i class="fas fa-eye"></i></a></td>
-                                                    <?php else : ?>
-                                                        <td><a href="#" class="btn btn-sm btn-block btn-danger"><i class="fas fa-times-circle"></i></a></td>
-                                                        <td><a href="<?= base_url('detail_input/' . $this->session->userdata('username') . '/' . $l->kodebarang) ?>" class="btn btn-sm btn-block btn-info"><i class="fas fa-eye"></i></a></td>
-                                                    <?php endif; ?>
+                                                    <td><?= $d->nama_barang ?></td>
+                                                    <td><?= $d->exp_date ?></td>
+                                                    <td><?= $d->qty ?></td>
+                                                    <td><?= $d->stock_box ?></td>
+                                                    <td><?= $d->stock_pcs ?></td>
+                                                    <td><?= $d->keterangan ?></td>
+                                                    <td><a href="#" class="btn btn-sm btn-block btn-warning" data-target="#revisiqty<?= $d->id_opname ?>" data-togle="modal"><i class="fas fa-pencil-alt"></i></a></td>
                                                 </tr>
                                             <?php endforeach; ?>
+                                            <!-- <?php foreach ($stock_controller as $s) : ?>
+                                                <tr>
+                                                    <td><?= $s->nama_barang ?></td>
+                                                    <td><?= $s->qtypending ?></td>
+                                                    <td><?= $s->qtymaster ?></td>
+                                                    <td><?= $s->saldo_all ?></td>
+                                                    <td><?= $s->qtyopname ?></td>
+                                                    <td><?= $s->selisih ?></td>
+                                                    <?php if ($s->hasil == 'match') : ?>
+                                                        <td><a href="#" class="btn btn-sm btn-block btn-success"><i class="fas fa-check-circle"></i></a></td>
+                                                    <?php else : ?>
+                                                        <td><a href="#" class="btn btn-sm btn-block btn-danger"><i class="fas fa-times-circle"></i></a></td>
+                                                    <?php endif; ?>
+                                                    <td><a href="<?= base_url('detail_stock_controller/' . $s->kode_barang) ?>" class="btn btn-sm btn-block btn-info"><i class="fas fa-eye"></i></a></td>
+                                                </tr>
+                                            <?php endforeach; ?> -->
                                         </tbody>
                                     </table>
                                 </div>

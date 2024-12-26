@@ -18,7 +18,7 @@
                                 <input class="form-control" type="text" id="act_input" name="act_input" value="edit_data" readonly />
                                 <input class="form-control" type="number" id="idopname" name="idopname" value="<?= $i->id_opname ?>" readonly />
                                 <input class="form-control" type="number" id="dimensi" name="dimensi" value="<?= $i->dimensi ?>" readonly />
-                                <input class="form-control" type="text" id="kdbarang" name="kdbarang" value="<?= $i->nama_barang ?>" readonly />
+                                <input class="form-control" type="text" id="kdbarang" name="kdbarang" value="<?= $i->kode_barang ?>" readonly />
                             </div>
                         </div>
                     </div>

@@ -46,6 +46,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="">Abaikan Bila Expired Sudah Sesuai</label>
+                            <input type="text" class="form-control" name="keterangan" id="keterangan" value="" placeholder="Input Expired Data TAHUN - BULAN - TANGGAL (YYYY-MM-DD)">
+                        </div>
+                        <div class="form-group">
                             <label for="">Qty Pcs</label>
                             <input type="number" class="form-control" name="qty_pcs" id="qty_pcs" value="0">
                         </div>

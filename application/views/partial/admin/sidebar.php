@@ -31,6 +31,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo base_url('stock_controller') ?>" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Stock Controller
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo base_url('user') ?>" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
