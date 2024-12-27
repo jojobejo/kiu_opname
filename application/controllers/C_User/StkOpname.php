@@ -15,10 +15,8 @@ class StkOpname extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model(array(
-            'M_Opname' => 'opname',
-            'M_Barang' => 'barang'
-        ));
+        $this->load->model("M_Opname");
+        $this->load->model("M_Barang");
     }
 
     public function index()
@@ -46,7 +44,7 @@ class StkOpname extends CI_Controller
         } else {
 
             $kdbarang = $this->input->post('nama_barang');
-            $data = $this->barang->selectbarang($kdbarang);
+            $data = $this->M_Barang->selectbarang($kdbarang);
             echo json_encode($data);
         }
     }
@@ -54,7 +52,7 @@ class StkOpname extends CI_Controller
     function get_data_barang()
     {
         $namabarang = $this->input->post('namabarang');
-        $data = $this->barang->get_detail_data($namabarang);
+        $data = $this->M_Barang->get_detail_data($namabarang);
         echo json_encode($data);
     }
 
@@ -64,7 +62,7 @@ class StkOpname extends CI_Controller
             redirect("login");
         } else {
             $kdbarang = $this->input->post('kodebarang', TRUE);
-            $data = $this->barang->get_exp_date($kdbarang)->result();
+            $data = $this->M_Barang->get_exp_date($kdbarang)->result();
             echo json_encode($data);
         }
     }
@@ -109,8 +107,8 @@ class StkOpname extends CI_Controller
                     'input_at'      => $date,
                     'edit_at'       => $date
                 );
-                $this->opname->inputopname($data);
-                $this->opname->inputsaldoexp($datainput);
+                $this->M_Opname->inputopname($data);
+                $this->M_Opname->inputsaldoexp($datainput);
                 redirect('u_opname');
             } else {
                 $data = array(
@@ -128,7 +126,7 @@ class StkOpname extends CI_Controller
                     'input_at'      => $date,
                     'edit_at'       => $date
                 );
-                $this->opname->inputopname($data);
+                $this->M_Opname->inputopname($data);
                 redirect('u_opname');
             }
         }

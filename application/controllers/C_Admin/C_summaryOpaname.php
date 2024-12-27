@@ -11,10 +11,8 @@ class C_summaryOpaname extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model(array(
-            'M_Opname' => 'opname',
-            'M_Barang' => 'barang'
-        ));
+        $this->load->model("M_Opname");
+        $this->load->model("M_Barang");
     }
 
     function index()
@@ -23,12 +21,12 @@ class C_summaryOpaname extends CI_Controller
             redirect("login");
         } else {
             $data['page_title']     = 'Match Progress || Quick Count';
-            $data['selisih']        = $this->opname->countAll()->result();
-            $data['listBarang']     = $this->opname->listBarangMatch()->result();
-            $data['selisihVivo']    = $this->opname->countVivo()->result();
-            $data['listVivo']       = $this->opname->listMatchVivo()->result();
-            $data['selisihFaktur']  = $this->opname->countfakturPending()->result();
-            $data['listPending']    = $this->opname->listCountByPending()->result();
+            $data['selisih']        = $this->M_Opname->countAll()->result();
+            $data['listBarang']     = $this->M_Opname->listBarangMatch()->result();
+            $data['selisihVivo']    = $this->M_Opname->countVivo()->result();
+            $data['listVivo']       = $this->M_Opname->listMatchVivo()->result();
+            $data['selisihFaktur']  = $this->M_Opname->countfakturPending()->result();
+            $data['listPending']    = $this->M_Opname->listCountByPending()->result();
 
             $this->load->view('partial/admin/header', $data);
             $this->load->view('content/admin/summary_opname', $data);
@@ -45,7 +43,7 @@ class C_summaryOpaname extends CI_Controller
             $sektor = $this->session->userdata('username');
 
             $data['page_title']         = 'Stock Controller';
-            $data['stock_controller']   = $this->opname->get_stock_list_inputer();
+            $data['stock_controller']   = $this->M_Opname->get_stock_list_inputer();
 
             $this->load->view('partial/admin/header', $data);
             $this->load->view('content/admin/stock_controller', $data);
@@ -60,7 +58,7 @@ class C_summaryOpaname extends CI_Controller
         } else {
 
             $data['page_title']         = 'Stock Tracing';
-            $data['detail_tracinng']    = $this->opname->list_detail_stock_controler($kdbr);
+            $data['detail_tracinng']    = $this->M_Opname->list_detail_stock_controler($kdbr);
 
             $this->load->view('partial/admin/header', $data);
             $this->load->view('content/admin/detailstockinputer', $data);
@@ -140,7 +138,7 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $siswa = $this->opname->listCountByPending()->result();
+        $siswa = $this->M_Opname->listCountByPending()->result();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
@@ -281,7 +279,7 @@ class C_summaryOpaname extends CI_Controller
         $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $siswa = $this->opname->listMatchVivo()->result();
+        $siswa = $this->M_Opname->listMatchVivo()->result();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4

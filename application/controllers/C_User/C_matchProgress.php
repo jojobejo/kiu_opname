@@ -11,10 +11,8 @@ class C_matchProgress extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model(array(
-            'M_Opname' => 'opname',
-            'M_Barang' => 'barang'
-        ));
+        $this->load->model("M_Opname");
+        $this->load->model("M_Barang");
     }
 
     function index()
@@ -26,7 +24,7 @@ class C_matchProgress extends CI_Controller
             $sektor = $this->session->userdata('username');
 
             $data['page_title'] = 'Match Progress';
-            $data['listbr']     = $this->opname->list_input($sektor);
+            $data['listbr']     = $this->M_Opname->list_input($sektor);
 
             $this->load->view('partial/user/header', $data);
             $this->load->view('content/user/match_progress', $data);
@@ -38,7 +36,7 @@ class C_matchProgress extends CI_Controller
     public function detail_input($user, $kdbarang)
     {
         $data['page_title']     = 'Match Progress';
-        $data['detail_opname']  = $this->opname->detail_input($user, $kdbarang);
+        $data['detail_opname']  = $this->M_Opname->detail_input($user, $kdbarang);
 
         $this->load->view('partial/user/header', $data);
         $this->load->view('content/user/detail_inputer', $data);
@@ -62,7 +60,7 @@ class C_matchProgress extends CI_Controller
                     'stock_pcs' => $pcs,
                     'qty'       => $qty
                 );
-                $this->opname->edited_opname($id, $dataedit);
+                $this->M_Opname->edited_opname($id, $dataedit);
                 redirect('detail_input/' . $user . '/' . $kdbr);
                 break;
 
@@ -71,7 +69,7 @@ class C_matchProgress extends CI_Controller
                 $kdbr       = $this->input->post('kdbarang');
                 $id         = $this->input->post('idopname');
 
-                $this->opname->hapus_opname($id);
+                $this->M_Opname->hapus_opname($id);
                 redirect('detail_input/' . $user . '/' . $kdbr);
                 break;
         }
@@ -90,5 +88,5 @@ class C_matchProgress extends CI_Controller
 
     // }
 
-    
+
 }
