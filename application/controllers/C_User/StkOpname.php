@@ -15,8 +15,8 @@ class StkOpname extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model("M_Opname");
-        $this->load->model("M_Barang");
+        $this->load->model('M_Opname');
+        $this->load->model('M_Barang');
     }
 
     public function index()
