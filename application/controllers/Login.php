@@ -53,7 +53,7 @@ class Login extends CI_Controller
                         'status'    => "is_login"
                     );
                     $this->session->set_userdata($data_session);
-                    redirect('def_user');
+                    redirect('dashboarduser');
                 } else {
                     $this->session->set_flashdata("gagal", "username / password salah!!!");
                     redirect('login');

@@ -99,7 +99,8 @@ class M_Opname extends CI_Model
         COUNT(x.kode_barang) as total,
         COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a = 0 then 1 ELSE NULL END) as 'match',
         COUNT(CASE WHEN (x.qty_b -COALESCE(x.qty_c,0))-x.qty_a != 0 then 1 ELSE NULL END) as 'not'
-        
+        COUNT(CASE WHEN (COALESCE(x.qty_pending)+COALESCE(x.qty_saldo,0)) -  = 0 then 1 ELSE NULL END) as 'match',
+        COUNT(CASE WHEN (COALESCE(x.qty_opname,0) - (COALESCE(x.qty_pending)+COALESCE(x.qty_saldo,0)))  = 0 then 1 ELSE NULL END) as 'match',
         FROM
         (Select 
         a.id_barang,

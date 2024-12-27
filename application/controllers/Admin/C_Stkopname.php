@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class C_Matchprogress extends CI_Controller
+class C_Stkopname extends CI_Controller
+
 {
 
     function __construct()
@@ -15,17 +16,19 @@ class C_Matchprogress extends CI_Controller
         $this->load->library('form_validation');
     }
 
-    function index()
+    public function index()
     {
         if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
             redirect("login");
         }
-
-        $data['page_title'] = 'Match Progress || Stok Opname'; 
-        $data['zahir']  = $this->M_Opname->countZahir();
+        $data['barang'] = $this->M_barang->getAll();
+        $data['page_title'] = 'Stok Opname'; 
 
         $this->load->view('partial/admin/header',$data);
-        $this->load->view('content/admin/match_progress');
+        $this->load->view('content/admin/stock_opname',$data);
         $this->load->view('partial/admin/footer');
+        $this->load->view('content/admin/ajax/selectbarang');
     }
+
+
 }

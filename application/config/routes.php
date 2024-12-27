@@ -50,31 +50,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'login';
-$route['list_barang'] = 'Admin/ListBarang';
-$route['admin'] = 'Admin/admin';
-$route['opname'] = 'Admin/StkOpname';
-$route['user'] = 'Admin/user';
-$route['data_zahir'] = 'Admin/Data_zahir';
-$route['logout'] = 'login/logout';
-$route['match_progress'] = 'Admin/C_matchProgress';
-$route['addBarang'] = 'Admin/ListBarang/addBarang';
-$route['def_user'] = 'User/Def_user';
-$route['u_opname'] = 'User/StkOpname';
-$route['faktur_pending'] = 'Admin/FakturPending';
-$route['u_match_progress'] = 'User/C_matchProgress';
-$route['u_list_barang'] = 'User/C_listBarang';
-$route['u_list_barang1'] = 'User/C_listBarang/get_data_user';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['quick_count']           = 'Admin/C_summaryOpaname';
-$route['stock_controller']      = 'Admin/C_summaryOpaname/stock_controller';
-$route['stock_tracing/(:any)']  = 'Admin/C_summaryOpaname/detail_stock_controller/$1';
+$route['list_barang']                   = 'admin/ListBarang';
+$route['admin']                         = 'admin/C_Admin';
+$route['opname']                        = 'admin/StkOpname';
+$route['user']                          = 'admin/user';
+$route['data_zahir']                    = 'admin/Data_zahir';
+$route['logout']                        = 'login/logout';
+$route['match_progress']                = 'admin/C_matchProgress';
+$route['addBarang']                     = 'admin/ListBarang/addBarang';
+$route['faktur_pending']                = 'admin/FakturPending';
+$route['quick_count']                   = 'admin/C_summaryOpaname';
+$route['stock_controller']              = 'admin/C_summaryOpaname/stock_controller';
+$route['stock_tracing/(:any)']          = 'admin/C_summaryOpaname/detail_stock_controller/$1';
 
-$route['addopname']             = 'User/StkOpname/add_opname_user';
-$route['selectbarang']          = 'User/StkOpname/selectbarang';
-$route['get_data_barang']       = 'User/StkOpname/get_data_barang';
-$route['get_exp']               = 'User/StkOpname/get_exp';
-
-$route['detail_input/(:any)/(:any)'] = 'User/C_matchProgress/detail_input/$1/$2';
-$route['input_edit/(:any)'] = 'User/C_matchProgress/input_edit/$1';
+$route['dashboarduser']                 = 'admin/C_Dashboarduser';
+$route['u_opname']                      = 'admin/StkOpname';
+$route['u_match_progress']              = 'admin/C_matchProgressuser';
+$route['u_list_barang']                 = 'admin/C_listBarang';
+$route['u_list_barang1']                = 'admin/C_listBarang/get_data_user';
+$route['addopname']                     = 'admin/StkOpname/add_opname_user';
+$route['selectbarang']                  = 'admin/StkOpname/selectbarang';
+$route['get_data_barang']               = 'admin/StkOpname/get_data_barang';
+$route['get_exp']                       = 'admin/StkOpname/get_exp';
+$route['detail_input/(:any)/(:any)']    = 'admin/C_matchProgressuser/detail_input/$1/$2';
+$route['input_edit/(:any)']             = 'admin/C_matchProgressuser/input_edit/$1';

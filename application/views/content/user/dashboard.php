@@ -30,45 +30,14 @@
                         <div class="col-lg-6 col-6">
                             <!-- small box -->
                             <div class="small-box bg-info">
-                                <!-- <?php
-                                        foreach ($barang as $b) {
-                                            $tB = $b->total_barang;
-                                            $hB =  round((float)$tB, 2);
-                                        }
-                                        ?> -->
-                                <div class="inner">
-                                    <!-- <h3><?= $hB ?></h3> -->
-                                    <p>Jumlah Barang</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?= base_url('u_opname') ?>" class="small-box-footer">Lakukan Stock Opname</a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-6 col-6">
                             <!-- small box -->
                             <div class="small-box bg-success">
-                                <!-- <?php
-                                        foreach ($jmlBarang as $s) {
-                                            $match = $s->match;
-                                            $not   = $s->not;
-                                            $total = $s->total;
-
-                                            $vM = ($match / $total) * 100;
-                                            $vN = ($not / $total) * 100;
-                                            $hM =  round((float)$vM, 2);
-                                        } ?> -->
-                                <div class="inner">
-                                    <!-- <h3><?php echo json_encode($hM) ?><sup style="font-size: 20px">%</sup></h3> -->
-
-                                    <p>Persentase Kecocokan</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?= base_url('u_match_progress') ?>" class="small-box-footer">Lihat Progress Inputer</a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -89,7 +58,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2022 <a href="https://kiu.co.id">PT.KARISMA INDOARGO UNIVERSAL</a>.</strong>
+            <strong>Copyright &copy; 2024<a href="https://kiu.co.id">PT.KARISMA INDOARGO UNIVERSAL</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0.1
