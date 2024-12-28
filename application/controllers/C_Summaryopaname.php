@@ -12,7 +12,6 @@ class C_Summaryopaname extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model("M_Opname");
-        $this->load->model("M_Barang");
     }
 
     function index()

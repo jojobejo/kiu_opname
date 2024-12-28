@@ -16,7 +16,6 @@ class C_Stkopname extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('M_Opname');
-        $this->load->model('M_Barang');
     }
 
     public function index()
@@ -44,7 +43,7 @@ class C_Stkopname extends CI_Controller
         } else {
 
             $kdbarang = $this->input->post('nama_barang');
-            $data = $this->M_Barang->selectbarang($kdbarang);
+            $data = $this->M_Opname->selectbarang($kdbarang);
             echo json_encode($data);
         }
     }
@@ -52,7 +51,7 @@ class C_Stkopname extends CI_Controller
     function get_data_barang()
     {
         $namabarang = $this->input->post('namabarang');
-        $data = $this->M_Barang->get_detail_data($namabarang);
+        $data = $this->M_Opname->get_detail_data($namabarang);
         echo json_encode($data);
     }
 
@@ -62,7 +61,7 @@ class C_Stkopname extends CI_Controller
             redirect("login");
         } else {
             $kdbarang = $this->input->post('kodebarang', TRUE);
-            $data = $this->M_Barang->get_exp_date($kdbarang)->result();
+            $data = $this->M_Opname->get_exp_date($kdbarang)->result();
             echo json_encode($data);
         }
     }

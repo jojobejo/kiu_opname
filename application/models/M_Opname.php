@@ -452,4 +452,34 @@ class M_Opname extends CI_Model
         $this->db->where('id_opname', $id);
         return $this->db->delete('tb_opname');
     }
+
+    public function selectbarang($search)
+    {
+        $this->db->select('*');
+        $this->db->limit('5');
+        $this->db->from('tb_master_barang');
+        $this->db->like('nama_barang', $search);
+        return $this->db->get()->result_array();
+    }
+
+    function get_detail_data($namabarang)
+    {
+        $query =  $this->db->get_where("tb_master_barang", array('kode_barang' => $namabarang))->result();
+        foreach ($query as $key) {
+            # code...
+            $data = array(
+                'nama_barang' => $key->nama_barang,
+                'kode_barang' => $key->kode_barang,
+                'hasil_dimensi' => $key->hasil_dimensi
+            );
+        }
+        return $data;
+    }
+
+    public function get_exp_date($kdbarang)
+    {
+        $this->db->from('v_barang_with_expdate');
+        $this->db->where('kode_barang', $kdbarang);
+        return $this->db->get();
+    }
 }

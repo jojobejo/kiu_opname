@@ -12,7 +12,6 @@ class C_Matchprogressuser extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model("M_Opname");
-        $this->load->model("M_Barang");
     }
 
     function index()
@@ -83,7 +82,7 @@ class C_Matchprogressuser extends CI_Controller
 
     //     $sektor = $this->session->userdate('sektor');
 
-    //     $data['barang'] = $this->M_barang->getBarang($sektor)->result();
+    //     $data['barang'] = $this->M_Barang->getBarang($sektor)->result();
     //     $data['selesih'] = $this->M_Opname->getHasilMatch()->result();
 
     // }
