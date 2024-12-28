@@ -81,3 +81,5 @@ $route['get_data_barang']               = 'C_Stkopname/get_data_barang';
 $route['get_exp']                       = 'C_Stkopname/get_exp';
 $route['detail_input/(:any)/(:any)']    = 'C_Matchprogressuser/detail_input/$1/$2';
 $route['input_edit/(:any)']             = 'C_Matchprogressuser/input_edit/$1';
+$route['excelallbarang']                = 'C_Matchprogressuser/excelAllBarang';
+$route['excelfefo']                     = 'C_Matchprogressuser/excelfefo';

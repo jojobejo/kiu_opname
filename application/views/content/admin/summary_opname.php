@@ -112,7 +112,7 @@
                                 <div class="tab-content">
                                     <!-- Morris chart - Sales -->
                                     <div class="chart tab-pane" id="revenue-chart">
-                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('C_Admin/C_summaryOpaname/excelFifo') ?>">
+                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('excelfefo') ?>">
                                             <i class="fas fa-file-excel"></i>&nbsp;
                                             Export Data To Excel
                                         </a>
@@ -197,7 +197,7 @@
                                         </table>
                                     </div>
                                     <div class="chart tab-pane active" id="sales-chart">
-                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('C_Admin/C_summaryOpaname/excelAllBarang') ?>">
+                                        <a type="button" class="btn btn-success m-2 ml-3" href="<?php echo base_url('excelallbarang') ?>">
                                             <i class="fas fa-file-excel"></i>&nbsp;
                                             Export Data To Excel
                                         </a>

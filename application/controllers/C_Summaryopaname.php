@@ -120,7 +120,7 @@ class C_Summaryopaname extends CI_Controller
         }
     }
 
-    public function excelAllBarang()
+    public function excelallbarang()
     {
 
         // Load plugin PHPExcel nya
