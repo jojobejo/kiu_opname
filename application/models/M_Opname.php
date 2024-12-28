@@ -434,7 +434,7 @@ class M_Opname extends CI_Model
             X.stock_box,
             X.stock_pcs,
             X.keterangan,
-            x.sektor,
+            X.sektor,
             X.dimensi,
             (COALESCE(x.qty_opname,0)-(COALESCE(X.saldo_qty, 0)+COALESCE(X.qty_pending, 0))) AS selisih,
             COALESCE(X.saldo_qty, 0) AS qty_saldo,
