@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     <?php echo form_open_multipart('stock_controller/adjustmen'); ?>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">qty<span class="required">*</span></label>
                             <div class="col-sm-8">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="modal-body">
                     <?php echo form_open_multipart('stock_controller/adjustmentadd'); ?>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">qty<span class="required">*</span></label>
                             <div class="col-sm-8">

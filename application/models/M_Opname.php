@@ -426,74 +426,77 @@ class M_Opname extends CI_Model
     public function list_detail_stock_controler($kdbr)
     {
         return $this->db->query("SELECT
-        x.id_opname,
-        x.kode_barang,
-        x.nama_barang,
-        x.exp_date,
-        x.qty_opname,
-        x.stock_box,
-        x.stock_pcs,
-        x.keterangan,
-        x.dimensi,
-        COALESCE(x.saldo_qty, 0) AS qty_saldo,
-        COALESCE(x.qty_pending, 0) AS qty_pending,
-        (
-                CASE
-                        WHEN (
-                                COALESCE(x.saldo_qty, 0) + COALESCE(x.qty_pending, 0)
-                        ) - COALESCE(x.qty_opname, 0) = 0 THEN 'match'
-                        ELSE 'not match'
-                END
+            X.id_opname,
+            X.kode_barang,
+            X.nama_barang,
+            X.exp_date,
+            X.qty_opname,
+            X.stock_box,
+            X.stock_pcs,
+            X.keterangan,
+            x.sektor,
+            X.dimensi,
+            (COALESCE(x.qty_opname,0)-(COALESCE(X.saldo_qty, 0)+COALESCE(X.qty_pending, 0))) AS selisih,
+            COALESCE(X.saldo_qty, 0) AS qty_saldo,
+            COALESCE(X.qty_pending, 0) AS qty_pending,
+            (
+                CASE WHEN(
+                    COALESCE(X.saldo_qty, 0) + COALESCE(X.qty_pending, 0)
+                ) - COALESCE(X.qty_opname, 0) = 0 THEN 'match' ELSE 'not match'
+            END
         ) AS hasil
-FROM
-        (
+        FROM
+            (
+            SELECT
+                a.id_opname,
+                a.kode_barang,
+                a.nama_barang,
+                a.exp_date,
+                a.qty,
+                a.stock_box,
+                a.stock_pcs,
+                a.keterangan,
+                a.sektor,
+                b.hasil_dimensi AS dimensi,
+                (
                 SELECT
-                        a.id_opname,
-                        a.kode_barang,
-                        a.nama_barang,
-                        a.exp_date,
-                        a.qty,
-                        a.stock_box,
-                        a.stock_pcs,
-                        a.keterangan,
-                        b.hasil_dimensi AS dimensi,
-                        (
-                                SELECT
-                                        SUM(c.qty)
-                                FROM
-                                        tb_saldo_exp c
-                                WHERE
-                                        c.kode_barang = a.kode_barang
-                                        AND c.exp_date = a.exp_date
-                                GROUP BY
-                                        c.kode_barang
-                        ) as saldo_qty,
-                        (
-                                SELECT
-                                        SUM(d.qty)
-                                FROM
-                                        tb_pending d
-                                WHERE
-                                        d.kode_barang = a.kode_barang
-                                GROUP BY
-                                        d.kode_barang = d.exp_date
-                        ) AS qty_pending,
-                        (
-                                SELECT
-                                        SUM(e.qty)
-                                FROM
-                                        tb_opname e
-                                WHERE
-                                        e.kode_barang = a.kode_barang
-                                GROUP BY
-                                        e.kode_barang
-                        ) AS qty_opname
+                    SUM(c.qty)
                 FROM
-                        tb_opname a
-                        JOIN tb_master_barang b ON b.kode_barang = a.kode_barang
+                    tb_saldo_exp c
                 WHERE
-                        a.kode_barang = '$kdbr'
-        ) AS x")->result();
+                    c.kode_barang = a.kode_barang AND c.exp_date = a.exp_date
+                GROUP BY
+                    c.kode_barang
+            ) AS saldo_qty,
+            (
+            SELECT
+                SUM(d.qty)
+            FROM
+                tb_pending d
+            WHERE
+                d.kode_barang = a.kode_barang
+            GROUP BY
+                d.kode_barang = d.exp_date
+        ) AS qty_pending,
+        (
+            SELECT
+                SUM(e.qty)
+            FROM
+                tb_opname e
+            WHERE
+                e.kode_barang = a.kode_barang
+            AND
+            	e.exp_date = a.exp_date
+            GROUP BY
+                e.kode_barang
+        ) AS qty_opname
+        FROM
+            tb_opname a
+        JOIN tb_master_barang b ON
+            b.kode_barang = a.kode_barang
+        WHERE
+            a.kode_barang = '$kdbr'
+        ) AS X")->result();
     }
 
     public function status_tracing($kdbr)
@@ -535,7 +538,7 @@ FROM
     public function selectbarang($search)
     {
         $this->db->select('*');
-        $this->db->limit('10');
+        $this->db->limit('15');
         $this->db->from('tb_master_barang');
         $this->db->like('nama_barang', $search);
         $this->db->order_by('nama_barang', 'ASC');
