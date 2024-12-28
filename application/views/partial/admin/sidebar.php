@@ -5,7 +5,6 @@
       <img src="<?php echo base_url("assets/images/Karisma.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Stock Opname</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
 
@@ -14,6 +13,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="<?php echo base_url('') ?>" class="nav-link">
+              <i class="nav-icon fa fa-box-open"></i>
+              <p>
+                Master Barang
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="<?php echo base_url('faktur_pending') ?>" class="nav-link">
               <i class="nav-icon fa fa-clock"></i>
@@ -32,7 +39,7 @@
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url('stock_controller') ?>" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
                 Stock Controller
               </p>
@@ -54,8 +61,6 @@
               </p>
             </a>
           </li>
-
-
       </nav>
       <!-- /.sidebar-menu -->
     </div>

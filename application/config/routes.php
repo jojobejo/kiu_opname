@@ -53,10 +53,12 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+
 $route['list_barang']                   = 'ListBarang';
 $route['admin']                         = 'C_Admin';
 $route['opname']                        = 'C_Stkopname';
-$route['user']                          = 'user';
+$route['user']                          = 'User';
+$route['Adduser']                       = 'User/Adduser';
 $route['data_zahir']                    = 'Data_zahir';
 $route['logout']                        = 'login/logout';
 $route['match_progress']                = 'C_Matchprogress';
@@ -64,6 +66,8 @@ $route['addBarang']                     = 'C_Listbarangss/addBarang';
 $route['faktur_pending']                = 'C_Fakturpending';
 $route['quick_count']                   = 'C_Summaryopaname';
 $route['stock_controller']              = 'C_Summaryopaname/stock_controller';
+$route['stock_controller/adjustmen']    = 'C_Summaryopaname/addjustment_controll';
+$route['stock_controller/adjustmentadd'] = 'C_Summaryopaname/adjustmentadd';
 $route['stock_tracing/(:any)']          = 'C_Summaryopaname/detail_stock_controller/$1';
 
 $route['dashboarduser']                 = 'C_Dashboarduser';

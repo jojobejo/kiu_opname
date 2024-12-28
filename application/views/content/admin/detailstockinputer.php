@@ -27,15 +27,32 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+<!-- 
+            <?php if ($this->session->userdata('username') == 'admin') : ?>
+            <?php else : ?>
+            <?php endif; ?> -->
 
             <!-- Main content -->
+            <?php $this->load->view('content/admin/modal/modal_stock_controller') ?>
             <section class="content">
                 <div class="container-fluids">
                     <div class="row">
                         <div class="col-md">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3>Stock Controller</h3>
+                                    <?php foreach ($status_tracing as $s) :
+                                        $qtyzahir   = $s->master;
+                                        $qtypending = $s->pending;
+                                        $qtyall  = $qtyzahir + $qtypending;
+                                        $selisih = ($s->opname - $qtyall);
+                                    ?>
+                                        <h3>Stock Controller - <?= $s->nama_barang ?> </h3>
+                                        <h5>|| Saldo Fisik : <?= $s->opname ?> </h5>
+                                        <h5>|| Saldo Buku : <?= $qtyall ?></h5>
+                                        <h5>|| Selisih : <?= $selisih ?></h5>
+                                    <?php endforeach; ?>
+                                    <a href="<?= base_url('stock_controller') ?>" class="btn btn-sm btn-primary mb-2"><i class="fas fa-home"></i></a>
+                                    <a href="#" class="btn btn-sm btn-block btn-info" data-toggle="modal" data-target="#adjustment"><i class="fas fa-plus-circle"></i></a>
                                 </div>
                                 <div class="card-body">
                                     <table id="table_stock_controller" class="table table-bordered table-striped">
@@ -44,22 +61,33 @@
                                                 <th>nama_barang</th>
                                                 <th>Exdate</th>
                                                 <th>Saldo Fisik</th>
+                                                <th>Saldo Zahir</th>
+                                                <th>Saldo Pending</th>
+                                                <th>Saldo All</th>
                                                 <th>Stock Box</th>
                                                 <th>Stock Pcs</th>
                                                 <th>Keterangan</th>
+                                                <th>Hasil</th>
                                                 <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($detail_tracinng as $d) : ?>
+
+                                            <?php foreach ($detail_tracinng as $d) :
+                                                $qtyall = $d->qty_pending + $d->qty_saldo;
+                                            ?>
                                                 <tr>
                                                     <td><?= $d->nama_barang ?></td>
                                                     <td><?= $d->exp_date ?></td>
-                                                    <td><?= $d->qty ?></td>
+                                                    <td><?= $d->qty_opname ?></td>
+                                                    <td><?= $d->qty_saldo ?></td>
+                                                    <td><?= $d->qty_pending ?></td>
+                                                    <td><?= $qtyall ?></td>
                                                     <td><?= $d->stock_box ?></td>
                                                     <td><?= $d->stock_pcs ?></td>
                                                     <td><?= $d->keterangan ?></td>
-                                                    <td><a href="#" class="btn btn-sm btn-block btn-warning" data-target="#revisiqty<?= $d->id_opname ?>" data-togle="modal"><i class="fas fa-pencil-alt"></i></a></td>
+                                                    <td><?= $d->hasil ?></td>
+                                                    <td><a href="#" data-toggle="modal" data-target="#modaledit<?= $d->id_opname ?>" class="btn btn-md btn-block btn-warning"><i class="fas fa-pencil-alt"></i></a></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                             <!-- <?php foreach ($stock_controller as $s) : ?>

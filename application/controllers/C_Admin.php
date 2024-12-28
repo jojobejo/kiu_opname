@@ -21,6 +21,7 @@ class C_Admin extends CI_Controller
         }
 
         $data['page_title'] = 'Dashboard Admin'; 
+        
         // $data['selisihVivo'] = $this->M_Opname->countVivo()->result();
         // $data['listVivo']   = $this->M_Opname->listMatchVivo()->result();
         // $data['totalUser'] = $this->M_Opname->countUser()->result();
@@ -31,4 +32,5 @@ class C_Admin extends CI_Controller
         $this->load->view('content/admin/dashboard', $data);
         $this->load->view('partial/admin/footer');
     }
+
 }

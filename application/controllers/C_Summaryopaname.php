@@ -58,10 +58,65 @@ class C_Summaryopaname extends CI_Controller
 
             $data['page_title']         = 'Stock Tracing';
             $data['detail_tracinng']    = $this->M_Opname->list_detail_stock_controler($kdbr);
+            $data['status_tracing']    = $this->M_Opname->status_tracing($kdbr)->result();
 
             $this->load->view('partial/admin/header', $data);
             $this->load->view('content/admin/detailstockinputer', $data);
             $this->load->view('partial/admin/footersummary');
+        }
+    }
+
+    public function addjustment_controll()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        } else {
+            $idopname      = $this->input->post("idopname");
+            $kdbarang      = $this->input->post("kdbarang");
+            $qty_pcs       = $this->input->post("stock_pcs");
+            $qty_box       = $this->input->post("stock_box");
+            $dimensi       = $this->input->post("dimensi");
+            $qty           = ($qty_box * $dimensi) + $qty_pcs;
+
+            $dataedit   = array(
+                'stock_pcs'         => $qty_pcs,
+                'stock_box'         => $qty_box,
+                'qty'               => $qty,
+                'inputer_edit'      => $this->session->userdata('username'),
+                'keterangan_edit'   => "addjustment"
+            );
+            $this->M_Opname->revisiqty($idopname, $dataedit);
+            redirect("stock_tracing/" . $kdbarang);
+        }
+    }
+    public function adjustmentadd()
+    {
+        if ($this->session->userdata('status') != "is_login" || $this->session->userdata("role") != "admin") {
+            redirect("login");
+        } else {
+
+            $kdbarang      = $this->input->post("kdbarang");
+            $namabarang    = $this->input->post("nmbr");
+            $qty           = $this->input->post("qtyisi");
+            $date           = date("Y-m-d H:i:s");
+
+            $datainput   = array(
+                'kode_barang'   => $kdbarang,
+                'nama_barang'   => $namabarang,
+                'stock_box'     => '0',
+                'stock_pcs'     => $qty,
+                'exp_date'      => '2222-12-12',
+                'qty'           => $qty,
+                'sektor'        => $this->session->userdata('sektor'),
+                'keterangan'    => 'Adjustment Admin',
+                'inputer'       => $this->session->userdata('username'),
+                'inputer_edit'  => $this->session->userdata('username'),
+                'keterangan_edit' => 'edit_by_admin',
+                'input_at'      => $date,
+                'edit_at'       => $date
+            );
+            $this->M_Opname->inputrevisi($datainput);
+            redirect("stock_tracing/" . $kdbarang);
         }
     }
 

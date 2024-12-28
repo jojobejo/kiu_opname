@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <?php echo form_open_multipart('C_Admin/User/AddUser'); ?>
+                <?php echo form_open_multipart('Adduser'); ?>
                 <div class="form-group">
                     <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama User<span class="required">*</span></label>

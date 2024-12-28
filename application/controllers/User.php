@@ -29,7 +29,7 @@ class User extends CI_Controller
         $this->load->view('partial/admin/footer');
     }
 
-    public function AddUser()
+    public function Adduser()
     {
         $nama_user  = $this->input->post("nama_isi");
         $username   = $this->input->post("username_isi");
