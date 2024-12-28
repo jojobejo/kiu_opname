@@ -143,6 +143,8 @@
                                                     <th>Stock Pcs</th>
                                                     <th>Keterangan</th>
                                                     <th>Selisih</th>
+                                                    <th>Sektor</th>
+
                                                     <th>Hasil</th>
                                                     <th>#</th>
                                                 </tr>
@@ -162,6 +164,7 @@
                                                         <td><?= $d->stock_pcs ?></td>
                                                         <td><?= $d->keterangan ?></td>
                                                         <td><?= $d->selisih ?></td>
+                                                        <td><?= $d->sektor ?></td>
                                                         <?php if ($d->hasil == 'match') : ?>
                                                             <td><a href="#" class="btn btn-sm btn-success btn-block"><i class="fas fa-check-circle"></i></a></td>
                                                         <?php else : ?>
