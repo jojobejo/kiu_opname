@@ -74,7 +74,7 @@
                                 <input class="form-control" type="text" id="act_input" name="act_input" value="hapus_data" readonly />
                                 <input class="form-control" type="number" id="idopname" name="idopname" value="<?= $i->id_opname ?>" readonly />
                                 <input class="form-control" type="number" id="dimensi" name="dimensi" value="<?= $i->dimensi ?>" readonly />
-                                <input class="form-control" type="text" id="kdbarang" name="kdbarang" value="<?= $i->nama_barang ?>" readonlsy />
+                                <input class="form-control" type="text" id="kdbarang" name="kdbarang" value="<?= $i->kode_barang ?>" readonlsy />
                             </div>
                         </div>
                     </div>
