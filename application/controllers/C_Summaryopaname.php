@@ -249,7 +249,7 @@ class C_Summaryopaname extends CI_Controller
         $write->save('php://output');
     }
 
-    public function excelFifo()
+    public function excelfefo()
     {
 
         // Load plugin PHPExcel nya
