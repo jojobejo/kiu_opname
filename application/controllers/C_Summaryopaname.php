@@ -202,7 +202,7 @@ class C_Summaryopaname extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->nama_barang);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->faktur_pending);
             $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->saldo_buku);
-            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->qty_b);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->saldo_fisik);
             $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->selisih);
             $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->hasil);
 
