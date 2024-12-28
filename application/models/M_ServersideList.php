@@ -1,6 +1,6 @@
 <?php
 
-class M_ServersideList extends CI_Model
+class M_Serversidelist extends CI_Model
 {
 
     var $table = 'tb_barang_zahir'; //nama tabel dari database

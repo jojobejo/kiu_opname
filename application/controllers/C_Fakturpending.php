@@ -10,7 +10,7 @@ class C_Fakturpending extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model("M_barang");
+        $this->load->model("M_Barang");
         $this->load->model("M_Opname");
         $this->load->library('form_validation');
     }

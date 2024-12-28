@@ -12,7 +12,7 @@ class C_Stkopname extends CI_Controller
     {
         parent::__construct();
         $this->load->model("M_Opname");
-        $this->load->model("M_barang");
+        $this->load->model("M_Barang");
         $this->load->library('form_validation');
     }
 
