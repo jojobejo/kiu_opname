@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class FakturPending extends CI_Controller
+class C_Fakturpending extends CI_Controller
 {
 
     function __construct()

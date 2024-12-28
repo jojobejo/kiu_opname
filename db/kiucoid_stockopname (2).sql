@@ -10506,7 +10506,7 @@ CREATE TABLE `v_barang_with_expdate` (
 --
 DROP TABLE IF EXISTS `v_barang_with_expdate`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_barang_with_expdate`  AS SELECT `a`.`id` AS `id`, `a`.`kode_barang` AS `kode_barang`, `a`.`nama_barang` AS `nama_barang`, `a`.`exp_date` AS `exp_date`, sum(`a`.`qty`) AS `qty` FROM `tb_saldo_exp` AS `a` GROUP BY `a`.`kode_barang`, `a`.`exp_date` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`kiucoid`@`localhost` SQL SECURITY DEFINER VIEW `v_barang_with_expdate`  AS SELECT `a`.`id` AS `id`, `a`.`kode_barang` AS `kode_barang`, `a`.`nama_barang` AS `nama_barang`, `a`.`exp_date` AS `exp_date`, sum(`a`.`qty`) AS `qty` FROM `tb_saldo_exp` AS `a` GROUP BY `a`.`kode_barang`, `a`.`exp_date` ;
 
 --
 -- Indexes for dumped tables

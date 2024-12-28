@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class C_matchProgress extends CI_Controller
+class C_Matchprogressuser extends CI_Controller
 {
 
     function __construct()
