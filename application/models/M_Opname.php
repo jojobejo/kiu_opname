@@ -137,11 +137,7 @@ class M_Opname extends CI_Model
         a.exp_date,
 (SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.nama_barang) as qty_a,         
 (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qty_c,
-(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qty_b,
-(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang ) as stkbox,
-(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang ) as stkpcs,
-(SELECT f.qty  from tb_opname f where f.kode_barang = a.kode_barang group by f.kode_barang ) as salqty
-         
+(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang ) as qty_b
         from tb_saldo_exp a  group by a.kode_barang , a.exp_date ) as x ");
     }
 
@@ -158,22 +154,51 @@ class M_Opname extends CI_Model
         COALESCE(x.qty_c,0) as faktur_pending,
         COALESCE(x.qty_b,0) - (COALESCE(x.qty_a,0)+COALESCE(x.qty_c,0)) AS selisih,
         COALESCE(x.qty_b,0) as saldo_fisik,
-        COALESCE(x.stkbox,0) as box_fisik,
-        COALESCE(x.stkpcs,0) as pcs_fisik,
         (CASE WHEN COALESCE(x.qty_b,0) - COALESCE(x.qty_c,0) = COALESCE(x.qty_a,0) THEN 'match' ELSE 'not match' END) AS hasil
         FROM
         (Select 
         a.kode_barang,
         a.nama_barang,
         a.exp_date,
-(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang) as qty_a,       
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qty_c,
-(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang) as qty_b,
-(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang) as stkbox,
-(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang) as stkpcs,
+(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang,g.exp_date) as qty_a,       
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang,c.exp_date) as qty_c,
+(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang,b.kode_barang) as qty_b,
 (SELECT h.hasil_dimensi FROM tb_master_barang h WHERE h.kode_barang = a.kode_barang) AS dimensi
-        from tb_saldo_exp a  group by a.kode_barang) as x");
+        from tb_saldo_exp a  group by a.kode_barang,a.exp_date) as x");
     }
+
+    //     public function list_match_fefo()
+    //     {
+    //         public function listMatchVivo()
+    //     {
+    //         return $this->db->query("SELECT 
+    //         x.kode_barang,
+    //         x.exp_date,
+    //         x.nama_barang,
+    //         COALESCE(x.qty_c,0)+COALESCE(x.qty_a,0) AS saldo_buku,
+    //         x.dimensi AS dimensi,
+    //         COALESCE(FLOOR(COALESCE(x.qty_a,0) / x.dimensi),0) AS saldo_box,
+    //         COALESCE(x.qty_a,0) - (floor((COALESCE(x.qty_a,0)/ x.dimensi))*x.dimensi) AS saldo_pcs,
+    //         COALESCE(x.qty_c,0) as faktur_pending,
+    //         COALESCE(x.qty_b,0) - (COALESCE(x.qty_a,0)+COALESCE(x.qty_c,0)) AS selisih,
+    //         COALESCE(x.qty_b,0) as saldo_fisik,
+    //         COALESCE(x.stkbox,0) as box_fisik,
+    //         COALESCE(x.stkpcs,0) as pcs_fisik,
+    //         (CASE WHEN COALESCE(x.qty_b,0) - COALESCE(x.qty_c,0) = COALESCE(x.qty_a,0) THEN 'match' ELSE 'not match' END) AS hasil
+    //         FROM
+    //         (Select 
+    //         a.kode_barang,
+    //         a.nama_barang,
+    //         a.exp_date,
+    // (SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang,g.exp_date) as qty_a,       
+    // (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang,c.exp_date) as qty_c,
+    // (SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang,b.kode_barang) as qty_b,
+    // (SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang,d.exp_date) as stkbox,
+    // (SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang,e.exp_date) as stkpcs,
+    // (SELECT h.hasil_dimensi FROM tb_master_barang h WHERE h.kode_barang = a.kode_barang) AS dimensi
+    //         from tb_saldo_exp a  group by a.kode_barang,a.exp_date) as x");
+    //     }
+    //     }
 
 
     // SELECT 
@@ -282,12 +307,9 @@ class M_Opname extends CI_Model
         a.kode_barang,
         a.nama_barang,
         a.exp_date,
-(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang  group by g.kode_barang) as qty_a,         
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang  group by c.kode_barang) as qty_c,
-(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b,
-(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang group by d.kode_barang ) as stkbox,
-(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang group by e.kode_barang ) as stkpcs,
-(SELECT f.qty  from tb_opname f where f.kode_barang = a.kode_barang group by f.kode_barang ) as salqty
+        (SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang  group by g.kode_barang) as qty_a,         
+        (SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang  group by c.kode_barang) as qty_c,
+        (SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang group by b.kode_barang ) as qty_b
         from tb_saldo_exp a  group by a.kode_barang) as x  
         ");
     }
