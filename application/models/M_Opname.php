@@ -166,13 +166,13 @@ class M_Opname extends CI_Model
         a.kode_barang,
         a.nama_barang,
         a.exp_date,
-(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang,g.exp_date) as qty_a,       
-(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang,c.exp_date) as qty_c,
-(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang,b.kode_barang) as qty_b,
-(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang,d.exp_date) as stkbox,
-(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang,e.exp_date) as stkpcs,
+(SELECT sum(g.qty) from tb_saldo_exp g where g.kode_barang = a.kode_barang and g.exp_date = a.exp_date group by g.kode_barang) as qty_a,       
+(SELECT sum(c.qty) from tb_pending c where c.kode_barang = a.kode_barang and c.exp_date = a.exp_date group by c.kode_barang) as qty_c,
+(SELECT sum(b.qty) from tb_opname b where b.kode_barang = a.kode_barang AND b.exp_date = a.exp_date group by b.kode_barang) as qty_b,
+(SELECT sum(d.stock_box)  from tb_opname d where d.kode_barang = a.kode_barang AND d.exp_date = a.exp_date group by d.kode_barang) as stkbox,
+(SELECT sum(e.stock_pcs)  from tb_opname e where e.kode_barang = a.kode_barang AND e.exp_date = a.exp_date group by e.kode_barang) as stkpcs,
 (SELECT h.hasil_dimensi FROM tb_master_barang h WHERE h.kode_barang = a.kode_barang) AS dimensi
-        from tb_saldo_exp a  group by a.kode_barang,a.exp_date) as x");
+        from tb_saldo_exp a  group by a.kode_barang) as x");
     }
 
 
